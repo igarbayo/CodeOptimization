@@ -3,10 +3,36 @@
 #include <sys/time.h>
 #include <math.h>
 
-#define N 10007 // evitar potencias de 2 para no favorecer la localidad
-#define REPETICIONES 4
-#define NUM_ITER_VALUES 6
-const int ITER_VALUES[NUM_ITER_VALUES] = {10, 100, 1000, 10000, 50000, 100000};
+// Tamaño N del problema
+int N[] = {
+        10, 20, 30, 50, 75,
+        100, 150, 200, 300, 450,
+        600, 800, 1000, 1500, 2000,
+        3000, 4500, 6000, 8000, 10000,
+        15000, 20000, 30000, 40000, 60000,
+        80000, 100000, 150000, 200000, 300000,
+        400000, 600000, 800000, 1000000, 1500000,
+        2000000, 3000000, 5000000, 7500000, 10000000
+};
+
+// Se ajusta para que cada par N[i], ITER[i] tarde más o menos lo mismo
+// Basta con ajustar para que N[i] * ITER[i] se mantenga constante para todo i < TAM_N
+int ITER[] = {
+        10000000, 5000000, 3300000, 2000000, 1300000,
+        1000000, 660000, 500000, 330000, 220000,
+        160000, 120000, 100000, 66000, 50000,
+        33000, 22000, 16000, 12000, 10000,
+        6600, 5000, 3300, 2500, 1700,
+        1300, 1000, 660, 500, 330,
+        250, 170, 130, 100, 66,
+        50, 33, 20, 13, 10
+};
+
+// Tamaño de los vectores N e ITER
+#define TAM_N 40
+
+// Ejecutamos cada par N[i], ITER[i] un número de REPETICIONES
+#define REPETICIONES 25
 
 // Macros para medir el tiempo
 typedef struct timeval timeval_t;
@@ -14,6 +40,8 @@ typedef struct timeval timeval_t;
 timeval_t start_time, end_time, overhead_start, overhead_end;
 double overhead = 0.0;
 
+// tiene como objetivo estimar el tiempo que tarda en ejecutarse la propia medición del tiempo
+// Mide el tiempo que se tarda en usar gettimeofday() dos veces seguidas.
 void medir_overhead() {
     gettimeofday(&overhead_start, NULL);
     gettimeofday(&overhead_end, NULL);
@@ -33,32 +61,30 @@ double finalizar_medida() {
     return tiempo;
 }
 
-void version_sin_optimizar(int* r, int iter) {
+void version_sin_optim(int N_local, int ITER_local) {
     int i, j, a, b = 0, m3 = 8, m5 = 32;
-    for (j = 0; j < iter; j++) {
-        for (i = 0; i < N; i++) {
-            a = r[i] * m3;
+    for (j = 0; j < ITER_local; j++) {
+        for (i = 0; i < N_local; i++) {
+            a = i * m3;
             b += a / m5;
         }
     }
-    volatile int sink = b; // evitar optimización del compilador
 }
 
-void version_optimizada(int* r, int iter) {
+void version_optim(int N_local, int ITER_local) {
     int i, j, a, b = 0;
-    for (j = 0; j < iter; j++) {
-        for (i = 0; i < N; i++) {
-            b += r[i] >> 2; // división por 4
+    for (j = 0; j < ITER_local; j++) {
+        for (i = 0; i < N_local; i++) {
+            b += i >> 2; // división por 4
         }
+        a = (N_local - 1) << 3; // multiplicación por 8
     }
-    a = (r[N - 1]) << 3; // multiplicación por 8
-    volatile int sink = b + a;
+
 }
 
-void inicializar_datos(int* r) {
-    for (int i = 0; i < N; i++) {
-        r[i] = i; // inicialización a mano, evita uso de rand()
-    }
+void inicializar_datos() {
+    // no hay que calentar la caché porque no se usa ningún vector
+    // solo se utilizan 3 variables que estarán en la pila
 }
 
 double calcular_media(double* tiempos) {
@@ -79,29 +105,47 @@ double calcular_desviacion(double* tiempos, double media) {
 }
 
 int main() {
-    int* r = (int*)malloc(sizeof(int) * N);
-    if (!r) {
-        perror("malloc failed");
+
+    
+    FILE *file = fopen("resultados.txt", "w");  // Abrimos el archivo en modo escritura
+    if (!file) {
+        perror("No se pudo abrir el archivo para escribir");
         return EXIT_FAILURE;
     }
 
-    inicializar_datos(r); // Calentamiento de caché
+    // Escribimos la cabecera en el archivo
+    fprintf(file, "N\tMED_SIN\tDESV_SIN\tMED_OPTIM\tDESV_OPTIM\n");
 
+    inicializar_datos(); // Calentamiento de caché (no se hace)
     medir_overhead();
 
-    for (int idx = 0; idx < NUM_ITER_VALUES; idx++) {
-        int iter = ITER_VALUES[idx];
+    for (int index = 0; index < TAM_N; index++) {
+        // Accedemos a los valores necesarios
+        int N_local = N[index];
+        int ITER_local = ITER[index];
+
         double tiempos_sin_opt[REPETICIONES];
         double tiempos_opt[REPETICIONES];
 
         for (int i = 0; i < REPETICIONES; i++) {
-            iniciar_medida();
-            version_sin_optimizar(r, iter);
-            tiempos_sin_opt[i] = finalizar_medida();
 
+            ///////// NO OPTIMIZADA
             iniciar_medida();
-            version_optimizada(r, iter);
+
+            // Versión sin optimizar
+            version_sin_optim(N_local, ITER_local);
+
+            tiempos_sin_opt[i] = finalizar_medida();
+            ///////////////////////
+
+            //////////// OPTIMIZADA
+            iniciar_medida();
+
+            // Versión optimizada
+            version_optim(N_local, ITER_local);
+
             tiempos_opt[i] = finalizar_medida();
+            ///////////////////////
         }
 
         double media_sin = calcular_media(tiempos_sin_opt);
@@ -110,11 +154,10 @@ int main() {
         double media_opt = calcular_media(tiempos_opt);
         double desv_opt = calcular_desviacion(tiempos_opt, media_opt);
 
-        printf("\nITER = %d (%d repeticiones):\n", iter, REPETICIONES);
-        printf("Sin optimizar: Media = %.6f s, Desviacion = %.6f s\n", media_sin, desv_sin);
-        printf("Optimizada   : Media = %.6f s, Desviacion = %.6f s\n", media_opt, desv_opt);
+        // Escribimos los resultados de esta iteración en el archivo
+        fprintf(file, "%d\t%.6f\t%.6f\t%.6f\t%.6f\n", N[index], media_sin, desv_sin, media_opt, desv_opt);
     }
 
-    free(r);
+    fclose(file);  // Cerramos el archivo
     return 0;
 }

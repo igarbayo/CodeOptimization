@@ -51,7 +51,7 @@ build cmake_object_order_depends_target_P2_Optim: phony || .
 
 build CMakeFiles/P2_Optim.dir/main.c.o: C_COMPILER__P2_Optim_unscanned_Debug /home/ignacio/Escritorio/Cuarto/Segundo$ Cuatri/Compiladores/P2-Optim/main.c || cmake_object_order_depends_target_P2_Optim
   DEP_FILE = CMakeFiles/P2_Optim.dir/main.c.o.d
-  FLAGS = -O0 -g -std=gnu11 -fdiagnostics-color=always
+  FLAGS = -std=gnu11 -fdiagnostics-color=always -O0
   OBJECT_DIR = CMakeFiles/P2_Optim.dir
   OBJECT_FILE_DIR = CMakeFiles/P2_Optim.dir
 
@@ -64,7 +64,6 @@ build CMakeFiles/P2_Optim.dir/main.c.o: C_COMPILER__P2_Optim_unscanned_Debug /ho
 # Link the executable P2_Optim
 
 build P2_Optim: C_EXECUTABLE_LINKER__P2_Optim_Debug CMakeFiles/P2_Optim.dir/main.c.o
-  FLAGS = -O0 -g
   LINK_LIBRARIES = -lm
   OBJECT_DIR = CMakeFiles/P2_Optim.dir
   POST_BUILD = :
