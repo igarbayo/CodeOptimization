@@ -29,7 +29,7 @@ int ITER[] = {
 };
 
 // Tamaño de los vectores N e ITER
-#define TAM_N 40
+#define TAM_N 4
 
 // Ejecutamos cada par N[i], ITER[i] un número de REPETICIONES
 #define REPETICIONES 25
@@ -107,7 +107,7 @@ double calcular_desviacion(double* tiempos, double media) {
 int main() {
 
     
-    FILE *file = fopen("resultados.txt", "w");  // Abrimos el archivo en modo escritura
+    FILE *file = fopen("resultados_pocos.txt", "w");  // Abrimos el archivo en modo escritura
     if (!file) {
         perror("No se pudo abrir el archivo para escribir");
         return EXIT_FAILURE;
@@ -129,6 +129,15 @@ int main() {
 
         for (int i = 0; i < REPETICIONES; i++) {
 
+            //////////// OPTIMIZADA
+            iniciar_medida();
+
+            // Versión optimizada
+            version_optim(N_local, ITER_local);
+
+            tiempos_opt[i] = finalizar_medida();
+            ///////////////////////
+
             ///////// NO OPTIMIZADA
             iniciar_medida();
 
@@ -138,14 +147,7 @@ int main() {
             tiempos_sin_opt[i] = finalizar_medida();
             ///////////////////////
 
-            //////////// OPTIMIZADA
-            iniciar_medida();
 
-            // Versión optimizada
-            version_optim(N_local, ITER_local);
-
-            tiempos_opt[i] = finalizar_medida();
-            ///////////////////////
         }
 
         double media_sin = calcular_media(tiempos_sin_opt);
