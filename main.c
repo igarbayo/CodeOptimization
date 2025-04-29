@@ -18,15 +18,16 @@ int N[] = {
 // Se ajusta para que cada par N[i], ITER[i] tarde más o menos lo mismo
 // Basta con ajustar para que N[i] * ITER[i] se mantenga constante para todo i < TAM_N
 int ITER[] = {
-        10000000, 5000000, 3300000, 2000000, 1300000,
-        1000000, 660000, 500000, 330000, 220000,
-        160000, 120000, 100000, 66000, 50000,
-        33000, 22000, 16000, 12000, 10000,
-        6600, 5000, 3300, 2500, 1700,
-        1300, 1000, 660, 500, 330,
-        250, 170, 130, 100, 66,
+        10000000, 5000000, 3333333, 2000000, 1333333,
+        1000000, 666666, 500000, 333333, 222222,
+        166666, 125000, 100000, 66666, 50000,
+        33333, 22222, 16666, 12500, 10000,
+        6666, 5000, 3333, 2500, 1666,
+        1250, 1000, 666, 500, 333,
+        250, 166, 125, 100, 66,
         50, 33, 20, 13, 10
 };
+
 
 // Tamaño de los vectores N e ITER
 #define TAM_N 40
@@ -49,51 +50,9 @@ void medir_overhead() {
                (overhead_end.tv_usec - overhead_start.tv_usec) / 1e6;
 }
 
-void iniciar_medida() {
-    gettimeofday(&start_time, NULL);
-}
-
-double finalizar_medida() {
-    gettimeofday(&end_time, NULL);
-    double tiempo = (end_time.tv_sec - start_time.tv_sec) +
-                    (end_time.tv_usec - start_time.tv_usec) / 1e6;
-    tiempo -= overhead;
-    return tiempo;
-}
-
-void version_sin_optim(int N_local, int ITER_local) {
-    int i, j, a = 0, b = 0, m3 = 8, m5 = 32;
-    for (j = 0; j < ITER_local; j++) {
-        for (i = 0; i < N_local; i++) {
-            a = i * m3;
-            b += a / m5;
-        }
-    }
-}
-
-void version_optim(int N_local, int ITER_local) {
-    int i, j, a = 0, b = 0;
-    for (j = 0; j < ITER_local; j++) {
-        for (i = 0; i < N_local; i++) {
-            a = i << 3;     // a = i * 8
-            b += a >> 5;    // b += a / 32
-        }
-    }
-
-
-}
-
 void inicializar_datos() {
     // no hay que calentar la caché porque no se usa ningún vector
     // solo se utilizan 3 variables que estarán en la pila
-}
-
-double calcular_media(double* tiempos) {
-    double suma = 0.0;
-    for (int i = 0; i < REPETICIONES; i++) {
-        suma += tiempos[i];
-    }
-    return suma / REPETICIONES;
 }
 
 // Comparador para qsort
@@ -132,79 +91,110 @@ double calcular_cuantil_75(double* datos) {
 
 
 
-
-double calcular_desviacion(double* tiempos, double media) {
-    double suma = 0.0;
-    for (int i = 0; i < REPETICIONES; i++) {
-        double diff = tiempos[i] - media;
-        suma += diff * diff;
-    }
-    return sqrt(suma / REPETICIONES);
-}
-
 int main() {
 
-    
-    FILE *file = fopen("resultados_pocos.txt", "w");  // Abrimos el archivo en modo escritura
+    FILE *file = fopen("FORMATO_resultados.txt", "w");  // Abrimos el archivo en modo escritura
     if (!file) {
         perror("No se pudo abrir el archivo para escribir");
         return EXIT_FAILURE;
     }
 
     // Escribimos la cabecera en el archivo
-    fprintf(file, "N\tMED_SIN\tDESV_SIN\tMED_OPTIM\tDESV_OPTIM\n");
+    fprintf(file, "N\tQ2_SIN\tQ1_SIN\tQ3_SIN\tQ2_OPT_OLD\tQ1_OPT_OLD\tQ3_OPT_OLD"
+                  "\tQ2_OPT_NEW\tQ1_OPT_NEW\tQ3_OPT_NEW\n");
+    //fprintf(file, "N\tQ2_SIN\tQ2_OPT_OLD\tQ2_OPT_NEW\n");
 
     inicializar_datos(); // Calentamiento de caché (no se hace)
     medir_overhead();
+    printf("Overhead: %lf\n", overhead);
 
     for (int index = 0; index < TAM_N; index++) {
         // Accedemos a los valores necesarios
         int N_local = N[index];
         int ITER_local = ITER[index];
 
+        // Variables locales
+        int i, j, m3 = 8, m5 = 32;
+        volatile int a = 0, b = 0;
+
         double tiempos_sin_opt[REPETICIONES];
-        double tiempos_opt[REPETICIONES];
+        double tiempos_opt_old[REPETICIONES];
+        double tiempos_opt_new[REPETICIONES];
 
-        for (int i = 0; i < REPETICIONES; i++) {
+        for (int k = 0; k < REPETICIONES; k++) {
 
-            //////////// OPTIMIZADA
-            iniciar_medida();
+            ///////////////////////////// SIN OPTIMIZACIÓN
+            gettimeofday(&start_time, NULL);
 
-            // Versión optimizada
-            version_optim(N_local, ITER_local);
+            for (j = 0; j < ITER_local; j++) {
+                for (i = 0; i < N_local; i++) {
+                    a = i * m3;
+                    b += a / m5;
+                }
+            }
 
-            tiempos_opt[i] = finalizar_medida();
-            ///////////////////////
+            gettimeofday(&end_time, NULL);
+            tiempos_sin_opt[k] = ((end_time.tv_sec - start_time.tv_sec +
+                                   (end_time.tv_usec - start_time.tv_usec)/1.e6))/ITER_local;
+            //////////////////////////////////////////////
 
-            ///////// NO OPTIMIZADA
-            iniciar_medida();
+            /////////////////////////////// OPTIMIZADA OLD
+            gettimeofday(&start_time, NULL);
 
-            // Versión sin optimizar
-            version_sin_optim(N_local, ITER_local);
+            for (j = 0; j < ITER_local; j++) {
+                for (i = 0; i < N_local; i++) {
+                    b += i >> 2;
+                }
+                a = (N_local - 1) << 3;
+            }
 
-            tiempos_sin_opt[i] = finalizar_medida();
-            ///////////////////////
+            gettimeofday(&end_time, NULL);
+            tiempos_opt_old[k] = ((end_time.tv_sec - start_time.tv_sec +
+                                   (end_time.tv_usec - start_time.tv_usec)/1.e6))/ITER_local;
+            //////////////////////////////////////////////
+
+            /////////////////////////////// OPTIMIZADA NEW
+            gettimeofday(&start_time, NULL);
+
+            for (j = 0; j < ITER_local; j++) {
+                for (i = 0; i < N_local; i++) {
+                    a = i << 3;     // a = i * 8
+                    b += a >> 5;    // b += a / 32
+                }
+            }
+
+            gettimeofday(&end_time, NULL);
+            tiempos_opt_new[k] = ((end_time.tv_sec - start_time.tv_sec +
+                               (end_time.tv_usec - start_time.tv_usec)/1.e6))/ITER_local;
+            //////////////////////////////////////////////
 
 
         }
 
-        double media_sin = calcular_media(tiempos_sin_opt);
-        double desv_sin = calcular_desviacion(tiempos_sin_opt, media_sin);
-        double mediana_sin = calcular_mediana(tiempos_sin_opt);
+        double q2_sin = calcular_mediana(tiempos_sin_opt);
         double q1_sin = calcular_cuantil_25(tiempos_sin_opt);
         double q3_sin = calcular_cuantil_75(tiempos_sin_opt);
 
-        double media_opt = calcular_media(tiempos_opt);
-        double desv_opt = calcular_desviacion(tiempos_opt, media_opt);
-        double mediana_opt = calcular_mediana(tiempos_opt);
-        double q1_opt = calcular_cuantil_25(tiempos_opt);
-        double q3_opt = calcular_cuantil_75(tiempos_opt);
+        double q2_opt_old = calcular_mediana(tiempos_opt_old);
+        double q1_opt_old = calcular_cuantil_25(tiempos_opt_old);
+        double q3_opt_old = calcular_cuantil_75(tiempos_opt_old);
+
+        double q2_opt_new = calcular_mediana(tiempos_opt_new);
+        double q1_opt_new = calcular_cuantil_25(tiempos_opt_new);
+        double q3_opt_new = calcular_cuantil_75(tiempos_opt_new);
 
         // Escribimos los resultados de esta iteración en el archivo
-        fprintf(file, "%d\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\n",
+        fprintf(file, "%d\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\n",
                 N[index],
-                media_sin, desv_sin, mediana_sin, q1_sin, q3_sin,
-                media_opt, desv_opt, mediana_opt, q1_opt, q3_opt);
+                q2_sin, q1_sin, q3_sin,
+                q2_opt_old, q1_opt_old, q3_opt_old,
+                q2_opt_new, q1_opt_new, q3_opt_new);
+        /*fprintf(file, "%d\t%.6f\t%.6f\t%.6f\n",
+                N[index],
+                q2_sin,
+                q2_opt_old,
+                q2_opt_new);*/
+
     }
 
     fclose(file);  // Cerramos el archivo
