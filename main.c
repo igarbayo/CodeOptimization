@@ -29,7 +29,7 @@ int ITER[] = {
 };
 
 // Tamaño de los vectores N e ITER
-#define TAM_N 4
+#define TAM_N 40
 
 // Ejecutamos cada par N[i], ITER[i] un número de REPETICIONES
 #define REPETICIONES 25
@@ -62,7 +62,7 @@ double finalizar_medida() {
 }
 
 void version_sin_optim(int N_local, int ITER_local) {
-    int i, j, a, b = 0, m3 = 8, m5 = 32;
+    int i, j, a = 0, b = 0, m3 = 8, m5 = 32;
     for (j = 0; j < ITER_local; j++) {
         for (i = 0; i < N_local; i++) {
             a = i * m3;
@@ -72,13 +72,14 @@ void version_sin_optim(int N_local, int ITER_local) {
 }
 
 void version_optim(int N_local, int ITER_local) {
-    int i, j, a, b = 0;
+    int i, j, a = 0, b = 0;
     for (j = 0; j < ITER_local; j++) {
         for (i = 0; i < N_local; i++) {
-            b += i >> 2; // división por 4
+            a = i << 3;     // a = i * 8
+            b += a >> 5;    // b += a / 32
         }
-        a = (N_local - 1) << 3; // multiplicación por 8
     }
+
 
 }
 
@@ -94,6 +95,43 @@ double calcular_media(double* tiempos) {
     }
     return suma / REPETICIONES;
 }
+
+// Comparador para qsort
+int comparar_doubles(const void* a, const void* b) {
+    double x = *(double*)a;
+    double y = *(double*)b;
+    return (x > y) - (x < y);
+}
+
+// Ordena el array y calcula la mediana (percentil 50)
+double calcular_mediana(double* datos) {
+    qsort(datos, REPETICIONES, sizeof(double), comparar_doubles);
+
+    if (REPETICIONES % 2 == 0) {
+        return (datos[REPETICIONES/2 - 1] + datos[REPETICIONES/2]) / 2.0;
+    } else {
+        return datos[REPETICIONES/2];
+    }
+}
+
+// Cuantil 25 (Q1)
+double calcular_cuantil_25(double* datos) {
+    qsort(datos, REPETICIONES, sizeof(double), comparar_doubles);
+
+    int idx = (int)(0.25 * (REPETICIONES - 1));
+    return datos[idx];
+}
+
+// Cuantil 75 (Q3)
+double calcular_cuantil_75(double* datos) {
+    qsort(datos, REPETICIONES, sizeof(double), comparar_doubles);
+
+    int idx = (int)(0.75 * (REPETICIONES - 1));
+    return datos[idx];
+}
+
+
+
 
 double calcular_desviacion(double* tiempos, double media) {
     double suma = 0.0;
@@ -152,12 +190,21 @@ int main() {
 
         double media_sin = calcular_media(tiempos_sin_opt);
         double desv_sin = calcular_desviacion(tiempos_sin_opt, media_sin);
+        double mediana_sin = calcular_mediana(tiempos_sin_opt);
+        double q1_sin = calcular_cuantil_25(tiempos_sin_opt);
+        double q3_sin = calcular_cuantil_75(tiempos_sin_opt);
 
         double media_opt = calcular_media(tiempos_opt);
         double desv_opt = calcular_desviacion(tiempos_opt, media_opt);
+        double mediana_opt = calcular_mediana(tiempos_opt);
+        double q1_opt = calcular_cuantil_25(tiempos_opt);
+        double q3_opt = calcular_cuantil_75(tiempos_opt);
 
         // Escribimos los resultados de esta iteración en el archivo
-        fprintf(file, "%d\t%.6f\t%.6f\t%.6f\t%.6f\n", N[index], media_sin, desv_sin, media_opt, desv_opt);
+        fprintf(file, "%d\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t%.6f\n",
+                N[index],
+                media_sin, desv_sin, mediana_sin, q1_sin, q3_sin,
+                media_opt, desv_opt, mediana_opt, q1_opt, q3_opt);
     }
 
     fclose(file);  // Cerramos el archivo
