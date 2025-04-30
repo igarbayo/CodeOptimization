@@ -1,48 +1,57 @@
+# Leer los datos
+datos_old <- read.table("C:/Users/Ignacio/Desktop/OneDrive/Cuarto/Segundo Cuatri/Compiladores/p2 optim/resultados/res_OPT_OLD.txt", header = TRUE)
+datos_sin <- read.table("C:/Users/Ignacio/Desktop/OneDrive/Cuarto/Segundo Cuatri/Compiladores/p2 optim/resultados/res_SIN_OPT.txt", header = TRUE)
 
-# Cargar el archivo como data.frame
-datos <- read.table("C:/Users/Ignacio/Desktop/OneDrive/Cuarto/Segundo Cuatri/Compiladores/p2 optim/FORMATO_resultados.txt", header = TRUE, sep = "\t")
+# Calcular la media de OPT_OLD para cada valor de N
+medias_old <- aggregate(OPT_OLD ~ N, data = datos_old, FUN = mean)
+medias_sin <- aggregate(SIN_OPT ~ N, data = datos_sin, FUN = mean)
 
-head(datos)
-str(datos)
+datos <- merge(medias_old, medias_sin, by = "N")
+names(datos) <- c("N", "MED_OLD", "MED_SIN")
 
-# Graficar usando la función plot en R base con escala logarítmica en el eje X
-ylim_range <- range(c(datos$Q1_SIN, datos$Q3_SIN,
-                      datos$Q1_OPT_OLD, datos$Q3_OPT_OLD,
-                      datos$Q1_OPT_NEW, datos$Q3_OPT_NEW))
+### Tiempos
 
-# Crear la gráfica con escala logarítmica en el eje X
-plot(datos$N, datos$Q2_SIN, type = "n", ylim = ylim_range, xlab = "N (escala logarítmica)", ylab = "Tiempo (s)", 
-     main = "Comparación entre medianas y rango intercuartílico", log = "x")
+# Abrir el dispositivo gráfico PDF
+pdf("C:/Users/Ignacio/Desktop/OneDrive/Cuarto/Segundo Cuatri/Compiladores/p2 optim/graficas/tiempos.pdf", width = 7, height = 6)
 
-# Añadir ticks en eje de N
+ylim_range <- range(c(datos$MED_OLD, datos$MED_SIN))
+plot(datos$N, datos$MED_OLD, type="n", ylim=ylim_range, xlab = "N (escala logarítmica)", ylab = "Tiempo (s)", 
+     main = "Comparación entre medias", log = "xy")
 axis(1, at = datos$N, labels = FALSE)
+points(datos$N, datos$MED_OLD, col = "blue", pch = 3, cex = 1)
+points(datos$N, datos$MED_SIN, col = "red", pch = 4, cex = 1)
 
-# Graficar el rango intercuartílico para la versión sin optimizar
-arrows(datos$N, datos$Q1_SIN, datos$N, datos$Q3_SIN, angle = 90, code = 3, col = "red", length = 0.1)
-# Graficar el rango intercuartílico para la versión optimizada old
-arrows(datos$N, datos$Q1_OPT_OLD, datos$N, datos$Q3_OPT_OLD, angle = 90, code = 3, col = "blue", length = 0.1)
-# Graficar el rango intercuartílico para la versión optimizada new
-arrows(datos$N, datos$Q1_OPT_NEW, datos$N, datos$Q3_OPT_NEW, angle = 90, code = 3, col = "green", length = 0.1)
+lowess_old <- lowess(datos$N, datos$MED_OLD, f = 0.2)
+lines(lowess_old, col = "blue", lwd = 1)
+lowess_sin <- lowess(datos$N, datos$MED_SIN, f = 0.2)
+lines(lowess_sin, col = "red", lwd = 1)
 
-
-# Graficar las medianas
-points(datos$N, datos$Q2_SIN, col = "red", pch = 16)  # Mediana sin optimizar
-points(datos$N, datos$Q2_OPT_OLD, col = "blue", pch = 16)  # Mediana optimizada
-points(datos$N, datos$Q2_OPT_NEW, col = "green", pch = 16)  # Mediana optimizada
-
-# Unir con líneas las medianas
-lowess_sin <- lowess(datos$N, datos$Q2_SIN, f = 0.3)
-lines(lowess_sin, col = "red", lwd = 2)
-lowess_opt_old <- lowess(datos$N, datos$Q2_OPT_OLD, f = 0.3)
-lines(lowess_opt_old, col = "blue", lwd = 2)
-lowess_opt_new <- lowess(datos$N, datos$Q2_OPT_NEW, f = 0.3)
-lines(lowess_opt_new, col = "green", lwd = 2)
-
-# Añadir la leyenda
 legend("topleft", 
-       legend = c("SIN", "OPT_OLD", "OPT_NEW"), 
-       col = c("red", "blue", "green"), 
-       pch = c(16, 16, 16), 
-       lwd = c(2, 2, 2), 
+       legend = c("SIN_OPT", "OPT_OLD"), 
+       col = c("red", "blue"), 
+       pch = c(4, 3),
+       lwd = c(2, 2), 
        bty = "n", 
        inset = 0.02)
+
+# 3. Cerrar el dispositivo gráfico
+dev.off()
+
+
+### Speedup
+
+pdf("C:/Users/Ignacio/Desktop/OneDrive/Cuarto/Segundo Cuatri/Compiladores/p2 optim/graficas/speedup.pdf", width = 7, height = 6)
+
+datos$speedup <- datos$MED_SIN / datos$MED_OLD
+colores <- ifelse(datos$speedup > 1, "blue", "red")
+plot(datos$N, datos$speedup, log="x", col = colores, 
+     pch = 16, cex = 1, ylim = range(0.5, 1.5),
+     xlab = "N (escala logarítmica)",
+     ylab = "Aceleración (original/optimizado)",
+     main = "Aceleración comparada")
+abline(h = 1, col = "black", lty = 1, lwd = 1)  # h = valor de y
+
+
+dev.off()
+
+

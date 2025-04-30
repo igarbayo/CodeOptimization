@@ -1,0 +1,123 @@
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{mathptmx}
+\usepackage{datetime}
+\usepackage[spanish, es-nolists]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{mathtools}
+
+\decimalpoint
+
+\usepackage{array}
+\usepackage{float}
+\usepackage[a4paper]{geometry}
+\geometry{top=2.5cm, bottom=2cm, left=2.54cm, right=2.54cm}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}  % Limpiar los encabezados y pies de página predeterminados
+% Encabezados para páginas impares
+\fancyhead[LE,RO]{\thepage} % En la izquierda de la página impar
+\fancyhead[RE]{\textsc{Garbayo, I.}} % En la derecha de la página impar
+% Encabezados para páginas pares
+\fancyhead[LO]{\textit{Informe}}  % En la izquierda de la página par
+\fancyfoot{}
+
+\usepackage{color}
+\usepackage{cancel}
+\usepackage{ulem}
+\usepackage{tcolorbox}
+\usepackage{multirow}
+\usepackage{tikz}
+\usetikzlibrary{babel, arrows.meta, arrows, datavisualization, patterns}
+\usepackage{multicol}
+\usepackage{stackrel}
+\usepackage{pdfpages}
+\renewcommand{\labelitemi}{\textbullet}
+
+\theoremstyle{definition}
+\newtheorem{ejemplo}{\textbf{Exemplo}}
+\newtheorem{ejer}{\textcolor{red}{\textbf{Exercicio}}}
+\newtheorem{defi}{\textbf{Definición}}
+\newtheorem{theorem}{\textbf{Teorema}}
+\newtheorem{lema}{\textbf{Lema}}
+\newtheorem{corol}{\textbf{Corolario}}
+\newtheorem{prop}{\textbf{Proposición}}
+\newtheorem{nota}{\textbf{\textit{Nota}}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+\usepackage{enumitem}
+
+
+\newcommand{\imagen}[1]{
+	\begin{figure} [H] \centering
+		\includegraphics[width=\textwidth]{#1}
+	\end{figure}
+}
+
+\title{%
+	\LARGE \textbf{Compiladores e Intérpretes} \\ \textbf{Informe}}
+\author{\textsc{Ignacio Garbayo Fernández}}
+\date{Universidade de Santiago de Compostela}
+
+\setlength{\parskip}{5pt}
+
+\usepackage{setspace}
+
+\onehalfspacing % Configura el interlineado a 1.5
+
+\setlength{\parindent}{0.7cm}
+
+\usepackage[hang, small,labelfont=bf,up,textfont=up]{caption}
+\usepackage{hanging}
+\usepackage{sectsty}
+
+\sectionfont{\fontsize{14}{15}\selectfont}
+\subsectionfont{\fontsize{12}{15}\selectfont}
+\subsubsectionfont{\fontsize{12}{15}\selectfont}
+
+\usepackage{titlesec}
+\titleformat{\subsection}[block]{\normalfont\large\itshape}{\thesubsection}{1em}{}
+\titlespacing*{\section}
+{0pt}{\baselineskip}{0pt}
+\titlespacing*{\subsection}
+{0pt}{\baselineskip}{0pt}
+\titlespacing*{\subsubsection}
+{0pt}{\baselineskip}{0pt}
+
+
+\begin{document}
+	
+	% PORTADA
+	\maketitle
+	\thispagestyle{empty}
+	
+	% ÍNDICE
+	\renewcommand{\contentsname}{Índice} % Cambia el título
+	\tableofcontents
+	
+	\vfill
+	
+	% Versión
+	\begin{figure}[H]
+		\centering
+		\textit{\underline{\colorbox{yellow}{Versión}}}: \today, \currenttime
+	\end{figure}
+
+\end{document}
