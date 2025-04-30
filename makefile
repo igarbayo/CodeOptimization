@@ -15,11 +15,11 @@ test_opt_new: test_opt_new.c
 
 $(OUTPUT_DIR)/sin_opt.s: sin_opt.c
 	mkdir -p $(OUTPUT_DIR)
-	$(CC) $(CFLAGS) -S sin_opt.c -o $(OUTPUT_DIR)/sin_opt.s
+	$(CC) $(CFLAGS) -S test_sin_opt.c -o $(OUTPUT_DIR)/sin_opt.s
 
 $(OUTPUT_DIR)/opt_old.s: opt_old.c
 	mkdir -p $(OUTPUT_DIR)
-	$(CC) $(CFLAGS) -S opt_old.c -o $(OUTPUT_DIR)/opt_old.s
+	$(CC) $(CFLAGS) -S test_opt_old.c -o $(OUTPUT_DIR)/opt_old.s
 
 $(OUTPUT_DIR)/opt_new.s: opt_new.c
 	mkdir -p $(OUTPUT_DIR)

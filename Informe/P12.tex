@@ -1,0 +1,214 @@
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{mathptmx}
+\usepackage{datetime}
+\usepackage[spanish, es-nolists]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{mathtools}
+
+\decimalpoint
+
+\usepackage{array}
+\usepackage{float}
+\usepackage[a4paper]{geometry}
+\geometry{top=2.5cm, bottom=2cm, left=2.54cm, right=2.54cm}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}  % Limpiar los encabezados y pies de página predeterminados
+% Encabezados para páginas impares
+\fancyhead[LE,RO]{\thepage} % En la izquierda de la página impar
+\fancyhead[RE]{\textsc{Anónimo}} % En la derecha de la página impar
+% Encabezados para páginas pares
+\fancyhead[LO]{\textit{Generación y optimización de código}}  % En la izquierda de la página par
+\fancyfoot{}
+
+\usepackage{color}
+\usepackage{cancel}
+\usepackage{ulem}
+\usepackage{tcolorbox}
+\usepackage{multirow}
+\usepackage{tikz}
+\usetikzlibrary{babel, arrows.meta, arrows, datavisualization, patterns}
+\usepackage{multicol}
+\usepackage{stackrel}
+\usepackage{pdfpages}
+\renewcommand{\labelitemi}{\textbullet}
+
+\theoremstyle{definition}
+\newtheorem{ejemplo}{\textbf{Exemplo}}
+\newtheorem{ejer}{\textcolor{red}{\textbf{Exercicio}}}
+\newtheorem{defi}{\textbf{Definición}}
+\newtheorem{theorem}{\textbf{Teorema}}
+\newtheorem{lema}{\textbf{Lema}}
+\newtheorem{corol}{\textbf{Corolario}}
+\newtheorem{prop}{\textbf{Proposición}}
+\newtheorem{nota}{\textbf{\textit{Nota}}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+\usepackage{enumitem}
+
+
+\newcommand{\imagen}[1]{
+	\begin{figure} [H] \centering
+		\includegraphics[width=\textwidth]{#1}
+	\end{figure}
+}
+
+\title{%
+	\LARGE \textbf{Compiladores e Intérpretes} \\ \vspace*{1cm} \textbf{Práctica 2: Generación y optimización de código}
+	\\ \Large \textbf{Reemplazo de multiplicaciones y divisiones enteras por operaciones de desplazamiento}}
+\author{\textsc{Autor anónimo}}
+\date{Universidade de Santiago de Compostela}
+
+\setlength{\parskip}{5pt}
+
+\usepackage{setspace}
+
+\onehalfspacing % Configura el interlineado a 1.5
+
+\setlength{\parindent}{0.7cm}
+
+\usepackage[hang, small,labelfont=bf,up,textfont=up]{caption}
+\usepackage{hanging}
+\usepackage{sectsty}
+
+\sectionfont{\fontsize{14}{15}\selectfont}
+\subsectionfont{\fontsize{12}{15}\selectfont}
+\subsubsectionfont{\fontsize{12}{15}\selectfont}
+
+\usepackage{titlesec}
+\titleformat{\subsection}[block]{\normalfont\large\itshape}{\thesubsection}{1em}{}
+\titlespacing*{\section}
+{0pt}{\baselineskip}{0pt}
+\titlespacing*{\subsection}
+{0pt}{\baselineskip}{0pt}
+\titlespacing*{\subsubsection}
+{0pt}{\baselineskip}{0pt}
+
+\usepackage[cache=false]{minted}
+\definecolor{bg}{rgb}{.95, .95, .95}
+
+
+\begin{document}
+	
+	% PORTADA
+	\maketitle
+	\thispagestyle{empty}
+	
+	\vspace*{1.5cm}
+	
+	% ÍNDICE
+	\renewcommand{\contentsname}{Índice} % Cambia el título
+	\tableofcontents
+	
+	\vfill
+	
+	% Versión
+	\begin{figure}[H]
+		\centering
+		\textit{\underline{\colorbox{yellow}{Versión}}}: \today, \currenttime
+	\end{figure}
+
+
+	\newpage
+
+
+	\section{Introducción}
+	
+	El rendimiento de los programas informáticos depende en gran medida de cómo se implementen las operaciones aritméticas, especialmente en bucles intensivos en cálculos. En esta práctica se analiza una técnica clásica de optimización a bajo nivel: el reemplazo de multiplicaciones y divisiones enteras por potencias de dos mediante operaciones de desplazamiento binario. Esta transformación permite, en muchos casos, reducir el coste computacional asociado a estas operaciones, aprovechando que los desplazamientos ($\ll$, $\gg$) se ejecutan generalmente más rápido que las multiplicaciones o divisiones en la mayoría de arquitecturas modernas.
+	
+	El objetivo principal del estudio es implementar dicha optimización sobre el código proporcionado, evaluar su impacto en el rendimiento y analizar su escalabilidad con respecto al tamaño del problema y al número de repeticiones (\texttt{ITER}). Para obtener medidas fiables, se realizan múltiples ejecuciones de cada versión del código (con y sin optimización), compiladas con el nivel de optimización \texttt{-O0} para evitar interferencias de otras transformaciones automáticas del compilador. Asimismo, se analiza el código ensamblador generado con el fin de confirmar que la sustitución ha tenido efecto y para entender mejor las diferencias observadas en los tiempos de ejecución.
+	
+	La práctica se completa con una interpretación de los resultados experimentales y un estudio de cómo influyen factores como la memoria caché y el número de repeticiones sobre la estabilidad y precisión de las medidas de tiempo, aportando una visión más completa sobre los beneficios reales de aplicar esta optimización.
+	
+
+	\section{Descripción de la técnica}
+
+	El desplazamiento de bits es una operación que consiste en mover los bits de un número binario hacia la izquierda o hacia la derecha una cantidad determinada de posiciones. Esta técnica es fundamental en programación de bajo nivel y se utiliza con frecuencia en ámbitos como sistemas embebidos, procesamiento gráfico y optimización de rendimiento, ya que permite realizar operaciones rápidas y con control detallado a nivel de bits, según se explica en \colorbox{yellow}{1}.
+	
+	Una operación de \textbf{desplazamiento a la izquierda} ($\ll$) mueve todos los bits de un número binario hacia la izquierda, rellenando con ceros los bits vacíos del lado derecho. Esta operación equivale a multiplicar el número original por $2^n$, donde $n$ es el número de posiciones desplazadas. Por ejemplo, desplazar un número una posición a la izquierda es equivalente a multiplicarlo por 2.
+	
+	De forma análoga, una operación de \textbf{desplazamiento a la derecha} ($\gg$) traslada los bits hacia la derecha. Si el desplazamiento es \emph{lógico}, los bits vacíos del lado izquierdo se rellenan con ceros; si es \emph{aritmético}, se conserva el bit de signo en números con representación en complemento a dos. Esta operación es equivalente, en muchos casos, a una división entera por potencias de dos.
+	
+	El uso de desplazamientos puede reemplazar multiplicaciones o divisiones enteras por potencias de dos, lo que permite reducir el coste computacional de estas operaciones en ciertas arquitecturas. Esto puede dar lugar a algoritmos más rápidos y eficientes, especialmente en aplicaciones críticas para el rendimiento, como el procesamiento gráfico, la criptografía o la indexación de grandes volúmenes de datos.
+	
+	El código con multiplicaciones y divisiones inicialmente propuesto es:
+	\begin{minted}[linenos,fontsize=\small,
+		bgcolor=bg]{c}
+int i, j, m3 = 8, m5 = 32, a = 0, b = 0;
+
+for (j = 0; j < ITER; j++) {
+	for (i = 0; i < N; i++) {
+		a = i * m3;
+		b += a / m5;
+	}
+}
+	\end{minted}
+
+	Es claro que \texttt{a} representa el valor del índice (sobre el tamaño del problema) multiplicado por $2^3=8$, para luego sumar de forma acumulada \texttt{b} con \texttt{a} dividido entre $2^5=32$.
+
+	La optimización que se implementará será la siguiente. Un simple análisis llega para ver que:
+	\begin{equation}\label{eq:uno}
+		\texttt{b} = \texttt{b} + \dfrac{\texttt{a}}{2^5} = \texttt{b} + \dfrac{i \cdot 2^3}{2^5} = \texttt{b} + \dfrac{i}{2^2}.
+	\end{equation}
+	
+	En la versión optimizada del código tenemos en cuenta (\ref{eq:uno}) e implementamos la operación con un desplazamiento de 2 bits a la derecha, como se ha explicado.
+	\begin{minted}[linenos,fontsize=\small,
+		bgcolor=bg]{c}
+for (j = 0; j < ITER_local; j++) {
+	for (i = 0; i < N_local; i++) {
+		b += i >> 2;
+	}
+	a = (N_local - 1) << 3;
+}
+	\end{minted}
+
+	De manera similar, para intentar ser fiel con el cálculo de \texttt{a} en cada uno de los índices sobre \texttt{ITER}, terminamos la iteración multiplicando como sigue. El término $\texttt{a}_i$ se refiere al valor de \texttt{a} antes de comenzar la iteración $i+1$ sobre \texttt{ITER}.
+	\begin{equation}\label{eq:dos}
+		\forall i, \:\: \texttt{a}_i = i \cdot 2^3 \implies \texttt{a}_{N-1} = (N-1)\cdot 2^3.
+	\end{equation}
+	
+	Además de su uso en operaciones aritméticas, el desplazamiento de bits permite manipular directamente bits individuales, lo cual resulta útil para configurar, borrar o alternar banderas dentro de registros binarios. Comprender estas operaciones es esencial para aquellos que deseen profundizar en el funcionamiento interno del hardware y en la eficiencia del software a bajo nivel.
+	
+	
+		
+	
+	\section{Beneficios y desventajas esperados}
+	
+	
+	\section{Códigos en ensamblador}
+	
+	
+	\section{Interpretación de los resultados}
+	
+	
+	\section{Conclusiones}
+	
+	
+	\section{Referencias}
+	
+	\begin{enumerate}
+		\item \href{https://wraycastle.com/es/blogs/knowledge-base/bit-shift-calculator#:~:text=El%20desplazamiento%20de%20bits%20es%20una%20operaci%C3%B3n%20que%20implica%20mover,n%C3%BAmero%20por%20potencias%20de%20dos.}{https://wraycastle.com/es/blogs/knowledge-base/bit-shift-calculator\#:~:text=El\%20desplazamiento\%20de\%20bits\%20es\%20una\%20operaci\%C3\%B3n\%20que\%20implica\%20mover,n\%C3\%BAmero\%20por\%20potencias\%20de\%20dos.}
+	\end{enumerate}
+	
+	
+	
+
+\end{document}

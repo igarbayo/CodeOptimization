@@ -1,0 +1,8 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{2}{section.1}%
+\contentsline {section}{\numberline {2}Descripción de la técnica}{2}{section.2}%
+\contentsline {section}{\numberline {3}Beneficios y desventajas esperados}{4}{section.3}%
+\contentsline {section}{\numberline {4}Códigos en ensamblador}{4}{section.4}%
+\contentsline {section}{\numberline {5}Interpretación de los resultados}{4}{section.5}%
+\contentsline {section}{\numberline {6}Conclusiones}{4}{section.6}%
+\contentsline {section}{\numberline {7}Referencias}{4}{section.7}%
