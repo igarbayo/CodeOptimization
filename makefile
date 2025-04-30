@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O0
+CFLAGS = -O1
 OUTPUT_DIR = ensamblador
 
 all: test_sin_opt test_opt_old test_opt_new $(OUTPUT_DIR)/sin_opt.s $(OUTPUT_DIR)/opt_old.s $(OUTPUT_DIR)/opt_new.s

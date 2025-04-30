@@ -14,8 +14,8 @@ int N[] = {
 
 // Tamaño del array N
 #define TAM_N (sizeof(N) / sizeof(N[0]))
-#define INDEX_FIN TAM_N
-#define INDEX_INICIO 0
+#define INDEX_FIN 11
+#define INDEX_INICIO 10
 
 // Se ajusta para que cada par N[i], ITER[i] tarde más o menos lo mismo
 // Basta con ajustar para que N[i] * ITER[i] se mantenga constante para todo i < TAM_N
@@ -27,7 +27,7 @@ void generar_ITER(int *ITER) {
 }
 
 // Ejecutamos cada par N[i], ITER[i] un número de REPETICIONES
-#define REPETICIONES 15
+#define REPETICIONES 40
 
 // Macros para medir el tiempo
 typedef struct timeval timeval_t;
