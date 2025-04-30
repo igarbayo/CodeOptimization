@@ -11,7 +11,7 @@ set(CMAKE_C_FLAGS_RELWITHDEBINFO "")
 set(CMAKE_C_FLAGS_MINSIZEREL "")
 
 # Fuerza -O0 para este ejecutable
-add_executable(P2_Optim main.c)
+add_executable(P2_Optim test_sin_opt.c)
 target_compile_options(P2_Optim PRIVATE -O0)
 
 # Enlaza con la librería matemática
