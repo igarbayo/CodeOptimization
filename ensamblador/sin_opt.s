@@ -2,8 +2,9 @@
 	.text
 	.globl	nombre_archivo
 	.section	.rodata
+	.align 8
 .LC0:
-	.string	"resultados/res_SIN_OPT.txt"
+	.string	"resultados/NOCHE-res_SIN_OPT.txt"
 	.section	.data.rel.local,"aw"
 	.align 8
 	.type	nombre_archivo, @object
@@ -14,20 +15,45 @@ nombre_archivo:
 	.data
 	.align 32
 	.type	N, @object
-	.size	N, 60
+	.size	N, 160
 N:
 	.long	3000
+	.long	4500
+	.long	7000
+	.long	9500
 	.long	12000
+	.long	17000
+	.long	25000
+	.long	34000
 	.long	40000
+	.long	56000
+	.long	78000
+	.long	95000
 	.long	110000
+	.long	160000
+	.long	250000
+	.long	320000
 	.long	390000
+	.long	570000
+	.long	820000
+	.long	1000000
 	.long	1190000
+	.long	1500000
+	.long	1750000
 	.long	1990000
+	.long	2550000
 	.long	3190000
+	.long	4200000
+	.long	5100000
 	.long	5900000
+	.long	7800000
+	.long	9500000
 	.long	11800000
+	.long	15900000
 	.long	23900000
+	.long	53000000
 	.long	95000000
+	.long	199000000
 	.long	383000000
 	.long	959000000
 	.long	1910000000
@@ -44,7 +70,7 @@ generar_ITER:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	movq	%rdi, -24(%rbp)
-	movabsq	$4800000000, %rax
+	movabsq	$6400000000, %rax
 	movq	%rax, -8(%rbp)
 	movl	$0, -12(%rbp)
 	jmp	.L2
@@ -68,7 +94,7 @@ generar_ITER:
 	addl	$1, -12(%rbp)
 .L2:
 	movl	-12(%rbp), %eax
-	cmpl	$14, %eax
+	cmpl	$39, %eax
 	jbe	.L3
 	nop
 	nop
@@ -133,11 +159,11 @@ main:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	subq	$240, %rsp
+	subq	$384, %rsp
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	leaq	-192(%rbp), %rax
+	leaq	-336(%rbp), %rax
 	movq	%rax, %rdi
 	call	generar_ITER
 	movq	nombre_archivo(%rip), %rax
@@ -145,8 +171,8 @@ main:
 	movq	%rdx, %rsi
 	movq	%rax, %rdi
 	call	fopen@PLT
-	movq	%rax, -200(%rbp)
-	cmpq	$0, -200(%rbp)
+	movq	%rax, -344(%rbp)
+	cmpq	$0, -344(%rbp)
 	jne	.L5
 	leaq	.LC2(%rip), %rax
 	movq	%rax, %rdi
@@ -154,7 +180,7 @@ main:
 	movl	$1, %eax
 	jmp	.L15
 .L5:
-	movq	-200(%rbp), %rax
+	movq	-344(%rbp), %rax
 	movq	%rax, %rcx
 	movl	$10, %edx
 	movl	$1, %esi
@@ -189,50 +215,53 @@ main:
 	movq	%rax, %rdi
 	movl	$1, %eax
 	call	printf@PLT
-	movl	$8, -212(%rbp)
-	movl	$32, -208(%rbp)
-	movl	$0, -204(%rbp)
-	movl	$0, -224(%rbp)
-	movl	$0, -220(%rbp)
+	movl	$8, -364(%rbp)
+	movl	$32, -360(%rbp)
+	movl	$0, -356(%rbp)
+	movl	$0, -376(%rbp)
+	movl	$0, -372(%rbp)
 	jmp	.L7
 .L14:
-	movl	$0, -216(%rbp)
-	jmp	.L8
-.L13:
-	movl	$0, -204(%rbp)
-	movl	$0, -224(%rbp)
-	movl	$0, %esi
-	leaq	start_time(%rip), %rax
-	movq	%rax, %rdi
-	call	gettimeofday@PLT
-	movl	$0, -228(%rbp)
-	jmp	.L9
-.L12:
-	movl	$0, -232(%rbp)
-	jmp	.L10
-.L11:
-	movl	-232(%rbp), %eax
-	imull	-212(%rbp), %eax
-	movl	%eax, -204(%rbp)
-	movl	-204(%rbp), %eax
-	cltd
-	idivl	-208(%rbp)
-	addl	%eax, -224(%rbp)
-	addl	$1, -232(%rbp)
-.L10:
-	movl	-220(%rbp), %eax
+	movl	-372(%rbp), %eax
 	cltq
 	leaq	0(,%rax,4), %rdx
 	leaq	N(%rip), %rax
 	movl	(%rdx,%rax), %eax
-	cmpl	%eax, -232(%rbp)
-	jl	.L11
-	addl	$1, -228(%rbp)
-.L9:
-	movl	-220(%rbp), %eax
+	movl	%eax, -352(%rbp)
+	movl	-372(%rbp), %eax
 	cltq
-	movl	-192(%rbp,%rax,4), %eax
-	cmpl	%eax, -228(%rbp)
+	movl	-336(%rbp,%rax,4), %eax
+	movl	%eax, -348(%rbp)
+	movl	$0, -368(%rbp)
+	jmp	.L8
+.L13:
+	movl	$0, -376(%rbp)
+	movl	$0, %esi
+	leaq	start_time(%rip), %rax
+	movq	%rax, %rdi
+	call	gettimeofday@PLT
+	movl	$0, -380(%rbp)
+	jmp	.L9
+.L12:
+	movl	$0, -384(%rbp)
+	jmp	.L10
+.L11:
+	movl	-384(%rbp), %eax
+	imull	-364(%rbp), %eax
+	movl	%eax, -356(%rbp)
+	movl	-356(%rbp), %eax
+	cltd
+	idivl	-360(%rbp)
+	addl	%eax, -376(%rbp)
+	addl	$1, -384(%rbp)
+.L10:
+	movl	-384(%rbp), %eax
+	cmpl	-352(%rbp), %eax
+	jl	.L11
+	addl	$1, -380(%rbp)
+.L9:
+	movl	-380(%rbp), %eax
+	cmpl	-348(%rbp), %eax
 	jl	.L12
 	movl	$0, %esi
 	leaq	end_time(%rip), %rax
@@ -251,40 +280,33 @@ main:
 	movsd	.LC4(%rip), %xmm2
 	divsd	%xmm2, %xmm0
 	addsd	%xmm1, %xmm0
-	movl	-220(%rbp), %eax
-	cltq
-	movl	-192(%rbp,%rax,4), %eax
 	pxor	%xmm1, %xmm1
-	cvtsi2sdl	%eax, %xmm1
+	cvtsi2sdl	-348(%rbp), %xmm1
 	divsd	%xmm1, %xmm0
-	movl	-216(%rbp), %eax
+	movl	-368(%rbp), %eax
 	cltq
-	movsd	%xmm0, -128(%rbp,%rax,8)
-	movl	-216(%rbp), %eax
+	movsd	%xmm0, -176(%rbp,%rax,8)
+	movl	-368(%rbp), %eax
 	cltq
-	movq	-128(%rbp,%rax,8), %rcx
-	movl	-220(%rbp), %eax
-	cltq
-	leaq	0(,%rax,4), %rdx
-	leaq	N(%rip), %rax
-	movl	(%rdx,%rax), %edx
-	movq	-200(%rbp), %rax
+	movq	-176(%rbp,%rax,8), %rcx
+	movl	-352(%rbp), %edx
+	movq	-344(%rbp), %rax
 	movq	%rcx, %xmm0
 	leaq	.LC6(%rip), %rcx
 	movq	%rcx, %rsi
 	movq	%rax, %rdi
 	movl	$1, %eax
 	call	fprintf@PLT
-	addl	$1, -216(%rbp)
+	addl	$1, -368(%rbp)
 .L8:
-	cmpl	$14, -216(%rbp)
+	cmpl	$19, -368(%rbp)
 	jle	.L13
-	addl	$1, -220(%rbp)
+	addl	$1, -372(%rbp)
 .L7:
-	movl	-220(%rbp), %eax
-	cmpl	$14, %eax
+	movl	-372(%rbp), %eax
+	cmpl	$39, %eax
 	jbe	.L14
-	movq	-200(%rbp), %rax
+	movq	-344(%rbp), %rax
 	movq	%rax, %rdi
 	call	fclose@PLT
 	movl	$0, %eax

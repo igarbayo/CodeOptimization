@@ -1,3 +1,0 @@
-/home/ignacio/Escritorio/Cuarto/Segundo Cuatri/Compiladores/P2-Optim/cmake-build-debug/CMakeFiles/P2_Optim.dir
-/home/ignacio/Escritorio/Cuarto/Segundo Cuatri/Compiladores/P2-Optim/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/ignacio/Escritorio/Cuarto/Segundo Cuatri/Compiladores/P2-Optim/cmake-build-debug/CMakeFiles/rebuild_cache.dir
