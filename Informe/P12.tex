@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper,twoside]{article}
+\documentclass[11pt,a4paper,twoside]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
@@ -112,7 +112,7 @@
 	\maketitle
 	\thispagestyle{empty}
 	
-	\vspace*{1.5cm}
+	\vspace*{1cm}
 	
 	% ÍNDICE
 	\renewcommand{\contentsname}{Índice} % Cambia el título
@@ -153,7 +153,6 @@
 	\begin{minted}[linenos,fontsize=\small,
 		bgcolor=bg]{c}
 int i, j, m3 = 8, m5 = 32, a = 0, b = 0;
-
 for (j = 0; j < ITER; j++) {
 	for (i = 0; i < N; i++) {
 		a = i * m3;
@@ -172,11 +171,11 @@ for (j = 0; j < ITER; j++) {
 	En la versión optimizada del código tenemos en cuenta (\ref{eq:uno}) e implementamos la operación con un desplazamiento de 2 bits a la derecha, como se ha explicado.
 	\begin{minted}[linenos,fontsize=\small,
 		bgcolor=bg]{c}
-for (j = 0; j < ITER_local; j++) {
-	for (i = 0; i < N_local; i++) {
+for (j = 0; j < ITER; j++) {
+	for (i = 0; i < N; i++) {
 		b += i >> 2;
 	}
-	a = (N_local - 1) << 3;
+	a = (N - 1) << 3;
 }
 	\end{minted}
 
@@ -185,27 +184,198 @@ for (j = 0; j < ITER_local; j++) {
 		\forall i, \:\: \texttt{a}_i = i \cdot 2^3 \implies \texttt{a}_{N-1} = (N-1)\cdot 2^3.
 	\end{equation}
 	
-	Además de su uso en operaciones aritméticas, el desplazamiento de bits permite manipular directamente bits individuales, lo cual resulta útil para configurar, borrar o alternar banderas dentro de registros binarios. Comprender estas operaciones es esencial para aquellos que deseen profundizar en el funcionamiento interno del hardware y en la eficiencia del software a bajo nivel.
+	Además de su uso en operaciones aritméticas, el desplazamiento de bits permite manipular directamente bits individuales, lo cual resulta útil para configurar, borrar o alternar banderas dentro de registros binarios. Comprender estas operaciones es esencial para aquellos que deseen profundizar en el funcionamiento interno del \textit{hardware} y en la eficiencia del software a bajo nivel.
 	
+	Para ambas versiones, se explica a continuación la motivación de los 2 bucles anidados.
 	
+	\subsection{Configuración del experimento}
+	
+	El objetivo del experimento es analizar el comportamiento de la versión con multiplicaciones y divisiones frente a la versión con operaciones de desplazamiento para diversos tamaños del problema. Para esto, se crea un \textit{array} de valores de \texttt{N} con un número de datos suficiente (40 valores diferentes) y evitando potencias enteras de 2. El \textit{array} se muestra en (\ref{eq:n}).
+	
+	\begin{equation}\label{eq:n}
+		\begin{aligned}
+			\texttt{N} = \left(
+			\begin{matrix}
+				3000,      & 4500,      & 7000,      & 9500,      & 12000,		\\
+				17000,     & 25000,     & 34000,     & 40000,     & 56000,		\\
+				78000,     & 95000,     & 110000,    & 160000,    & 250000,		\\
+				320000,    & 390000,    & 570000,    & 820000,    & 1000000,	\\
+				1190000,   & 1500000,   & 1750000,   & 1990000,   & 2550000,	\\ 
+				3190000,   & 4200000,   & 5100000,   & 5900000,   & 7800000,	\\
+				9500000,   & 11800000,  & 15900000,  & 23900000,  & 53000000,	\\
+				95000000,  & 199000000, & 383000000, & 959000000, & 1910000000	\\
+			\end{matrix}
+			\right).
+		\end{aligned}
+	\end{equation}
+
+	Además, resulta importante incluir un bucle externo de número fijo de iteraciones (\texttt{ITER}) cuando se estudia el rendimiento de un algoritmo en función del tamaño del problema, especialmente si este es variable, para garantizar condiciones comparables entre ejecuciones con distintos valores de N. Para valores pequeños de \texttt{N}, la ejecución del algoritmo es demasiado rápida. Esto puede provocar medidas ruidosas y poco precisas por debajo del umbral de resolución del reloj del sistema, aparte de un dominio del \textit{overhead} de la llamada al sistema o del propio cronómetro (si este no valiese 0).
+	
+	Sin embargo, para valores grandes de tamaño del problema, el algoritmo tarda más, pero con mucha menor variabilidad relativa. Esto genera datos incomparables y gráficas sesgadas. Se introduce así un bucle externo de \texttt{ITER} repeticiones, donde \texttt{ITER} se elige dinámicamente para que el producto $\texttt{ITER} \cdot \texttt{N}$ sea constante (o aproximadamente constante). Fijando que cada repetición del experimento deba tardar, al menos, una decena de segundos, generamos el vector de \texttt{ITER} según (\ref{eq:ITER}), que garantiza esta condición.
+	
+	\begin{equation} \label{eq:ITER}
+		\forall i \in \lbrace 1, \dots, 40 \rbrace, \:\: \texttt{ITER}_i = \left\lfloor \dfrac{6.400.000.000}{\texttt{N}_i} \right\rfloor.
+	\end{equation}
+
+	Esta expresión se traducirá en el código C en la función \texttt{generar\_iter()}. Para el vector (\ref{eq:n}), los valores corrrespondientes se reflejan en (\ref{eq:ejITER}).
+	
+	\begin{equation} \label{eq:ejITER}
+		\begin{aligned}
+			\texttt{ITER} = \left(
+			\begin{matrix}
+				valores
+			\end{matrix}
+			\right).
+		\end{aligned}
+	\end{equation}
+
+	Para cada valor de \texttt{N}, es fundamental ejecutar el algoritmo un número suficiente de veces, denotado como \texttt{REPETICIONES}, con el fin de obtener medidas de rendimiento representativas y estables. La variabilidad inherente al sistema ---debido a factores como la planificación del sistema operativo, el estado de la caché, o procesos en segundo plano--- puede provocar fluctuaciones significativas en los tiempos de ejecución individuales. Al repetir las mediciones y calcular posteriormente estadísticas como la \textbf{media}, el \textbf{máximo} y el \textbf{mínimo}, se obtiene una caracterización más completa del comportamiento del algoritmo. Estas métricas permiten representar en las gráficas no solo la tendencia central, sino también la dispersión y los extremos del rendimiento, ofreciendo una visión más realista y robusta para comparar implementaciones o analizar cuellos de botella. Para este particular, \texttt{REPETICIONES} se fija a 20.
 		
 	
 	\section{Beneficios y desventajas esperados}
 	
+	Las técnicas de \textbf{reducción por fuerza}, como se ve en \colorbox{yellow}{2}, permiten reemplazar operaciones costosas por otras equivalentes pero más eficientes en la máquina objetivo. Estas transformaciones están motivadas por el hecho de que ciertas instrucciones del conjunto de la arquitectura son mucho más económicas que otras. Por ejemplo, elevar un número al cuadrado, $x^2$, puede reemplazarse por la multiplicación $x \times x$, que resulta menos costosa que una llamada a una rutina de exponenciación general.
 	
-	\section{Códigos en ensamblador}
+	Un caso particularmente interesante es el uso de \textbf{desplazamientos binarios} ($\ll$, $\gg$) como sustitutos de multiplicaciones o divisiones por potencias de dos. Estas operaciones, en principio, deberían ser más rápidas que una multiplicación o división convencional, ya que el \textit{hardware} puede implementarlas mediante simples circuitos de cableado sin necesidad de utilizar una unidad aritmética compleja.
+	
+	Sin embargo, en la práctica, esta ventaja no siempre se manifiesta de forma significativa. En arquitecturas modernas, las unidades aritméticas están tan optimizadas que las diferencias de coste entre una multiplicación por una constante y un desplazamiento pueden ser mínimas o incluso inexistentes, especialmente cuando el compilador ya realiza estas optimizaciones automáticamente, \textit{aún compilando sin optimizaciones}. Además, el uso de desplazamientos puede introducir ambigüedad o dificultar la legibilidad del código fuente si no se utiliza con criterio.
+	
+	De acuerdo a \colorbox{yellow}{3}, la compilación en GCC con \texttt{-O0} reduce el tiempo de compilación y permite que la depuración produzca los resultados esperados. Este es el nivel predeterminado. Con la opción \texttt{-O0}, GCC desactiva completamente la mayoría de las pasadas de optimización; estas no se ejecutan ni siquiera si se habilitan explícitamente en la línea de comandos o si aparecen listadas como activadas por defecto.
+	
+	Por lo tanto, aunque los desplazamientos siguen siendo una herramienta útil en la optimización de bajo nivel ---especialmente en sistemas embebidos o compiladores de alto rendimiento---, es importante evaluar su beneficio real en el contexto específico de la arquitectura y el compilador utilizados.
 	
 	
-	\section{Interpretación de los resultados}
+	\section{Programación y código en ensamblador}
+	
+	La compilación con la opción \texttt{-S} de GCC produce códigos fuente del ensamblador de la máquina mediante los que podemos analizar la traducción de las 2 estrategias. Se han ejecutado los códigos en una máquina con las siguientes características:
+	
+	\begin{itemize}
+		\item Sistema operativo:
+		\item Procesador y número de núcleos:
+		\item Versión de GCC:
+		\item Memoria caché:
+		\item Memoria RAM: 
+	\end{itemize}
+
+	Con el fin de ejecutar las dos versiones en las mismas condiciones, se ha vuelto en cada caso el algoritmo en una estructura de bucles bajo \texttt{REPETICIONES} y variables de la forma que sigue:
+	
+	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{c}
+int main() {
+	int ITER[TAM_N]; // Array ITER del mismo tamaño que N
+	generar_ITER(ITER); // Generar valores
+	
+	// Abrimos en modo escritura
+	FILE *file = fopen(nombre_archivo, "w"); 
+	if (!file) { ... }
+	
+	// Escribimos la cabecera en el archivo
+	fprintf(file, "N\t ... \n");
+	
+	// No hay que calentar la caché porque no se usa ningún vector
+	// solo se utilizan 3 variables que estarán en la pila
+	
+	// Medir overhead, que ha resultado 0, luego se obvia
+	gettimeofday(&overhead_start, NULL);
+	gettimeofday(&overhead_end, NULL);
+	overhead = (overhead_end.tv_sec - overhead_start.tv_sec) +
+	(overhead_end.tv_usec - overhead_start.tv_usec) / 1e6;
+	
+	// Variables locales
+	int i, j, a = 0, b = 0; // y m3, m5
+	
+	for (int index = INDEX_INICIO; index < INDEX_FIN; index++) {
+		double tiempos[REPETICIONES];
+		int N_local = N[index], ITER_local = ITER[index];
+		
+		for (int k = 0; k < REPETICIONES; k++) {
+			b=0;
+			gettimeofday(&start_time, NULL);
+			// algoritmo
+			gettimeofday(&end_time, NULL);
+			tiempos[k] = ((end_time.tv_sec - start_time.tv_sec +
+			(end_time.tv_usec - start_time.tv_usec)/1.e6))/
+			ITER_local;
+			fprintf(file, "%d\t%.6f\n", N_local, tiempos[k]);
+		}
+	}
+	
+	fclose(file);
+	return 0;
+}
+	\end{minted}
+
+	Los bloques denotados por el comentario \texttt{algoritmo} son los que se han descrito en la sección 2. En las dos versiones, el bucle externo de \texttt{ITER} se traduce en la directiva \texttt{.L10} y el bucle interno sobre \texttt{N} en \texttt{.L11}.
+
+	\subsection{Bucles}
+	
+	En el caso de la versión original, los dos bucles anteriores se traducen en lo siguiente.
+	
+	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
+.L11:
+	movl	-384(%rbp), %eax
+	imull	-364(%rbp), %eax
+	movl	%eax, -356(%rbp)
+	movl	-356(%rbp), %eax
+	cltd
+	idivl	-360(%rbp)
+	addl	%eax, -376(%rbp)
+	addl	$1, -384(%rbp)
+.L10:
+	movl	-384(%rbp), %eax
+	cmpl	-352(%rbp), %eax
+	jl	  .L11
+	addl	$1, -380(%rbp)
+	\end{minted}
+
+	Las instrucciones \texttt{imull} e \texttt{idivl}, que se corresponden con \texttt{a = i * m3} y \texttt{b += a / m5}, respectivamente, representan multipliciaciones y divisiones explícitas en cada iteración sobre un valor de \texttt{N}. Estas 2, teóricamente, son operaciones con un coste alto, aunque se podría ver reducido en computadores modernos.
+	
+	Para la versión con desplazamientos, los dos bucles anteriores se traducen en lo siguiente.
+	
+	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
+.L11:
+	movl	-376(%rbp), %eax
+	sarl	$2, %eax
+	addl	%eax, -368(%rbp)
+	addl	$1, -376(%rbp)
+.L10:
+	movl	-376(%rbp), %eax
+	cmpl	-352(%rbp), %eax
+	jl	  .L11
+	movl	-352(%rbp), %eax
+	subl	$1, %eax
+	sall	$3, %eax
+	movl	%eax, -356(%rbp)
+	addl	$1, -372(%rbp)
+	\end{minted}
+
+	Las instrucciones \texttt{sarl} y \texttt{sall}, que se corresponden con \texttt{i $\gg$ 2} y \texttt{(N-1) $\ll$ 3}, respectivamente, son operaciones de desplazamiento de bits. Por lo tanto, estas suelen tardar 1 ciclo en cada llamada, lo que las haría en principio más rápidas que las aritméticas de multiplicación y división. A pesar de todo, con \texttt{-O0} el compilador no elimina accesos redundantes a memoria, por lo que se podría anular esta ventaja.
+	
+	\subsection{Accesos a memoria}
+	
+	\colorbox{yellow}{Seguir completando con PDF}
+	
+	\subsection{Resumen comparado}
+	
+	\section{Resultados obtenidos}
+	
+	\subsection{Tiempos de ejecución}
+	
+	\subsection{Aceleración}
+	
+	\subsection{Tamaños del problema pequeños}
 	
 	
 	\section{Conclusiones}
 	
 	
-	\section{Referencias}
+	\section*{Referencias}
 	
 	\begin{enumerate}
 		\item \href{https://wraycastle.com/es/blogs/knowledge-base/bit-shift-calculator#:~:text=El%20desplazamiento%20de%20bits%20es%20una%20operaci%C3%B3n%20que%20implica%20mover,n%C3%BAmero%20por%20potencias%20de%20dos.}{https://wraycastle.com/es/blogs/knowledge-base/bit-shift-calculator\#:~:text=El\%20desplazamiento\%20de\%20bits\%20es\%20una\%20operaci\%C3\%B3n\%20que\%20implica\%20mover,n\%C3\%BAmero\%20por\%20potencias\%20de\%20dos.}
+		
+		\item Aho (libro asignatura)
+		
+		\item -O0 en el manual de GCC: \href{https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#index-O0}{https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html\#index-O0}
 	\end{enumerate}
 	
 	

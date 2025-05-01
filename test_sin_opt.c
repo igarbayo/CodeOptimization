@@ -23,7 +23,7 @@ int N[] = {
 // Se ajusta para que cada par N[i], ITER[i] tarde más o menos lo mismo
 // Basta con ajustar para que N[i] * ITER[i] se mantenga constante para todo i < TAM_N
 void generar_ITER(int *ITER) {
-    const long long PRODUCTO = 6400000000LL; // 4.8e9
+    const long long PRODUCTO = 6400000000LL; 
     for (int i = 0; i < TAM_N; i++) {
         ITER[i] = (int)(PRODUCTO / N[i]); // División entera (truncamiento)
     }
