@@ -1,0 +1,8 @@
+SIN_POTENCIAS
+movl	$15, -116(%rbp)
+
+CON_POTENCIAS
+movl	$16, -116(%rbp)
+
+DESPLAZAMIENTOS
+sall	$4, %eax	en vez de imull
