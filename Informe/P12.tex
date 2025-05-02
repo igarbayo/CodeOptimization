@@ -247,17 +247,11 @@ for (j = 0; j < ITER; j++) {
 	
 	\section{Programación y código en ensamblador}
 	
-	La compilación con la opción \texttt{-S} de GCC produce códigos fuente del ensamblador de la máquina mediante los que podemos analizar la traducción de las 2 estrategias. Se han ejecutado los códigos en una máquina con las siguientes características:
+	La compilación con la opción \texttt{-S} de GCC produce códigos fuente del ensamblador de la máquina mediante los que podemos analizar la traducción de las 2 estrategias. Se han ejecutado los códigos en una máquina ASUS Zenbook UX425EA 1.0, equipada con el sistema operativo Ubuntu 22.04.3 LTS x86\_64. Cuenta con un procesador Intel i7-1165G7 de 8 núcleos de undécima generación, que funciona a una frecuencia de reloj de 2.80 GHz. Las direcciones de memoria ocupan 39 bits físicos y 48 bits virtuales.
 	
-	\begin{itemize}
-		\item Sistema operativo:
-		\item Procesador y número de núcleos:
-		\item Versión de GCC:
-		\item Memoria caché:
-		\item Memoria RAM: 
-	\end{itemize}
+	Cada núcleo dispone de 2 hilos de procesamiento. Dispone de 15 GiB de memoria RAM totales y de 4 niveles de memoria caché: L1d (192 KiB, 4 instancias), L1i (128 KiB, 4 instancias), L2 (5 MiB, 4 instancias) y L3 (12 MiB, 1 instancia). Se omite la inclusión de otros componentes como la tarjeta gráfica o de sonido porque no afectarán a los resultados de las pruebas. La versión del compilador utilizada es \colorbox{yellow}{GCC XX}.
 
-	Con el fin de ejecutar las dos versiones en las mismas condiciones, se ha vuelto en cada caso el algoritmo en una estructura de bucles bajo \texttt{REPETICIONES} y variables de la forma que sigue:
+	Con el fin de ejecutar las dos versiones en las mismas condiciones, se ha envuelto en cada caso el algoritmo en una estructura de bucles bajo \texttt{REPETICIONES} y variables de la forma que sigue:
 	
 	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{c}
 int main() {
@@ -293,8 +287,8 @@ int main() {
 			// algoritmo
 			gettimeofday(&end_time, NULL);
 			tiempos[k] = ((end_time.tv_sec - start_time.tv_sec +
-			(end_time.tv_usec - start_time.tv_usec)/1.e6))/
-			ITER_local;
+			(end_time.tv_usec - start_time.tv_usec)/1.e6)
+			- overhead)/ITER_local;
 			fprintf(file, "%d\t%.6f\n", N_local, tiempos[k]);
 		}
 	}
@@ -304,11 +298,11 @@ int main() {
 }
 	\end{minted}
 
-	Los bloques denotados por el comentario \texttt{algoritmo} son los que se han descrito en la sección 2. En las dos versiones, el bucle externo de \texttt{ITER} se traduce en la directiva \texttt{.L10} y el bucle interno sobre \texttt{N} en \texttt{.L11}.
+	Los bloques denotados por el comentario \texttt{algoritmo} son los que se han descrito en la sección 2. En las dos versiones, el bucle externo de \texttt{ITER} se traduce en la directiva \texttt{.L10} y el bucle interno sobre \texttt{N} en \texttt{.L11}. El resto de instrucciones, puesto que se programa para ello, se traducen de forma idénticamente literal en el código ensamblador.
 
 	\subsection{Bucles}
 	
-	En el caso de la versión original, los dos bucles anteriores se traducen en lo siguiente.
+	En el caso de la versión original, los dos bucles explicados en la sección 2 se traducen en lo siguiente.
 	
 	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
 .L11:
@@ -358,14 +352,61 @@ int main() {
 	
 	\section{Resultados obtenidos}
 	
+	Los experimentos se han realizado teniendo en cuenta los parámetros \texttt{N}, \texttt{ITER} y \texttt{REPETICIONES} explicados en la sección 2. Las fases del experimento también se han introducido en la sección 4. No se ha realizado ninguna fase de calentamiento de la caché, ya que no se utiliza ningún vector para las operaciones, únicamente variables almacenadas en la pila (\texttt{a}, \texttt{b} y \texttt{c}). Seguidamente, se obtiene el \textit{overhead}, medición que tiene como objetivo estimar el tiempo que tarda en ejecutarse la propia medición del tiempo. Esto se aproxima calculando el tiempo que se tarda en usar \texttt{gettimeofday()} dos veces seguidas. Con todo, el \textit{overhead} ha resultado ser nulo durante las pruebas.
+	
 	\subsection{Tiempos de ejecución}
+	
+	La Figura \ref{graf:tiempos} representa los resultados obtenidos directamente de la ejecución del experimento. Para una más sencilla visualización, se presentan los ejes en escala logarítmica y se representan como puntos las medias de tiempo para cada valor de \texttt{N}, junto con el intervalo comprendido entre la mínima y la máxima medición (aunque en la mayoría de casos tiene longitud casi despreciable).
+	
+	\begin{figure} [H] \centering
+		\includegraphics[width=.8\textwidth]{../graficas/NOCHE_tiempos.pdf}
+		\caption{Comparativa global de los tiempos de ejecución.}
+		\label{graf:tiempos}
+	\end{figure}
+
+	De forma aparentemente sorprendente respecto a lo desarrollado en la sección 3, la versión con multiplicaciones y divisiones enteras se ejecuta más rápido para todos los casos.
 	
 	\subsection{Aceleración}
 	
-	\subsection{Tamaños del problema pequeños}
+	Una mejor manera de comparar las dos versiones del código es obtener la ganancia de una versión frente a la otra, es decir, la aceleración, que vendrá dada por:
 	
+	\begin{equation} \label{eq:speedup}
+		ac = \dfrac{t_{\text{multiplicaciones, divisiones}}}{t_{\text{desplazamientos}}}.
+	\end{equation}
+
+	La Figura \ref{graf:speedup} implementa la expresión (\ref{eq:speedup}) tomando como referencia la media de tiempo de ejecución para cada \texttt{N}.
+	
+	\begin{figure} [H] \centering
+		\includegraphics[width=.8\textwidth]{../graficas/NOCHE_speedup.pdf}
+		\caption{Comparativa global de la aceleración media.}
+		\label{graf:speedup}
+	\end{figure}
+
+	Viendo esta gráfica es ya claro que la versión que utiliza multiplicaciones y divisiones se ejecuta ligeramente más rápido que la que emplea desplazamientos.
+	
+	\subsection{Experimento reducido}
+	
+	Para intentar comprender por qué sucede lo anterior, pues contradice el punto de vista teórico, se ha desarrollado otro experimento a pequeña escala, que ha consistido en comparar la ejecución de múltiples veces en la misma máquina de una operación de multiplicación entre dos enteros que no son potencia entera de 2, una operación de multiplicación siendo uno de los enteros potencia entera de 2, y la misma operación de multiplicación implementada con un desplazamiento. 
+	
+	De forma análoga a lo ocurrido en el experimento principal, las versiones con multiplicación han ganado a la versión con desplazamientos en todos los casos. Por ejemplo, fijando operandos constantes $\texttt{a}=15$ y $\texttt{b}=33$ para la versión sin potencias enteras y $\texttt{a}=16$, con \texttt{b} idénticamente 33, y $\texttt{N}=95000$, los tiempos medios han sido los mostrados en el Cuadro \ref{tabla1}.
+	
+	\begin{table} [H] \centering
+		\begin{tabular} {| c | c | c |}
+			\hline
+			Sin potencias de 2 & Un operando es potencia de 2 & Con desplazamientos \\
+			\hline
+			 0.000142 & 0.000139 & 0.000162 \\
+			 \hline
+		\end{tabular}
+		\caption{Ejemplo de comparativa de tiempos en el experimento reducido.}
+		\label{tabla1}
+	\end{table} 
+	
+	Esto muestra que posiblemente el procesador ya efectúe optimizaciones en tiempo de ejecución (tales como paralelismo, reordenamiento de instrucciones, etc.) que no se pueden controlar de forma manual sobre las operaciones de multiplicación y división, reduciendo de forma efectiva el número de ciclos que tarda en realizarlas. \colorbox{yellow}{BUSCAR REFERENCIA}. Incluso es posible que el propio procesador haya implementado la instrucción de multiplicación como una secuencia de desplazamientos y sumas en código máquina.
 	
 	\section{Conclusiones}
+	
+	\colorbox{yellow}{Faltan conclusiones, valores de ITER, formatear biblio y referencia de CPU}.
 	
 	
 	\section*{Referencias}

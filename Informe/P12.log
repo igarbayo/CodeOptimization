@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.4.30)  1 MAY 2025 18:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.4.30)  2 MAY 2025 19:27
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1398,24 +1398,24 @@ nacio/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
 \pydata@fh@0=\write7
 \openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250501183716 E92C142C0618E235635C86
+runsystem(latexminted config  --timestamp 20250502192732 E92C142C0618E235635C86
 AE0D73AB56)...executed.
 
 
 (_E92C142C0618E235635C86AE0D73AB56.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250501183716 E92C142C0618E2356
+runsystem(latexminted cleanconfig  --timestamp 20250502192732 E92C142C0618E2356
 35C86AE0D73AB56)...executed.
 
 \openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted styledef  --timestamp 20250501183716 E92C142C0618E235635C
+runsystem(latexminted styledef  --timestamp 20250502192732 E92C142C0618E235635C
 86AE0D73AB56)...executed.
 
 
 (_E92C142C0618E235635C86AE0D73AB56.style.minted)
 \openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250501183716 E92C142C0618E235635
+runsystem(latexminted highlight  --timestamp 20250502192732 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
 
@@ -1435,7 +1435,7 @@ LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 )
 \openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250501183716 E92C142C0618E235635
+runsystem(latexminted highlight  --timestamp 20250502192732 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
  (_E92C142C0618E235635C86AE0D73AB56.highlight.minted)
@@ -1457,17 +1457,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [4]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 2
-53.
- (C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
 \openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250501183716 E92C142C0618E235635
+runsystem(latexminted highlight  --timestamp 20250502192732 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
-(_E92C142C0618E235635C86AE0D73AB56.highlight.minted
+ (_E92C142C0618E235635C86AE0D73AB56.highlight.minted
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1479,7 +1474,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [5])
 \openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250501183716 E92C142C0618E235635
+runsystem(latexminted highlight  --timestamp 20250502192732 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
  (_E92C142C0618E235635C86AE0D73AB56.highlight.minted
@@ -1494,20 +1489,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [6])
 \openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250501183716 E92C142C0618E235635
+runsystem(latexminted highlight  --timestamp 20250502192732 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
  (_E92C142C0618E235635C86AE0D73AB56.highlight.minted)
-Overfull \hbox (618.6209pt too wide) in paragraph at lines 374--375
-[][][]\T1/ptm/m/n/10.95 https://wraycastle.com/es/blogs/knowledge-base/bit-shif
-t-calculator#:~:text=El%20desplazamiento%20de%20bits%20es%20una%20operaci%C3%B3
-n%20que%20implica%20mover,n%C3%BAmero%20por%20potencias%20de%20dos.[][] 
- []
-
-
-Underfull \vbox (badness 1009) has occurred while \output is active []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1517,6 +1502,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [7]
+<../graficas/NOCHE_tiempos.pdf, id=124, 505.89pt x 433.62pt>
+File: ../graficas/NOCHE_tiempos.pdf Graphic file (type pdf)
+<use ../graficas/NOCHE_tiempos.pdf>
+Package pdftex.def Info: ../graficas/NOCHE_tiempos.pdf  used on input line 362.
+
+(pdftex.def)             Requested size: 362.37598pt x 310.61159pt.
+
+Underfull \vbox (badness 1314) has occurred while \output is active []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1525,8 +1520,40 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[8]
-runsystem(latexminted cleantemp  --timestamp 20250501183716 E92C142C0618E235635
+[8 <../graficas/NOCHE_tiempos.pdf>]
+<../graficas/NOCHE_speedup.pdf, id=138, 505.89pt x 433.62pt>
+File: ../graficas/NOCHE_speedup.pdf Graphic file (type pdf)
+<use ../graficas/NOCHE_speedup.pdf>
+Package pdftex.def Info: ../graficas/NOCHE_speedup.pdf  used on input line 380.
+
+(pdftex.def)             Requested size: 362.37598pt x 310.61159pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[9 <../graficas/NOCHE_speedup.pdf>]
+Overfull \hbox (618.6209pt too wide) in paragraph at lines 415--416
+[][][]\T1/ptm/m/n/10.95 https://wraycastle.com/es/blogs/knowledge-base/bit-shif
+t-calculator#:~:text=El%20desplazamiento%20de%20bits%20es%20una%20operaci%C3%B3
+n%20que%20implica%20mover,n%C3%BAmero%20por%20potencias%20de%20dos.[][] 
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[10]
+runsystem(latexminted cleantemp  --timestamp 20250502192732 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
  (P12.aux
@@ -1538,14 +1565,14 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
  ***********
 Package rerunfilecheck Info: File `P12.out' has not changed.
-(rerunfilecheck)             Checksum: A89B3D5959B7AE47EE8EC5FD3257301B;2094.
+(rerunfilecheck)             Checksum: 4BCD6EFA474E83F5B1B96F661A83A644;2037.
  ) 
 Here is how much of TeX's memory you used:
- 37041 strings out of 469959
- 781035 string characters out of 5468866
- 1290206 words of memory out of 5000000
- 63162 multiletter control sequences out of 15000+600000
- 696879 words of font info for 139 fonts, out of 8000000 for 9000
+ 37047 strings out of 469959
+ 781375 string characters out of 5468866
+ 1290484 words of memory out of 5000000
+ 63164 multiletter control sequences out of 15000+600000
+ 700446 words of font info for 141 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,12n,117p,1026b,1098s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
@@ -1560,9 +1587,9 @@ Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C
 :/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb>
 <C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.p
 fb>
-Output written on P12.pdf (8 pages, 220428 bytes).
+Output written on P12.pdf (10 pages, 246118 bytes).
 PDF statistics:
- 186 PDF objects out of 1000 (max. 8388607)
- 33 named destinations out of 1000 (max. 500000)
- 117 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 219 PDF objects out of 1000 (max. 8388607)
+ 39 named destinations out of 1000 (max. 500000)
+ 127 words of extra memory for PDF output out of 10000 (max. 10000000)
 
