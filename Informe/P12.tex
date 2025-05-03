@@ -105,6 +105,9 @@
 \usepackage[cache=false]{minted}
 \definecolor{bg}{rgb}{.95, .95, .95}
 
+\usepackage[backend=biber, style=ieee, sorting=nty]{biblatex}
+\bibliography{references}
+
 
 \begin{document}
 	
@@ -141,7 +144,7 @@
 
 	\section{Descripción de la técnica}
 
-	El desplazamiento de bits es una operación que consiste en mover los bits de un número binario hacia la izquierda o hacia la derecha una cantidad determinada de posiciones. Esta técnica es fundamental en programación de bajo nivel y se utiliza con frecuencia en ámbitos como sistemas embebidos, procesamiento gráfico y optimización de rendimiento, ya que permite realizar operaciones rápidas y con control detallado a nivel de bits, según se explica en \colorbox{yellow}{1}.
+	El desplazamiento de bits es una operación que consiste en mover los bits de un número binario hacia la izquierda o hacia la derecha una cantidad determinada de posiciones. Esta técnica es fundamental en programación de bajo nivel y se utiliza con frecuencia en ámbitos como sistemas embebidos, procesamiento gráfico y optimización de rendimiento, ya que permite realizar operaciones rápidas y con control detallado a nivel de bits, según se explica en \cite{burrell}.
 	
 	Una operación de \textbf{desplazamiento a la izquierda} ($\ll$) mueve todos los bits de un número binario hacia la izquierda, rellenando con ceros los bits vacíos del lado derecho. Esta operación equivale a multiplicar el número original por $2^n$, donde $n$ es el número de posiciones desplazadas. Por ejemplo, desplazar un número una posición a la izquierda es equivalente a multiplicarlo por 2.
 	
@@ -223,7 +226,14 @@ for (j = 0; j < ITER; j++) {
 		\begin{aligned}
 			\texttt{ITER} = \left(
 			\begin{matrix}
-				valores
+				2133333, & 1422222, & 914285, & 673684, & 533333, \\
+				376470, & 256000, & 188235, & 160000, & 114285, \\
+				82051, & 67368, & 58181, & 40000, & 25600, \\
+				20000, & 16410, & 11228, & 7804, & 6400, \\
+				5378, & 4266, & 3657, & 3216, & 2509, \\
+				2006, & 1523, & 1254, & 1084, & 820, \\
+				673, & 542, & 402, & 267, & 120, \\
+				67, & 32, & 16, & 6, & 3 \\
 			\end{matrix}
 			\right).
 		\end{aligned}
@@ -234,13 +244,13 @@ for (j = 0; j < ITER; j++) {
 	
 	\section{Beneficios y desventajas esperados}
 	
-	Las técnicas de \textbf{reducción por fuerza}, como se ve en \colorbox{yellow}{2}, permiten reemplazar operaciones costosas por otras equivalentes pero más eficientes en la máquina objetivo. Estas transformaciones están motivadas por el hecho de que ciertas instrucciones del conjunto de la arquitectura son mucho más económicas que otras. Por ejemplo, elevar un número al cuadrado, $x^2$, puede reemplazarse por la multiplicación $x \times x$, que resulta menos costosa que una llamada a una rutina de exponenciación general.
+	Las técnicas de \textbf{reducción por fuerza}, como se ve en \cite{aho}, permiten reemplazar operaciones costosas por otras equivalentes pero más eficientes en la máquina objetivo. Estas transformaciones están motivadas por el hecho de que ciertas instrucciones del conjunto de la arquitectura son mucho más económicas que otras. Por ejemplo, elevar un número al cuadrado, $x^2$, puede reemplazarse por la multiplicación $x \times x$, que resulta menos costosa que una llamada a una rutina de exponenciación general.
 	
 	Un caso particularmente interesante es el uso de \textbf{desplazamientos binarios} ($\ll$, $\gg$) como sustitutos de multiplicaciones o divisiones por potencias de dos. Estas operaciones, en principio, deberían ser más rápidas que una multiplicación o división convencional, ya que el \textit{hardware} puede implementarlas mediante simples circuitos de cableado sin necesidad de utilizar una unidad aritmética compleja.
 	
 	Sin embargo, en la práctica, esta ventaja no siempre se manifiesta de forma significativa. En arquitecturas modernas, las unidades aritméticas están tan optimizadas que las diferencias de coste entre una multiplicación por una constante y un desplazamiento pueden ser mínimas o incluso inexistentes, especialmente cuando el compilador ya realiza estas optimizaciones automáticamente, \textit{aún compilando sin optimizaciones}. Además, el uso de desplazamientos puede introducir ambigüedad o dificultar la legibilidad del código fuente si no se utiliza con criterio.
 	
-	De acuerdo a \colorbox{yellow}{3}, la compilación en GCC con \texttt{-O0} reduce el tiempo de compilación y permite que la depuración produzca los resultados esperados. Este es el nivel predeterminado. Con la opción \texttt{-O0}, GCC desactiva completamente la mayoría de las pasadas de optimización; estas no se ejecutan ni siquiera si se habilitan explícitamente en la línea de comandos o si aparecen listadas como activadas por defecto.
+	De acuerdo a \cite{gcc}, la compilación en GCC con \texttt{-O0} reduce el tiempo de compilación y permite que la depuración produzca los resultados esperados. Este es el nivel predeterminado. Con la opción \texttt{-O0}, GCC desactiva completamente la mayoría de las pasadas de optimización; estas no se ejecutan ni siquiera si se habilitan explícitamente en la línea de comandos o si aparecen listadas como activadas por defecto.
 	
 	Por lo tanto, aunque los desplazamientos siguen siendo una herramienta útil en la optimización de bajo nivel ---especialmente en sistemas embebidos o compiladores de alto rendimiento---, es importante evaluar su beneficio real en el contexto específico de la arquitectura y el compilador utilizados.
 	
@@ -249,7 +259,7 @@ for (j = 0; j < ITER; j++) {
 	
 	La compilación con la opción \texttt{-S} de GCC produce códigos fuente del ensamblador de la máquina mediante los que podemos analizar la traducción de las 2 estrategias. Se han ejecutado los códigos en una máquina ASUS Zenbook UX425EA 1.0, equipada con el sistema operativo Ubuntu 22.04.3 LTS x86\_64. Cuenta con un procesador Intel i7-1165G7 de 8 núcleos de undécima generación, que funciona a una frecuencia de reloj de 2.80 GHz. Las direcciones de memoria ocupan 39 bits físicos y 48 bits virtuales.
 	
-	Cada núcleo dispone de 2 hilos de procesamiento. Dispone de 15 GiB de memoria RAM totales y de 4 niveles de memoria caché: L1d (192 KiB, 4 instancias), L1i (128 KiB, 4 instancias), L2 (5 MiB, 4 instancias) y L3 (12 MiB, 1 instancia). Se omite la inclusión de otros componentes como la tarjeta gráfica o de sonido porque no afectarán a los resultados de las pruebas. La versión del compilador utilizada es \colorbox{yellow}{GCC XX}.
+	Cada núcleo dispone de 2 hilos de procesamiento. Dispone de 15 GiB de memoria RAM totales y de 4 niveles de memoria caché: L1d (192 KiB, 4 instancias), L1i (128 KiB, 4 instancias), L2 (5 MiB, 4 instancias) y L3 (12 MiB, 1 instancia). Se omite la inclusión de otros componentes como la tarjeta gráfica o de sonido porque no afectarán a los resultados de las pruebas. La versión del compilador utilizada es GCC 11.4.0.
 
 	Con el fin de ejecutar las dos versiones en las mismas condiciones, se ha envuelto en cada caso el algoritmo en una estructura de bucles bajo \texttt{REPETICIONES} y variables de la forma que sigue:
 	
@@ -344,11 +354,6 @@ int main() {
 
 	Las instrucciones \texttt{sarl} y \texttt{sall}, que se corresponden con \texttt{i $\gg$ 2} y \texttt{(N-1) $\ll$ 3}, respectivamente, son operaciones de desplazamiento de bits. Por lo tanto, estas suelen tardar 1 ciclo en cada llamada, lo que las haría en principio más rápidas que las aritméticas de multiplicación y división. A pesar de todo, con \texttt{-O0} el compilador no elimina accesos redundantes a memoria, por lo que se podría anular esta ventaja.
 	
-	\subsection{Accesos a memoria}
-	
-	\colorbox{yellow}{Seguir completando con PDF}
-	
-	\subsection{Resumen comparado}
 	
 	\section{Resultados obtenidos}
 	
@@ -393,7 +398,7 @@ int main() {
 	\begin{table} [H] \centering
 		\begin{tabular} {| c | c | c |}
 			\hline
-			Sin potencias de 2 & Un operando es potencia de 2 & Con desplazamientos \\
+			\textbf{Sin potencias de 2} & \textbf{Un operando es potencia de 2} & \textbf{Con desplazamientos} \\
 			\hline
 			 0.000142 & 0.000139 & 0.000162 \\
 			 \hline
@@ -406,18 +411,17 @@ int main() {
 	
 	\section{Conclusiones}
 	
-	\colorbox{yellow}{Faltan conclusiones, valores de ITER, formatear biblio y referencia de CPU}.
-	
-	
-	\section*{Referencias}
-	
-	\begin{enumerate}
-		\item \href{https://wraycastle.com/es/blogs/knowledge-base/bit-shift-calculator#:~:text=El%20desplazamiento%20de%20bits%20es%20una%20operaci%C3%B3n%20que%20implica%20mover,n%C3%BAmero%20por%20potencias%20de%20dos.}{https://wraycastle.com/es/blogs/knowledge-base/bit-shift-calculator\#:~:text=El\%20desplazamiento\%20de\%20bits\%20es\%20una\%20operaci\%C3\%B3n\%20que\%20implica\%20mover,n\%C3\%BAmero\%20por\%20potencias\%20de\%20dos.}
-		
-		\item Aho (libro asignatura)
-		
-		\item -O0 en el manual de GCC: \href{https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#index-O0}{https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html\#index-O0}
-	\end{enumerate}
+	\colorbox{yellow}{Faltan conclusiones, caché, núm nucleos e hilos, referencia de CPU y explicar más exp. reducido}.
+
+
+\newpage
+\thispagestyle{empty}
+
+%-------------------------------------------
+
+
+
+\printbibliography
 	
 	
 	

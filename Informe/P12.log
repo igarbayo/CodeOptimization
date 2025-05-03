@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.4.30)  2 MAY 2025 19:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.4.30)  3 MAY 2025 15:21
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1219,58 +1219,327 @@ Package shellesc Info: Unrestricted shell escape enabled on input line 75.
 \@float@every@listing=\toks65
 \c@listing=\count414
 )
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 10
-9.
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.sty
+Package: biblatex 2024/03/21 v3.20 programmable bibliographies (PK/MW)
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count415
 
-(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1ptm.fd
-File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+\c@tabx@nest=\count416
+\c@listtotal=\count417
+\c@listcount=\count418
+\c@liststart=\count419
+\c@liststop=\count420
+\c@citecount=\count421
+\c@citetotal=\count422
+\c@multicitecount=\count423
+\c@multicitetotal=\count424
+\c@instcount=\count425
+\c@maxnames=\count426
+\c@minnames=\count427
+\c@maxitems=\count428
+\c@minitems=\count429
+\c@citecounter=\count430
+\c@maxcitecounter=\count431
+\c@savedcitecounter=\count432
+\c@uniquelist=\count433
+\c@uniquename=\count434
+\c@refsection=\count435
+\c@refsegment=\count436
+\c@maxextratitle=\count437
+\c@maxextratitleyear=\count438
+\c@maxextraname=\count439
+\c@maxextradate=\count440
+\c@maxextraalpha=\count441
+\c@abbrvpenalty=\count442
+\c@highnamepenalty=\count443
+\c@lownamepenalty=\count444
+\c@maxparens=\count445
+\c@parenlevel=\count446
+\blx@tempcnta=\count447
+\blx@tempcntb=\count448
+\blx@tempcntc=\count449
+\c@blx@maxsection=\count450
+\blx@maxsegment@0=\count451
+\blx@notetype=\count452
+\blx@parenlevel@text=\count453
+\blx@parenlevel@foot=\count454
+\blx@sectionciteorder@0=\count455
+\blx@sectionciteorderinternal@0=\count456
+\blx@entrysetcounter=\count457
+\blx@biblioinstance=\count458
+\labelnumberwidth=\skip95
+\labelalphawidth=\skip96
+\biblabelsep=\skip97
+\bibitemsep=\skip98
+\bibnamesep=\skip99
+\bibinitsep=\skip100
+\bibparsep=\skip101
+\bibhang=\skip102
+\blx@bcfin=\read6
+\blx@bcfout=\write5
+\blx@langwohyphens=\language80
+\c@mincomprange=\count459
+\c@maxcomprange=\count460
+\c@mincompwidth=\count461
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-dm.def
+File: blx-dm.def 2024/03/21 v3.20 biblatex datamodel (PK/MW)
 )
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'ieee.dbx' not found.
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count462
+\c@savedafterword=\count463
+\c@annotator=\count464
+\c@savedannotator=\count465
+\c@author=\count466
+\c@savedauthor=\count467
+\c@bookauthor=\count468
+\c@savedbookauthor=\count469
+\c@commentator=\count470
+\c@savedcommentator=\count471
+\c@editor=\count472
+\c@savededitor=\count473
+\c@editora=\count474
+\c@savededitora=\count475
+\c@editorb=\count476
+\c@savededitorb=\count477
+\c@editorc=\count478
+\c@savededitorc=\count479
+\c@foreword=\count480
+\c@savedforeword=\count481
+\c@holder=\count482
+\c@savedholder=\count483
+\c@introduction=\count484
+\c@savedintroduction=\count485
+\c@namea=\count486
+\c@savednamea=\count487
+\c@nameb=\count488
+\c@savednameb=\count489
+\c@namec=\count490
+\c@savednamec=\count491
+\c@translator=\count492
+\c@savedtranslator=\count493
+\c@shortauthor=\count494
+\c@savedshortauthor=\count495
+\c@shorteditor=\count496
+\c@savedshorteditor=\count497
+\c@labelname=\count498
+\c@savedlabelname=\count499
+\c@institution=\count500
+\c@savedinstitution=\count501
+\c@lista=\count502
+\c@savedlista=\count503
+\c@listb=\count504
+\c@savedlistb=\count505
+\c@listc=\count506
+\c@savedlistc=\count507
+\c@listd=\count508
+\c@savedlistd=\count509
+\c@liste=\count510
+\c@savedliste=\count511
+\c@listf=\count512
+\c@savedlistf=\count513
+\c@location=\count514
+\c@savedlocation=\count515
+\c@organization=\count516
+\c@savedorganization=\count517
+\c@origlocation=\count518
+\c@savedoriglocation=\count519
+\c@origpublisher=\count520
+\c@savedorigpublisher=\count521
+\c@publisher=\count522
+\c@savedpublisher=\count523
+\c@language=\count524
+\c@savedlanguage=\count525
+\c@origlanguage=\count526
+\c@savedoriglanguage=\count527
+\c@pageref=\count528
+\c@savedpageref=\count529
+\shorthandwidth=\skip103
+\shortjournalwidth=\skip104
+\shortserieswidth=\skip105
+\shorttitlewidth=\skip106
+\shortauthorwidth=\skip107
+\shorteditorwidth=\skip108
+\locallabelnumberwidth=\skip109
+\locallabelalphawidth=\skip110
+\localshorthandwidth=\skip111
+\localshortjournalwidth=\skip112
+\localshortserieswidth=\skip113
+\localshorttitlewidth=\skip114
+\localshortauthorwidth=\skip115
+\localshorteditorwidth=\skip116
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-compat.d
+ef
+File: blx-compat.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.def
+File: biblatex.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
+\c@textcitecount=\count530
+\c@textcitetotal=\count531
+\c@textcitemaxnames=\count532
+\c@biburlbigbreakpenalty=\count533
+\c@biburlbreakpenalty=\count534
+\c@biburlnumpenalty=\count535
+\c@biburlucpenalty=\count536
+\c@biburllcpenalty=\count537
+\biburlbigskip=\muskip19
+\biburlnumskip=\muskip20
+\biburlucskip=\muskip21
+\biburllcskip=\muskip22
+\c@smartand=\count538
+)
+Package biblatex Info: Trying to load bibliography style 'ieee'...
+Package biblatex Info: ... file 'ieee.bbx' found.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-ieee\ieee.bb
+x
+File: ieee.bbx 2025-03-14 v1.4e biblatex bibliography style
+Package biblatex Info: Trying to load bibliography style 'numeric-comp'...
+Package biblatex Info: ... file 'numeric-comp.bbx' found.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\numeric-
+comp.bbx
+File: numeric-comp.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\numeric.
+bbx
+File: numeric.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\standard
+.bbx
+File: standard.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count539
+\c@bbx:relatedtotal=\count540
+)))
+
+Package biblatex Warning: Macro 'volume+number' undefined.
+(biblatex)                Using \newbibmacro.
+
+)
+Package biblatex Info: Trying to load citation style 'ieee'...
+Package biblatex Info: ... file 'ieee.cbx' found.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-ieee\ieee.cb
+x
+File: ieee.cbx 2025-03-14 v1.4e biblatex citation style
+Package biblatex Info: Trying to load citation style 'numeric-verb'...
+Package biblatex Info: ... file 'numeric-verb.cbx' found.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/cbx\numeric-
+verb.cbx
+File: numeric-verb.cbx 2024/03/21 v3.20 biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+Package biblatex Info: Redefining '\textcites'.
+))
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.cfg
+File: biblatex.cfg 
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Document encoding is UTF8 ....
+ (C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+Package: expl3 2025-03-26 L3 programming layer (loader) 
+
 (C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-p
 dftex.def
 File: l3backend-pdftex.def 2025-03-14 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count415
-) (P12.aux
-LaTeX Info: Redefining \. on input line 11.
-LaTeX Info: Redefining \% on input line 11.
+\l__color_backend_stack_int=\count541
+))
+Package biblatex Info: ... and expl3
+(biblatex)             2025-03-26 L3 programming layer (loader) 
+(biblatex)             is new enough (at least 2020/04/06),
+(biblatex)             setting 'casechanger=expl3'.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-case-exp
+l3.sty
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xpa
+rse.sty
+Package: xparse 2024-08-16 L3 Experimental document command parser
+)
+Package: blx-case-expl3 2024/03/21 v3.20 expl3 case changing code for biblatex
+))
+
+Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+(biblatex)                Loading 'csquotes' recommended.
+
+\@quotelevel=\count542
+\@quotereset=\count543
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 11
+2.
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1ptm.fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+)
+(P12.aux
+LaTeX Info: Redefining \. on input line 12.
+LaTeX Info: Redefining \% on input line 12.
 Package babel Info: 'spanish' activates 'spanish' shorthands.
-(babel)             Reported  on input line 11.
+(babel)             Reported  on input line 12.
 )
 \openout1 = `P12.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Info: Redefining \. on input line 109.
-LaTeX Info: Redefining \% on input line 109.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Info: Redefining \. on input line 112.
+LaTeX Info: Redefining \% on input line 112.
 
 (C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.
 mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count416
+\scratchcounter=\count544
 \scratchdimen=\dimen338
 \scratchbox=\box142
-\nofMPsegments=\count417
-\nofMParguments=\count418
+\nofMPsegments=\count545
+\nofMParguments=\count546
 \everyMPshowfont=\toks66
-\MPscratchCnt=\count419
+\MPscratchCnt=\count547
 \MPscratchDim=\dimen339
-\MPnumerator=\count420
-\makeMPintoPDFobject=\count421
+\MPnumerator=\count548
+\makeMPintoPDFobject=\count549
 \everyMPtoPDFconversion=\toks67
 )
 (C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf
@@ -1332,51 +1601,69 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-Package hyperref Info: Link coloring ON on input line 109.
+Package hyperref Info: Link coloring ON on input line 112.
  (P12.out) (P12.out)
-\@outlinefile=\write5
-\openout5 = `P12.out'.
+\@outlinefile=\write6
+\openout6 = `P12.out'.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
+Package biblatex Info: Trying to load language 'spanish'...
+Package biblatex Info: ... file 'spanish.lbx' found.
+
+(C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\spanish.
+lbx
+File: spanish.lbx 2024/03/21 v3.20 biblatex localization (PK/MW)
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout5 = `P12.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'P12.bbl' found.
+ (P12.bbl)
+Package biblatex Info: Reference section=0 on input line 112.
+Package biblatex Info: Reference segment=0 on input line 112.
 LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line
- 113.
+ 116.
 
 (C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line
- 113.
+ 116.
 
 (C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line
- 113.
+ 116.
 
 (C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line
- 113.
+ 116.
 
 (C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 1
-13.
+16.
 
 (C:\Users\Ignacio\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 113.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 116.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 113.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 116.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 113.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 116.
 
 (P12.toc
+LaTeX Info: Redefining \sptext on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
@@ -1386,8 +1673,8 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 4.
 )
-\tf@toc=\write6
-\openout6 = `P12.toc'.
+\tf@toc=\write7
+\openout7 = `P12.toc'.
 
 
 
@@ -1395,27 +1682,27 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 
 {C:/Users/Ignacio/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Ig
 nacio/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
-\pydata@fh@0=\write7
-\openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
+\pydata@fh@0=\write8
+\openout8 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250502192732 E92C142C0618E235635C86
+runsystem(latexminted config  --timestamp 20250503152158 E92C142C0618E235635C86
 AE0D73AB56)...executed.
 
 
 (_E92C142C0618E235635C86AE0D73AB56.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250502192732 E92C142C0618E2356
+runsystem(latexminted cleanconfig  --timestamp 20250503152158 E92C142C0618E2356
 35C86AE0D73AB56)...executed.
 
-\openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
+\openout8 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted styledef  --timestamp 20250502192732 E92C142C0618E235635C
+runsystem(latexminted styledef  --timestamp 20250503152158 E92C142C0618E235635C
 86AE0D73AB56)...executed.
 
 
 (_E92C142C0618E235635C86AE0D73AB56.style.minted)
-\openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
+\openout8 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250502192732 E92C142C0618E235635
+runsystem(latexminted highlight  --timestamp 20250503152158 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
 
@@ -1433,9 +1720,9 @@ uper-t1.enc}]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 2.
 )
-\openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
+\openout8 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250502192732 E92C142C0618E235635
+runsystem(latexminted highlight  --timestamp 20250503152158 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
  (_E92C142C0618E235635C86AE0D73AB56.highlight.minted)
@@ -1448,6 +1735,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [3]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1457,9 +1747,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [4]
-\openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
+\openout8 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250502192732 E92C142C0618E235635
+runsystem(latexminted highlight  --timestamp 20250503152158 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
  (_E92C142C0618E235635C86AE0D73AB56.highlight.minted
@@ -1472,9 +1762,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [5])
-\openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
+\openout8 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250502192732 E92C142C0618E235635
+runsystem(latexminted highlight  --timestamp 20250503152158 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
  (_E92C142C0618E235635C86AE0D73AB56.highlight.minted
@@ -1487,9 +1777,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [6])
-\openout7 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
+\openout8 = `_E92C142C0618E235635C86AE0D73AB56.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250502192732 E92C142C0618E235635
+runsystem(latexminted highlight  --timestamp 20250503152158 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
  (_E92C142C0618E235635C86AE0D73AB56.highlight.minted)
@@ -1502,14 +1792,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [7]
-<../graficas/NOCHE_tiempos.pdf, id=124, 505.89pt x 433.62pt>
+<../graficas/NOCHE_tiempos.pdf, id=120, 505.89pt x 433.62pt>
 File: ../graficas/NOCHE_tiempos.pdf Graphic file (type pdf)
 <use ../graficas/NOCHE_tiempos.pdf>
-Package pdftex.def Info: ../graficas/NOCHE_tiempos.pdf  used on input line 362.
+Package pdftex.def Info: ../graficas/NOCHE_tiempos.pdf  used on input line 367.
 
 (pdftex.def)             Requested size: 362.37598pt x 310.61159pt.
 
-Underfull \vbox (badness 1314) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
@@ -1521,10 +1811,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [8 <../graficas/NOCHE_tiempos.pdf>]
-<../graficas/NOCHE_speedup.pdf, id=138, 505.89pt x 433.62pt>
+<../graficas/NOCHE_speedup.pdf, id=134, 505.89pt x 433.62pt>
 File: ../graficas/NOCHE_speedup.pdf Graphic file (type pdf)
 <use ../graficas/NOCHE_speedup.pdf>
-Package pdftex.def Info: ../graficas/NOCHE_speedup.pdf  used on input line 380.
+Package pdftex.def Info: ../graficas/NOCHE_speedup.pdf  used on input line 385.
 
 (pdftex.def)             Requested size: 362.37598pt x 310.61159pt.
 
@@ -1537,13 +1827,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [9 <../graficas/NOCHE_speedup.pdf>]
-Overfull \hbox (618.6209pt too wide) in paragraph at lines 415--416
-[][][]\T1/ptm/m/n/10.95 https://wraycastle.com/es/blogs/knowledge-base/bit-shif
-t-calculator#:~:text=El%20desplazamiento%20de%20bits%20es%20una%20operaci%C3%B3
-n%20que%20implica%20mover,n%C3%BAmero%20por%20potencias%20de%20dos.[][] 
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1553,28 +1836,40 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [10]
-runsystem(latexminted cleantemp  --timestamp 20250502192732 E92C142C0618E235635
+Overfull \hbox (4.15027pt too wide) in paragraph at lines 425--425
+[]\T1/ptm/m/n/10.95 S. Bu-rrell, ``Com-pren-sión del des-pla-za-mien-to de bits
+,'' |   [],
+ []
+
+
+
+[11]
+runsystem(latexminted cleantemp  --timestamp 20250503152158 E92C142C0618E235635
 C86AE0D73AB56)...executed.
 
  (P12.aux
-LaTeX Info: Redefining \. on input line 11.
-LaTeX Info: Redefining \% on input line 11.
+LaTeX Info: Redefining \sptext on input line 12.
+LaTeX Info: Redefining \. on input line 12.
+LaTeX Info: Redefining \% on input line 12.
 )
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
  ***********
 Package rerunfilecheck Info: File `P12.out' has not changed.
-(rerunfilecheck)             Checksum: 4BCD6EFA474E83F5B1B96F661A83A644;2037.
+(rerunfilecheck)             Checksum: 4F6C3EEDA961B31F6C40175E49F9A125;1742.
+Package logreq Info: Writing requests to 'P12.run.xml'.
+\openout1 = `P12.run.xml'.
+
  ) 
 Here is how much of TeX's memory you used:
- 37047 strings out of 469959
- 781375 string characters out of 5468866
- 1290484 words of memory out of 5000000
- 63164 multiletter control sequences out of 15000+600000
+ 44331 strings out of 469959
+ 930185 string characters out of 5468866
+ 1848548 words of memory out of 5000000
+ 70388 multiletter control sequences out of 15000+600000
  700446 words of font info for 141 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,12n,117p,1026b,1098s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 98i,12n,117p,1026b,1926s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmex10.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /amsfonts/cm/cmmi10.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/t
@@ -1587,9 +1882,9 @@ Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C
 :/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb>
 <C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.p
 fb>
-Output written on P12.pdf (10 pages, 246118 bytes).
+Output written on P12.pdf (11 pages, 249861 bytes).
 PDF statistics:
- 219 PDF objects out of 1000 (max. 8388607)
- 39 named destinations out of 1000 (max. 500000)
- 127 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 218 PDF objects out of 1000 (max. 8388607)
+ 38 named destinations out of 1000 (max. 500000)
+ 111 words of extra memory for PDF output out of 10000 (max. 10000000)
 

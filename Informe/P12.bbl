@@ -1,0 +1,135 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{aho}{book}{}{}
+      \name{author}{4}{}{%
+        {{hash=87e9142329f09390b038692270dc2168}{%
+           family={Aho},
+           familyi={A\bibinitperiod},
+           given={Alfred\bibnamedelima V.},
+           giveni={A\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=2935cefbbdea2e46ed9635bd5cf1db28}{%
+           family={Lam},
+           familyi={L\bibinitperiod},
+           given={Monica\bibnamedelima S.},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=b0e677112f976b0ff780553fcb888351}{%
+           family={Sethi},
+           familyi={S\bibinitperiod},
+           given={Ravi},
+           giveni={R\bibinitperiod}}}%
+        {{hash=cafe1d770c56825ebccdb81e9f7c9b3b}{%
+           family={Ullman},
+           familyi={U\bibinitperiod},
+           given={Jeffrey\bibnamedelima D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {spanish}%
+      }
+      \list{publisher}{1}{%
+        {Pearson. Addison Wesley}%
+      }
+      \strng{namehash}{e81f18fe5b19a688d5145730fb236624}
+      \strng{fullhash}{b955b20997f1b0d8317cbada66b20151}
+      \strng{fullhashraw}{b955b20997f1b0d8317cbada66b20151}
+      \strng{bibnamehash}{b955b20997f1b0d8317cbada66b20151}
+      \strng{authorbibnamehash}{b955b20997f1b0d8317cbada66b20151}
+      \strng{authornamehash}{e81f18fe5b19a688d5145730fb236624}
+      \strng{authorfullhash}{b955b20997f1b0d8317cbada66b20151}
+      \strng{authorfullhashraw}{b955b20997f1b0d8317cbada66b20151}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Compiladores. Principios, técnicas y herramientas}
+      \field{year}{2008}
+    \endentry
+    \entry{burrell}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=4ab6e4ddbb676983ce4d355cf3688998}{%
+           family={Burrell},
+           familyi={B\bibinitperiod},
+           given={Stephanie},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {spanish}%
+      }
+      \strng{namehash}{4ab6e4ddbb676983ce4d355cf3688998}
+      \strng{fullhash}{4ab6e4ddbb676983ce4d355cf3688998}
+      \strng{fullhashraw}{4ab6e4ddbb676983ce4d355cf3688998}
+      \strng{bibnamehash}{4ab6e4ddbb676983ce4d355cf3688998}
+      \strng{authorbibnamehash}{4ab6e4ddbb676983ce4d355cf3688998}
+      \strng{authornamehash}{4ab6e4ddbb676983ce4d355cf3688998}
+      \strng{authorfullhash}{4ab6e4ddbb676983ce4d355cf3688998}
+      \strng{authorfullhashraw}{4ab6e4ddbb676983ce4d355cf3688998}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Wraycastle, empowering the telecoms world}
+      \field{title}{Comprensión del desplazamiento de bits}
+      \field{year}{2014}
+      \verb{urlraw}
+      \verb https://wraycastle.com/es/blogs/knowledge-base/bit-shift-calculator#:~:text=El%20desplazamiento%20de%20bits%20es%20una%20operaci%C3%B3n%20que%20implica%20mover,n%C3%BAmero%20por%20potencias%20de%20dos
+      \endverb
+      \verb{url}
+      \verb https://wraycastle.com/es/blogs/knowledge-base/bit-shift-calculator#:~:text=El%20desplazamiento%20de%20bits%20es%20una%20operaci%C3%B3n%20que%20implica%20mover,n%C3%BAmero%20por%20potencias%20de%20dos
+      \endverb
+    \endentry
+    \entry{gcc}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=f9ce3c726d54181a202c590efe2cc2e9}{%
+           family={Free\bibnamedelimb Software\bibnamedelima Foundation},
+           familyi={F\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {spanish}%
+      }
+      \strng{namehash}{f9ce3c726d54181a202c590efe2cc2e9}
+      \strng{fullhash}{f9ce3c726d54181a202c590efe2cc2e9}
+      \strng{fullhashraw}{f9ce3c726d54181a202c590efe2cc2e9}
+      \strng{bibnamehash}{f9ce3c726d54181a202c590efe2cc2e9}
+      \strng{authorbibnamehash}{f9ce3c726d54181a202c590efe2cc2e9}
+      \strng{authornamehash}{f9ce3c726d54181a202c590efe2cc2e9}
+      \strng{authorfullhash}{f9ce3c726d54181a202c590efe2cc2e9}
+      \strng{authorfullhashraw}{f9ce3c726d54181a202c590efe2cc2e9}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{A GNU Manual}
+      \field{title}{GCC Optimize Options}
+      \field{year}{1988-2025}
+      \verb{urlraw}
+      \verb https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#index-O0
+      \endverb
+      \verb{url}
+      \verb https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#index-O0
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
