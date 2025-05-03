@@ -57,6 +57,9 @@ N:
 	.long	383000000
 	.long	959000000
 	.long	1910000000
+	.section	.rodata
+.LC1:
+	.string	"%d = %d\n"
 	.text
 	.globl	generar_ITER
 	.type	generar_ITER, @function
@@ -69,6 +72,7 @@ generar_ITER:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
+	subq	$32, %rsp
 	movq	%rdi, -24(%rbp)
 	movabsq	$6400000000, %rax
 	movq	%rax, -8(%rbp)
@@ -91,6 +95,18 @@ generar_ITER:
 	movq	-24(%rbp), %rax
 	addq	%rcx, %rax
 	movl	%edx, (%rax)
+	movl	-12(%rbp), %eax
+	cltq
+	leaq	0(,%rax,4), %rdx
+	movq	-24(%rbp), %rax
+	addq	%rdx, %rax
+	movl	(%rax), %edx
+	movl	-12(%rbp), %eax
+	movl	%eax, %esi
+	leaq	.LC1(%rip), %rax
+	movq	%rax, %rdi
+	movl	$0, %eax
+	call	printf@PLT
 	addl	$1, -12(%rbp)
 .L2:
 	movl	-12(%rbp), %eax
@@ -98,7 +114,7 @@ generar_ITER:
 	jbe	.L3
 	nop
 	nop
-	popq	%rbp
+	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
@@ -136,16 +152,16 @@ overhead_end:
 overhead:
 	.zero	8
 	.section	.rodata
-.LC1:
+.LC2:
 	.string	"w"
 	.align 8
-.LC2:
-	.string	"No se pudo abrir el archivo para escribir"
 .LC3:
+	.string	"No se pudo abrir el archivo para escribir"
+.LC4:
 	.string	"N\tOPT_OLD\n"
-.LC5:
-	.string	"Overhead: %lf\n"
 .LC6:
+	.string	"Overhead: %lf\n"
+.LC7:
 	.string	"%d\t%.6f\n"
 	.text
 	.globl	main
@@ -167,14 +183,14 @@ main:
 	movq	%rax, %rdi
 	call	generar_ITER
 	movq	nombre_archivo(%rip), %rax
-	leaq	.LC1(%rip), %rdx
+	leaq	.LC2(%rip), %rdx
 	movq	%rdx, %rsi
 	movq	%rax, %rdi
 	call	fopen@PLT
 	movq	%rax, -344(%rbp)
 	cmpq	$0, -344(%rbp)
 	jne	.L5
-	leaq	.LC2(%rip), %rax
+	leaq	.LC3(%rip), %rax
 	movq	%rax, %rdi
 	call	perror@PLT
 	movl	$1, %eax
@@ -184,7 +200,7 @@ main:
 	movq	%rax, %rcx
 	movl	$10, %edx
 	movl	$1, %esi
-	leaq	.LC3(%rip), %rax
+	leaq	.LC4(%rip), %rax
 	movq	%rax, %rdi
 	call	fwrite@PLT
 	movl	$0, %esi
@@ -205,13 +221,13 @@ main:
 	subq	%rdx, %rax
 	pxor	%xmm0, %xmm0
 	cvtsi2sdq	%rax, %xmm0
-	movsd	.LC4(%rip), %xmm2
+	movsd	.LC5(%rip), %xmm2
 	divsd	%xmm2, %xmm0
 	addsd	%xmm1, %xmm0
 	movsd	%xmm0, overhead(%rip)
 	movq	overhead(%rip), %rax
 	movq	%rax, %xmm0
-	leaq	.LC5(%rip), %rax
+	leaq	.LC6(%rip), %rax
 	movq	%rax, %rdi
 	movl	$1, %eax
 	call	printf@PLT
@@ -275,9 +291,11 @@ main:
 	subq	%rdx, %rax
 	pxor	%xmm0, %xmm0
 	cvtsi2sdq	%rax, %xmm0
-	movsd	.LC4(%rip), %xmm2
+	movsd	.LC5(%rip), %xmm2
 	divsd	%xmm2, %xmm0
 	addsd	%xmm1, %xmm0
+	movsd	overhead(%rip), %xmm1
+	subsd	%xmm1, %xmm0
 	pxor	%xmm1, %xmm1
 	cvtsi2sdl	-348(%rbp), %xmm1
 	divsd	%xmm1, %xmm0
@@ -290,7 +308,7 @@ main:
 	movl	-352(%rbp), %edx
 	movq	-344(%rbp), %rax
 	movq	%rcx, %xmm0
-	leaq	.LC6(%rip), %rcx
+	leaq	.LC7(%rip), %rcx
 	movq	%rcx, %rsi
 	movq	%rax, %rdi
 	movl	$1, %eax
@@ -322,7 +340,7 @@ main:
 	.size	main, .-main
 	.section	.rodata
 	.align 8
-.LC4:
+.LC5:
 	.long	0
 	.long	1093567616
 	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"

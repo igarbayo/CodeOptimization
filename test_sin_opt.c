@@ -86,7 +86,7 @@ int main() {
 
             gettimeofday(&end_time, NULL);
             tiempos_sin_opt[k] = ((end_time.tv_sec - start_time.tv_sec +
-                                   (end_time.tv_usec - start_time.tv_usec)/1.e6))/ITER_local;
+                                   (end_time.tv_usec - start_time.tv_usec)/1.e6) - overhead)/ITER_local;
             //printf("%.6f\n", tiempos_sin_opt[k]);
             //////////////////////////////////////////////
 

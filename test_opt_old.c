@@ -25,6 +25,7 @@ void generar_ITER(int *ITER) {
     const long long PRODUCTO = 6400000000LL; 
     for (int i = 0; i < TAM_N; i++) {
         ITER[i] = (int)(PRODUCTO / N[i]); // División entera (truncamiento)
+        printf("%d = %d\n", i, ITER[i]);
     }
 }
 

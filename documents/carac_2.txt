@@ -1,0 +1,47 @@
+gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+ITER:
+0 = 2133333
+1 = 1422222
+2 = 914285
+3 = 673684
+4 = 533333
+5 = 376470
+6 = 256000
+7 = 188235
+8 = 160000
+9 = 114285
+10 = 82051
+11 = 67368
+12 = 58181
+13 = 40000
+14 = 25600
+15 = 20000
+16 = 16410
+17 = 11228
+18 = 7804
+19 = 6400
+20 = 5378
+21 = 4266
+22 = 3657
+23 = 3216
+24 = 2509
+25 = 2006
+26 = 1523
+27 = 1254
+28 = 1084
+29 = 820
+30 = 673
+31 = 542
+32 = 402
+33 = 267
+34 = 120
+35 = 67
+36 = 32
+37 = 16
+38 = 6
+39 = 3
+

@@ -280,6 +280,8 @@ main:
 	movsd	.LC4(%rip), %xmm2
 	divsd	%xmm2, %xmm0
 	addsd	%xmm1, %xmm0
+	movsd	overhead(%rip), %xmm1
+	subsd	%xmm1, %xmm0
 	pxor	%xmm1, %xmm1
 	cvtsi2sdl	-348(%rbp), %xmm1
 	divsd	%xmm1, %xmm0
