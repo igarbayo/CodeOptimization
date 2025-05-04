@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Lista de ejecutables
-executables=("P2_OPT_OLD" "P2_SIN_OPT")
+executables=("P2_OPT" "P2_SIN_OPT")
 
 # Recorremos cada ejecutable
 for exe in "${executables[@]}"; do

@@ -1,6 +1,6 @@
 # Leer los datos
-datos_old <- read.table("C:/Users/Ignacio/Desktop/OneDrive/Cuarto/Segundo Cuatri/Compiladores/p2 optim/resultados/NOCHE_OPT_OLD.txt", header = TRUE)
-datos_sin <- read.table("C:/Users/Ignacio/Desktop/OneDrive/Cuarto/Segundo Cuatri/Compiladores/p2 optim/resultados/NOCHE_SIN_OPT.txt", header = TRUE)
+datos_old <- read.table("/resultados/NOCHE_OPT_OLD.txt", header = TRUE)
+datos_sin <- read.table("/resultados/NOCHE_SIN_OPT.txt", header = TRUE)
 
 # Calcular la media de OPT_OLD para cada valor de N
 medias_old <- aggregate(OPT_OLD ~ N, data = datos_old, FUN = mean)
@@ -25,7 +25,7 @@ datos <- merge(datos, min_max_sin, by = "N")
 ### Tiempos
 
 # Abrir el dispositivo grï¿½fico PDF
-pdf("C:/Users/Ignacio/Desktop/OneDrive/Cuarto/Segundo Cuatri/Compiladores/p2 optim/graficas/NOCHE_tiempos.pdf", width = 7, height = 6)
+pdf("/graficas/NOCHE_tiempos.pdf", width = 7, height = 6)
 
 ylim_range <- range(c(datos$MED_OLD, datos$MED_SIN))
 plot(datos$N, datos$MED_OLD, type="n", ylim=ylim_range, xlab = "N (escala logarítmica)", ylab = "Tiempo (s, escala logarítmica)", 
@@ -57,7 +57,7 @@ dev.off()
 
 ### Speedup
 
-pdf("C:/Users/Ignacio/Desktop/OneDrive/Cuarto/Segundo Cuatri/Compiladores/p2 optim/graficas/NOCHE_speedup.pdf", width = 7, height = 6)
+pdf("/graficas/NOCHE_speedup.pdf", width = 7, height = 6)
 
 datos$speedup <- datos$MED_SIN / datos$MED_OLD
 colores <- ifelse(datos$speedup > 1, "blue", "red")
