@@ -98,23 +98,21 @@
     \endentry
     \entry{gcc}{article}{}{}
       \name{author}{1}{}{%
-        {{hash=f9ce3c726d54181a202c590efe2cc2e9}{%
-           family={Free\bibnamedelimb Software\bibnamedelima Foundation},
-           familyi={F\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim F\bibinitperiod},
-           given={Inc.},
-           giveni={I\bibinitperiod}}}%
+        {{hash=99ee40c8e1bf42859100ff4d9e1f8dff}{%
+           family={{Free Software Foundation, Inc.}},
+           familyi={F\bibinitperiod}}}%
       }
       \list{language}{1}{%
         {spanish}%
       }
-      \strng{namehash}{f9ce3c726d54181a202c590efe2cc2e9}
-      \strng{fullhash}{f9ce3c726d54181a202c590efe2cc2e9}
-      \strng{fullhashraw}{f9ce3c726d54181a202c590efe2cc2e9}
-      \strng{bibnamehash}{f9ce3c726d54181a202c590efe2cc2e9}
-      \strng{authorbibnamehash}{f9ce3c726d54181a202c590efe2cc2e9}
-      \strng{authornamehash}{f9ce3c726d54181a202c590efe2cc2e9}
-      \strng{authorfullhash}{f9ce3c726d54181a202c590efe2cc2e9}
-      \strng{authorfullhashraw}{f9ce3c726d54181a202c590efe2cc2e9}
+      \strng{namehash}{99ee40c8e1bf42859100ff4d9e1f8dff}
+      \strng{fullhash}{99ee40c8e1bf42859100ff4d9e1f8dff}
+      \strng{fullhashraw}{99ee40c8e1bf42859100ff4d9e1f8dff}
+      \strng{bibnamehash}{99ee40c8e1bf42859100ff4d9e1f8dff}
+      \strng{authorbibnamehash}{99ee40c8e1bf42859100ff4d9e1f8dff}
+      \strng{authornamehash}{99ee40c8e1bf42859100ff4d9e1f8dff}
+      \strng{authorfullhash}{99ee40c8e1bf42859100ff4d9e1f8dff}
+      \strng{authorfullhashraw}{99ee40c8e1bf42859100ff4d9e1f8dff}
       \field{sortinit}{F}
       \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
       \field{labelnamesource}{author}

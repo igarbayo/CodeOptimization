@@ -120,14 +120,6 @@
 	% ÍNDICE
 	\renewcommand{\contentsname}{Índice} % Cambia el título
 	\tableofcontents
-	
-	\vfill
-	
-	% Versión
-	\begin{figure}[H]
-		\centering
-		\textit{\underline{\colorbox{yellow}{Versión}}}: \today, \currenttime
-	\end{figure}
 
 
 	\newpage
@@ -148,7 +140,7 @@
 	
 	Una operación de \textbf{desplazamiento a la izquierda} ($\ll$) mueve todos los bits de un número binario hacia la izquierda, rellenando con ceros los bits vacíos del lado derecho. Esta operación equivale a multiplicar el número original por $2^n$, donde $n$ es el número de posiciones desplazadas. Por ejemplo, desplazar un número una posición a la izquierda es equivalente a multiplicarlo por 2.
 	
-	De forma análoga, una operación de \textbf{desplazamiento a la derecha} ($\gg$) traslada los bits hacia la derecha. Si el desplazamiento es \emph{lógico}, los bits vacíos del lado izquierdo se rellenan con ceros; si es \emph{aritmético}, se conserva el bit de signo en números con representación en complemento a dos. Esta operación es equivalente, en muchos casos, a una división entera por potencias de dos.
+	De forma análoga, una operación de \textbf{desplazamiento a la derecha} ($\gg$) traslada los bits hacia la derecha. Si el desplazamiento es {lógico}, los bits vacíos del lado izquierdo se rellenan con ceros; si es {aritmético}, se conserva el bit de signo en números con representación en complemento a dos. Esta operación es equivalente, en muchos casos, a una división entera por potencias de dos.
 	
 	El uso de desplazamientos puede reemplazar multiplicaciones o divisiones enteras por potencias de dos, lo que permite reducir el coste computacional de estas operaciones en ciertas arquitecturas. Esto puede dar lugar a algoritmos más rápidos y eficientes, especialmente en aplicaciones críticas para el rendimiento, como el procesamiento gráfico, la criptografía o la indexación de grandes volúmenes de datos.
 	
@@ -391,9 +383,9 @@ int main() {
 	
 	\subsection{Experimento reducido}
 	
-	Para intentar comprender por qué sucede lo anterior, pues contradice el punto de vista teórico, se ha desarrollado otro experimento a pequeña escala, que ha consistido en comparar la ejecución de múltiples veces en la misma máquina de una operación de multiplicación entre dos enteros que no son potencia entera de 2, una operación de multiplicación siendo uno de los enteros potencia entera de 2, y la misma operación de multiplicación implementada con un desplazamiento. 
+	Para intentar comprender por qué sucede lo anterior, pues contradice el punto de vista teórico, se ha desarrollado otro experimento a pequeña escala, que ha consistido en comparar la ejecución de múltiples veces en la misma máquina de una operación de multiplicación entre dos enteros que no son potencia entera de 2, una operación de multiplicación siendo uno de los enteros potencia entera de 2, y la misma operación de multiplicación implementada con un desplazamiento. Para la realización se han escogido diversos pares de la forma $(\texttt{N}_i, \texttt{ITER}_i)$ mostrados en (\ref{eq:n}) y (\ref{eq:ejITER}) y se ha repetido, en bucles anidados de igual manera, la operación correspondiente $\texttt{N}_i\cdot \texttt{ITER}_i$ veces.
 	
-	De forma análoga a lo ocurrido en el experimento principal, las versiones con multiplicación han ganado a la versión con desplazamientos en todos los casos. Por ejemplo, fijando operandos constantes $\texttt{a}=15$ y $\texttt{b}=33$ para la versión sin potencias enteras y $\texttt{a}=16$, con \texttt{b} idénticamente 33, y $\texttt{N}=95000$, los tiempos medios han sido los mostrados en el Cuadro \ref{tabla1}.
+	De forma análoga a lo ocurrido en el experimento principal, las versiones con multiplicación han ganado a la versión con desplazamientos en todos los casos. Por ejemplo, fijando operandos constantes $\texttt{a}=15$ y $\texttt{b}=33$ para la versión sin potencias enteras y $\texttt{a}=16$, con \texttt{b} idénticamente 33, y $\texttt{N}=95000$, los tiempos medios han sido los que aparecen en el Cuadro \ref{tabla1}.
 	
 	\begin{table} [H] \centering
 		\begin{tabular} {| c | c | c |}
@@ -407,17 +399,15 @@ int main() {
 		\label{tabla1}
 	\end{table} 
 	
-	Esto muestra que posiblemente el procesador ya efectúe optimizaciones en tiempo de ejecución (tales como paralelismo, reordenamiento de instrucciones, etc.) que no se pueden controlar de forma manual sobre las operaciones de multiplicación y división, reduciendo de forma efectiva el número de ciclos que tarda en realizarlas. \colorbox{yellow}{BUSCAR REFERENCIA}. Incluso es posible que el propio procesador haya implementado la instrucción de multiplicación como una secuencia de desplazamientos y sumas en código máquina.
+	Esto sugiere que posiblemente el procesador ya efectúe optimizaciones en tiempo de ejecución (tales como paralelismo, reordenamiento de instrucciones, etc.) que no se pueden controlar de forma manual sobre las operaciones de multiplicación y división, reduciendo de forma efectiva el número de ciclos que tarda en realizarlas. Incluso es posible que el propio procesador haya implementado la instrucción de multiplicación como una secuencia de desplazamientos y sumas en código máquina.
 	
 	\section{Conclusiones}
 	
-	\colorbox{yellow}{Faltan conclusiones, caché, núm nucleos e hilos, referencia de CPU y explicar más exp. reducido}.
-
-
-\newpage
-\thispagestyle{empty}
-
-%-------------------------------------------
+	En el contexto de arquitecturas de CPU modernas, al menos en los experimentos realizados, no se han encontrado pruebas concluyentes que permitan afirmar que el uso de operaciones de desplazamiento (\textit{bit shift}) suponga una mejora en el tiempo de ejecución frente a multiplicaciones y divisiones enteras tradicionales. Esto se ha observado de forma consistente para cualquier valor correspondiente al tamaño del problema.
+	
+	En consecuencia, la optimización manual mediante desplazamientos no parece aportar ventajas de rendimiento generalizadas en este entorno, lo cual sugiere que los compiladores y procesadores actuales ya gestionan eficientemente este tipo de operaciones.
+	
+	\colorbox{yellow}{Faltan caché, núm nucleos e hilos}.
 
 
 
