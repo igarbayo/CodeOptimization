@@ -22,8 +22,6 @@ REPS=15
 
 # Recorremos cada ejecutable
 for exe in "${executables[@]}"; do
-
-    
     echo "Turno de $exe..."
 	
     src="${fuentes[$exe]}"
