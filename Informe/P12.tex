@@ -236,7 +236,9 @@ for (j = 0; j < ITER; j++) {
 	
 	\section{Beneficios y desventajas esperados}
 	
-	Las técnicas de \textbf{reducción por fuerza}, como se ve en \cite{aho}, permiten reemplazar operaciones costosas por otras equivalentes pero más eficientes en la máquina objetivo. Estas transformaciones están motivadas por el hecho de que ciertas instrucciones del conjunto de la arquitectura son mucho más económicas que otras. Por ejemplo, elevar un número al cuadrado, $x^2$, puede reemplazarse por la multiplicación $x \times x$, que resulta menos costosa que una llamada a una rutina de exponenciación general.
+	Las técnicas de \textbf{reducción por fuerza}, como se ve en \cite{aho} (sección 8.7.4), permiten reemplazar operaciones costosas por otras equivalentes pero más eficientes en la máquina objetivo. Estas transformaciones están motivadas por el hecho de que ciertas instrucciones del conjunto de la arquitectura son mucho más económicas que otras. Por ejemplo, elevar un número al cuadrado, $x^2$, puede reemplazarse por la multiplicación $x \times x$, que resulta menos costosa que una llamada a una rutina de exponenciación general.
+	
+	Estas transformaciones, conocidas como reducción por fuerza local, se complementan con otras optimizaciones como la eliminación de operaciones redundantes mediante identidades aritméticas básicas y el plegado de constantes, contribuyendo todas a una generación de código más eficiente, según \cite{aho} (sección 8.5.4).
 	
 	Un caso particularmente interesante es el uso de \textbf{desplazamientos binarios} ($\ll$, $\gg$) como sustitutos de multiplicaciones o divisiones por potencias de dos. Estas operaciones, en principio, deberían ser más rápidas que una multiplicación o división convencional, ya que el \textit{hardware} puede implementarlas mediante simples circuitos de cableado sin necesidad de utilizar una unidad aritmética compleja.
 	
@@ -249,9 +251,11 @@ for (j = 0; j < ITER; j++) {
 	
 	\section{Programación y código en ensamblador}
 	
-	La compilación con la opción \texttt{-S} de GCC produce códigos fuente del ensamblador de la máquina mediante los que podemos analizar la traducción de las 2 estrategias. Se han ejecutado los códigos en una máquina ASUS Zenbook UX425EA 1.0, equipada con el sistema operativo Ubuntu 22.04.3 LTS x86\_64. Cuenta con un procesador Intel i7-1165G7 de 8 núcleos de undécima generación, que funciona a una frecuencia de reloj de 2.80 GHz. Las direcciones de memoria ocupan 39 bits físicos y 48 bits virtuales.
+	\subsection{Arquitectura de compilación y ejecución}
 	
-	Cada núcleo dispone de 2 hilos de procesamiento. Dispone de 15 GiB de memoria RAM totales y de 4 niveles de memoria caché: L1d (192 KiB, 4 instancias), L1i (128 KiB, 4 instancias), L2 (5 MiB, 4 instancias) y L3 (12 MiB, 1 instancia). Se omite la inclusión de otros componentes como la tarjeta gráfica o de sonido porque no afectarán a los resultados de las pruebas. La versión del compilador utilizada es GCC 11.4.0.
+	La compilación con la opción \texttt{-S} de GCC produce códigos fuente del ensamblador de la máquina mediante los que podemos analizar la traducción de las 2 estrategias. Se han ejecutado los códigos en una máquina ASUS Zenbook UX425EA 1.0, equipada con el sistema operativo Ubuntu 22.04.3 LTS x86\_64. Cuenta con un procesador Intel i7-1165G7 de 4 núcleos físicos de undécima generación, que funciona a una frecuencia de reloj de 2.80 GHz. Las direcciones de memoria ocupan 39 bits físicos y 48 bits virtuales.
+	
+	Cada núcleo dispone de 2 hilos de procesamiento, resultando en un total de 8 hilos. Dispone de 16 GiB de memoria RAM totales y de 4 niveles de memoria caché: L1d (192 KiB, 4 instancias), L1i (128 KiB, 4 instancias), L2 (5 MiB, 4 instancias) y L3 (12 MiB, 1 instancia). El TDP (\textit{Thermal Design Power}) es configurable entre 12 y 28 W. Se omite la inclusión de otros componentes como la tarjeta gráfica o de sonido porque no afectarán a los resultados de las pruebas. La versión del compilador utilizada es GCC 11.4.0.
 
 	Con el fin de ejecutar las dos versiones en las mismas condiciones, se ha envuelto en cada caso el algoritmo en una estructura de bucles bajo \texttt{REPETICIONES} y variables de la forma que sigue:
 	
@@ -406,9 +410,6 @@ int main() {
 	En el contexto de arquitecturas de CPU modernas, al menos en los experimentos realizados, no se han encontrado pruebas concluyentes que permitan afirmar que el uso de operaciones de desplazamiento (\textit{bit shift}) suponga una mejora en el tiempo de ejecución frente a multiplicaciones y divisiones enteras tradicionales. Esto se ha observado de forma consistente para cualquier valor correspondiente al tamaño del problema.
 	
 	En consecuencia, la optimización manual mediante desplazamientos no parece aportar ventajas de rendimiento generalizadas en este entorno, lo cual sugiere que los compiladores y procesadores actuales ya gestionan eficientemente este tipo de operaciones.
-	
-	\colorbox{yellow}{Faltan caché, núm nucleos e hilos}.
-
 
 
 \printbibliography
