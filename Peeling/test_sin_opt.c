@@ -2,11 +2,16 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
+#ifndef N
+#error "Tienes que definir N"
+#endif // N
+
+#ifndef ITER
+#error "Tienes que definir ITER"
+#endif // ITER
 
 // Archivo para resultados
-char* nombre_archivo = "resultados/NOCHE-sin-opt.txt";
-
-const long long PRODUCTO = 6400000000LL;
+char* nombre_archivo = "resultados/DIA-sin-opt.txt";
 
 // Macros para medir el tiempo
 typedef struct timeval timeval_t;
@@ -16,29 +21,24 @@ double overhead = 0.0;
 
 int main(int argc, char **argv) {
 
-    if (argc < 2) {
-        perror("Falta el parámetro N.");
-        return EXIT_FAILURE;
-    }
-    int N = atoi(argv[1]);
-
     // Imprimir o usar el valor de N
-    printf("N recibido: %d\n", N);
+    // printf("N recibido: %d\n", N);
 
-    int ITER = (int)(PRODUCTO / N);
-
-    FILE *file = fopen(nombre_archivo, "w");  // Abrimos el archivo en modo escritura
+    FILE *file = fopen(nombre_archivo, "a");  // Abrimos el archivo en modo escritura
     if (!file) {
         perror("No se pudo abrir el archivo para escribir");
         return EXIT_FAILURE;
     }
 
-    // Escribimos la cabecera en el archivo
-    fprintf(file, "N\tSIN_OPT\n");
-
     // Variables locales
     int i, k;
-    float x[N], y[N];
+    float *x = malloc(N * sizeof(float));
+    float *y = malloc(N * sizeof(float));
+    if (!x || !y) {
+    	perror("No se pudo asignar memoria");
+        return EXIT_FAILURE;
+    }
+
     double tiempo;
 
     // Fase de calentamiento de caché
@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
     overhead = (overhead_end.tv_sec - overhead_start.tv_sec) +
                (overhead_end.tv_usec - overhead_start.tv_usec) / 1e6;
 
-    printf("Overhead: %lf\n", overhead);
+    // printf("Overhead: %lf\n", overhead);
 
     ///////////////////////////// SIN OPTIMIZACIÓN
     gettimeofday(&start_time, NULL);
@@ -80,6 +80,9 @@ int main(int argc, char **argv) {
     //////////////////////////////////////////////
 
     fprintf(file, "%d\t%.6f\n", N, tiempo);
+    
+    free(x);
+    free(y);
 
     fclose(file);  // Cerramos el archivo
     return 0;
