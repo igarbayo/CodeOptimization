@@ -47,11 +47,11 @@ En los archivos de código C:
 
 - La variable global `N[]` representa el _array_ de tamaños del problema.
 
-- El número de veces que se efectúa cada expermiento se puede modificar en la variable global `REPETICIONES`.
+- El número de veces que se efectúa cada experimento se puede modificar en la variable global `REPETICIONES`.
 
 ## Estructura de carpetas
 
-Además, se entregna varias carpetas adicionales:
+Además, se entregan varias carpetas adicionales:
 
 - `/ensamblador` contiene los códigos en ensamblador generados durante la compilación.
 
