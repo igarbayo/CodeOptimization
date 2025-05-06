@@ -10,10 +10,10 @@ generate_asm:
 	$(CC) $(CFLAGS) -S test_opt.c -o $(OUTPUT_DIR)/opt.s -fverbose-asm
 
 test_sin_opt: test_sin_opt.c
-	$(CC) $(CFLAGS) test_sin_opt.c -o P2_SIN_OPT -Wall
+	$(CC) $(CFLAGS) -D N="10000" -D ITER="(7000000000LL/$n)" test_sin_opt.c -o P2_SIN_OPT -Wall
 
 test_opt: test_opt.c
-	$(CC) $(CFLAGS) test_opt.c -o P2_OPT -Wall
+	$(CC) $(CFLAGS) -D N="10000" -D ITER="(7000000000LL/$n)" test_opt.c -o P2_OPT -Wall
 
 clean:
 	rm -f P2*

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.4.30)  6 MAY 2025 20:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.4.30)  7 MAY 2025 00:14
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1686,17 +1686,17 @@ nacio/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
 File: art1.png Graphic file (type png)
 <use art1.png>
 Package pdftex.def Info: art1.png  used on input line 148.
-(pdftex.def)             Requested size: 140.41905pt x 98.90248pt.
+(pdftex.def)             Requested size: 185.71864pt x 130.8055pt.
 <art2.png, id=74, 487.8225pt x 395.22656pt>
 File: art2.png Graphic file (type png)
 <use art2.png>
 Package pdftex.def Info: art2.png  used on input line 149.
-(pdftex.def)             Requested size: 140.41905pt x 113.76244pt.
+(pdftex.def)             Requested size: 185.71864pt x 150.46506pt.
 <art3.png, id=75, 484.05844pt x 391.4625pt>
 File: art3.png Graphic file (type png)
 <use art3.png>
 Package pdftex.def Info: art3.png  used on input line 150.
-(pdftex.def)             Requested size: 140.41905pt x 113.55705pt.
+(pdftex.def)             Requested size: 185.71864pt x 150.19086pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1714,23 +1714,23 @@ uper-t1.enc}]
 \pydata@fh@0=\write8
 \openout8 = `_1673D41557FAA0D66134C9F8D4B348A5.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250506205333 1673D41557FAA0D66134C9
+runsystem(latexminted config  --timestamp 20250507001433 1673D41557FAA0D66134C9
 F8D4B348A5)...executed.
 
  (_1673D41557FAA0D66134C9F8D4B348A5.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250506205333 1673D41557FAA0D66
+runsystem(latexminted cleanconfig  --timestamp 20250507001433 1673D41557FAA0D66
 134C9F8D4B348A5)...executed.
 
 \openout8 = `_1673D41557FAA0D66134C9F8D4B348A5.data.minted'.
 
-runsystem(latexminted styledef  --timestamp 20250506205333 1673D41557FAA0D66134
+runsystem(latexminted styledef  --timestamp 20250507001433 1673D41557FAA0D66134
 C9F8D4B348A5)...executed.
 
 
 (_1673D41557FAA0D66134C9F8D4B348A5.style.minted)
 \openout8 = `_1673D41557FAA0D66134C9F8D4B348A5.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250506205333 1673D41557FAA0D6613
+runsystem(latexminted highlight  --timestamp 20250507001433 1673D41557FAA0D6613
 4C9F8D4B348A5)...executed.
 
 
@@ -1740,7 +1740,7 @@ LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 )
 \openout8 = `_1673D41557FAA0D66134C9F8D4B348A5.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250506205333 1673D41557FAA0D6613
+runsystem(latexminted highlight  --timestamp 20250507001433 1673D41557FAA0D6613
 4C9F8D4B348A5)...executed.
 
 
@@ -1765,7 +1765,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [4]
 \openout8 = `_1673D41557FAA0D66134C9F8D4B348A5.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250506205333 1673D41557FAA0D6613
+runsystem(latexminted highlight  --timestamp 20250507001433 1673D41557FAA0D6613
 4C9F8D4B348A5)...executed.
 
  (_1673D41557FAA0D66134C9F8D4B348A5.highlight.minted
@@ -1780,7 +1780,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [5])
 \openout8 = `_1673D41557FAA0D66134C9F8D4B348A5.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250506205333 1673D41557FAA0D6613
+runsystem(latexminted highlight  --timestamp 20250507001433 1673D41557FAA0D6613
 4C9F8D4B348A5)...executed.
 
  (_1673D41557FAA0D66134C9F8D4B348A5.highlight.minted
@@ -1795,7 +1795,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [6])
 \openout8 = `_1673D41557FAA0D66134C9F8D4B348A5.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250506205333 1673D41557FAA0D6613
+runsystem(latexminted highlight  --timestamp 20250507001433 1673D41557FAA0D6613
 4C9F8D4B348A5)...executed.
 
  (_1673D41557FAA0D66134C9F8D4B348A5.highlight.minted
@@ -1808,13 +1808,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [7])
-<../graficas/DIA_tiempos.pdf, id=122, 505.89pt x 433.62pt>
-File: ../graficas/DIA_tiempos.pdf Graphic file (type pdf)
-<use ../graficas/DIA_tiempos.pdf>
-Package pdftex.def Info: ../graficas/DIA_tiempos.pdf  used on input line 430.
-(pdftex.def)             Requested size: 362.37598pt x 310.61159pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1038) has occurred while \output is active []
 
 
 
@@ -1826,14 +1820,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [8]
-<../graficas/DIA_speedup.pdf, id=130, 505.89pt x 433.62pt>
-File: ../graficas/DIA_speedup.pdf Graphic file (type pdf)
-<use ../graficas/DIA_speedup.pdf>
-Package pdftex.def Info: ../graficas/DIA_speedup.pdf  used on input line 448.
+<../graficas/DIA_tiempos.pdf, id=128, 505.89pt x 433.62pt>
+File: ../graficas/DIA_tiempos.pdf Graphic file (type pdf)
+<use ../graficas/DIA_tiempos.pdf>
+Package pdftex.def Info: ../graficas/DIA_tiempos.pdf  used on input line 430.
 (pdftex.def)             Requested size: 362.37598pt x 310.61159pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 
 
 
@@ -1844,11 +1835,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [9 <../graficas/DIA_tiempos.pdf>]
-Overfull \hbox (154.54036pt too wide) in paragraph at lines 470--470
-[]\T1/ptm/m/n/10.95 L. Song y K. M. Ka-vi, ``A tech-ni-que for va-ria-ble de-pe
-n-den-ce dri-ven loop pee-ling,'' |   [],
- []
-
+<../graficas/DIA_speedup.pdf, id=146, 505.89pt x 433.62pt>
+File: ../graficas/DIA_speedup.pdf Graphic file (type pdf)
+<use ../graficas/DIA_speedup.pdf>
+Package pdftex.def Info: ../graficas/DIA_speedup.pdf  used on input line 460.
+(pdftex.def)             Requested size: 362.37598pt x 310.61159pt.
 
 
 
@@ -1859,7 +1850,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [10 <../graficas/DIA_speedup.pdf>]
-runsystem(latexminted cleantemp  --timestamp 20250506205333 1673D41557FAA0D6613
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[11]
+runsystem(latexminted cleantemp  --timestamp 20250507001433 1673D41557FAA0D6613
 4C9F8D4B348A5)...executed.
 
  (P13.aux
@@ -1878,10 +1878,10 @@ Package logreq Info: Writing requests to 'P13.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 44395 strings out of 469959
- 931682 string characters out of 5468866
- 1858382 words of memory out of 5000000
- 70453 multiletter control sequences out of 15000+600000
+ 44397 strings out of 469959
+ 931706 string characters out of 5468866
+ 1858396 words of memory out of 5000000
+ 70454 multiletter control sequences out of 15000+600000
  710928 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,12n,117p,1026b,1926s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1891,16 +1891,17 @@ m/cmex10.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/public
 ype1/public/amsfonts/cm/cmr10.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKT
 eX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Ignacio/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/public/cm-super/sfit1000.pfb><C:/Users/Ignacio/AppDat
-a/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt1000.pfb><C:/Users/Igna
-cio/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt1095.pfb><C:/
-Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C
-:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb
-><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.p
-fb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8
-a.pfb>
-Output written on P13.pdf (10 pages, 344166 bytes).
+a/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt0800.pfb><C:/Users/Igna
+cio/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt1000.pfb><C:/
+Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt109
+5.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utm
+b8a.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/u
+tmbi8a.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/time
+s/utmr8a.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/ti
+mes/utmri8a.pfb>
+Output written on P13.pdf (11 pages, 353643 bytes).
 PDF statistics:
- 216 PDF objects out of 1000 (max. 8388607)
- 34 named destinations out of 1000 (max. 500000)
+ 227 PDF objects out of 1000 (max. 8388607)
+ 35 named destinations out of 1000 (max. 500000)
  126 words of extra memory for PDF output out of 10000 (max. 10000000)
 

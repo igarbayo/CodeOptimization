@@ -145,10 +145,10 @@
 	En la Figura \ref{fig:art1} aparecen tres ejemplos de bucles sobre los que se puede aplicar \textit{peeling} para conseguir paralelismo o vectorizaciones, salvando así las dependencias entre los valores.
 	
 	\begin{figure} [H] \centering
-		\includegraphics[width=.31\textwidth]{art1.png}
-		\includegraphics[width=.31\textwidth]{art2.png}
-		\includegraphics[width=.31\textwidth]{art3.png}
-		\caption{Tres ejemplos donde aplicar \textit{peeling} permite optimizar el código.}
+		\includegraphics[width=.41\textwidth]{art1.png}
+		\includegraphics[width=.41\textwidth]{art2.png}
+		\includegraphics[width=.41\textwidth]{art3.png}
+		\caption{Tres ejemplos donde aplicar \textit{peeling} permite optimizar el código. Fuente: \cite{art}.}
 		\label{fig:art1}
 	\end{figure}
 	
@@ -230,9 +230,9 @@ for(k = 0; k<ITER; k++) {
 	
 	\section{Beneficios y desventajas esperados}
 	
-	La técnica de \textit{loop peeling}, aplicada en este caso a los bucles con condiciones específicas como $i = N/2$ e $i = N - 1$, tiene como principal ventaja la eliminación de ramas condicionales dentro del bucle. Al tratar estos casos especiales de manera separada, se evita la penalización por salto en el flujo de control durante la ejecución. Esto permite que el procesador pueda predecir mejor las instrucciones y optimizar el uso del \textit{pipeline}, lo cual, a su vez, mejora la eficiencia en términos de ciclos de CPU. Además, al separar los casos especiales del bucle general, se facilita la aplicación de técnicas de optimización como la vectorización, que pueden ser beneficiosas en operaciones de procesamiento de datos a gran escala.
+	La técnica de \textit{loop peeling}, aplicada en este caso a los bucles con condiciones específicas como $\texttt{i} = \texttt{N}/2$ e $\texttt{i} = \texttt{N} - 1$, tiene como principal ventaja la eliminación de ramas condicionales dentro del bucle. Al tratar estos casos especiales de manera separada, se evita la penalización por salto en el flujo de control durante la ejecución. Esto permite que el procesador pueda predecir mejor las instrucciones y optimizar el uso del \textit{pipeline}, lo cual, a su vez, mejora la eficiencia en términos de ciclos de CPU. Además, al separar los casos especiales del bucle general, se facilita la aplicación de técnicas de optimización como la vectorización, que pueden ser beneficiosas en operaciones de procesamiento de datos a gran escala.
 	
-	Sin embargo, esta técnica tiene también sus desventajas. La principal es la duplicación de código, ya que se repite la lógica de actualización de los elementos del array $x$ en cada uno de los casos ($i = N/2$ e $i = N - 1$). Esto no solo aumenta el tamaño del código, sino que puede complicar el mantenimiento y la comprensión del código a largo plazo, sobre todo si se modifica la lógica del bucle en el futuro. Además, el rendimiento de esta técnica depende de la naturaleza de los bucles y la cantidad de iteraciones especiales. Si el número de iteraciones que caen en los casos especiales es pequeño en comparación con el total de iteraciones, los beneficios de \textit{loop peeling} pueden no ser significativos. En algunos casos, el costo de las instrucciones adicionales y la duplicación del código pueden contrarrestar los beneficios.
+	Sin embargo, esta técnica tiene también sus desventajas. La principal es la duplicación de código, ya que se repite la lógica de actualización de los elementos del \textit{array} \texttt{x} en cada uno de los casos tratados. Esto no solo aumenta el tamaño del código, sino que puede complicar el mantenimiento y la comprensión del código a largo plazo, sobre todo si se modifica la lógica del bucle en el futuro. Además, el rendimiento de esta técnica depende de la naturaleza de los bucles y la cantidad de iteraciones especiales. Si el número de iteraciones que caen en los casos especiales es pequeño en comparación con el total de iteraciones, los beneficios de \textit{loop peeling} pueden no ser significativos. En algunos casos, el costo de las instrucciones adicionales y la duplicación del código pueden contrarrestar los beneficios.
 	
 	A pesar de estas desventajas, en muchos contextos, como en algoritmos numéricos o de procesamiento intensivo de datos, las ganancias de rendimiento obtenidas mediante la optimización del flujo de control pueden superar los inconvenientes. Además, cuando el tamaño del bucle es grande y las iteraciones especiales son más frecuentes, \textit{loop peeling} puede resultar en mejoras de rendimiento sustanciales, especialmente en arquitecturas de procesador modernas que optimizan el uso de caché y el paralelismo.
 	
@@ -444,13 +444,13 @@ fclose(file);  // Cerramos el archivo
 	
 	La Figura \ref{graf:speedup} implementa la expresión (\ref{eq:speedup}) tomando como referencia la media de tiempo de ejecución para cada \texttt{N}.
 	
-	Para cada tamaño de \texttt{N}, se consideran los tiempos de ejecución correspondientes a dos versiones distintas de un programa. Sea \( T_{\mathrm{OPT}}^{(N)} \) y \( T_{\mathrm{SIN}}^{(N)} \) los conjuntos de tiempos para cada versión. Se definen los cuantiles como \( Q_p(X) \), siendo \( Q_{0.25}(X) \) el cuantil inferior (primer cuartil) y \( Q_{0.75}(X) \) el cuantil superior (tercer cuartil) del conjunto \( X \). A partir de estos cuantiles, se estiman límites robustos para el \textit{speedup} como una franja entre dos cocientes: el inferior, que representa una ganancia conservadora, se calcula como:
+	Para cada tamaño de \texttt{N}, se consideran los tiempos de ejecución correspondientes a dos versiones distintas de un programa. Sea \( T_{\mathrm{OPT}}^{(\texttt{N})} \) y \( T_{\mathrm{SIN}}^{(\texttt{N})} \) los conjuntos de tiempos para cada versión. Se definen los cuantiles como \( Q_p(X) \), siendo \( Q_{0.25}(X) \) el cuantil inferior (primer cuartil) y \( Q_{0.75}(X) \) el cuantil superior (tercer cuartil) del conjunto \( X \). A partir de estos cuantiles, se estiman límites robustos para el \textit{speedup} como una franja entre dos cocientes: el inferior, que representa una ganancia conservadora, se calcula como:
 	\begin{equation}\label{q1}
-		\text{Speedup}_{\mathrm{min}} = \frac{Q_{0.25}(T_{\mathrm{SIN}}^{(N)})}{Q_{0.75}(T_{\mathrm{OPT}}^{(N)})},
+		\text{Speedup}_{\text{mín}} = \frac{Q_{0.25}\left(T_{\mathrm{SIN}}^{(N)}\right)}{Q_{0.75}\left(T_{\mathrm{OPT}}^{(N)}\right)},
 	\end{equation}
 	y el superior, que representa una ganancia potencial más optimista, como
 	\begin{equation} \label{q2}
-		\text{Speedup}_{\mathrm{max}} = \frac{Q_{0.75}(T_{\mathrm{SIN}}^{(N)})}{Q_{0.25}(T_{\mathrm{OPT}}^{(N)})}.
+		\text{Speedup}_{\text{máx}} = \frac{Q_{0.75}\left(T_{\mathrm{SIN}}^{(N)}\right)}{Q_{0.25}\left(T_{\mathrm{OPT}}^{(N)}\right)}.
 	\end{equation}
 	
 	Esta franja proporciona una estimación del rendimiento relativa entre ambas versiones, mitigando la influencia de valores atípicos.
@@ -461,10 +461,17 @@ fclose(file);  // Cerramos el archivo
 		\caption{Comparativa global de la aceleración media.}
 		\label{graf:speedup}
 	\end{figure}
+
+	La gran variabilidad en los tamaños de problema pequeños puede explicarse por dos motivos. El primero puede ser la falta de precisión de la función \texttt{gettimeofday()}, que solo alcanza precisión de microsegundos programada de la forma que se presenta. Aunque existen alterntivas de myor fiabilidad en cuanto a cifras significativas, se ha optado por realizar el experimento de forma homogénea. Otra puede ser consecuencia de la Ley de Amdahl. Aunque la versión optimizada del programa muestra un mejor rendimiento general, la ley de Amdahl sugiere que para tamaños pequeños de entrada, donde los costes secuenciales u operaciones no mejorables representan una fracción significativa del tiempo total, puede ocurrir que una versión no optimizada resulte más eficiente.
 	
 	
 	\section{Conclusiones}
 
+	Los resultados obtenidos muestran que la estrategia de \textit{loop peeling} aplicada en este caso concreto proporciona mejoras claras de rendimiento frente a la versión sin optimizar. Se trata de una técnica sencilla de implementar, ya que consiste únicamente en separar manualmente las iteraciones especiales del bucle principal, permitiendo así una ejecución más eficiente del resto del cuerpo del bucle.
+	
+	Además, esta técnica no solo resulta beneficiosa en este ejemplo particular, sino que, en general, tiende a mejorar el rendimiento cuando hay condiciones especiales en algunas iteraciones que impiden una vectorización o una optimización uniforme del bucle. No obstante, aunque el \textit{loop peeling} manual puede ser efectivo, lo más recomendable es confiar en las optimizaciones automáticas del compilador, que suelen aplicar este tipo de transformaciones de forma más robusta y general.
+	
+	Finalmente, se observa que la mejora relativa aportada por el peeling tiende a incrementarse ligeramente a medida que crece el tamaño del problema, lo cual puede deberse a una mayor proporción de iteraciones que se benefician de un bucle limpio y optimizable en comparación con las pocas iteraciones especiales tratadas por separado.
 
 \printbibliography
 	

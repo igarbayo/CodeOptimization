@@ -19,7 +19,7 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
-    \entry{art}{article}{}{}
+    \entry{art}{misc}{}{}
       \name{author}{2}{}{%
         {{hash=a1a3e1ab32c5d7afc3034678e389415f}{%
            family={Song},
@@ -31,6 +31,9 @@
            familyi={K\bibinitperiod},
            given={Krishna\bibnamedelima M.},
            giveni={K\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Dept.\ Computer Science.\ \allowbreak University of North Texas}%
       }
       \list{language}{1}{%
         {spanish}%
@@ -47,7 +50,6 @@
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Dept. Computer Science. University of North Texas}
       \field{title}{A technique for variable dependence driven loop peeling}
       \field{year}{2002}
       \verb{urlraw}

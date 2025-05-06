@@ -7,6 +7,6 @@
 \contentsline {subsection}{\numberline {4.1}Arquitectura de compilación y ejecución}{5}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Bucles}{6}{subsection.4.2}%
 \contentsline {section}{\numberline {5}Resultados obtenidos}{8}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Tiempos de ejecución}{8}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.1}Tiempos de ejecución}{9}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Aceleración}{9}{subsection.5.2}%
 \contentsline {section}{\numberline {6}Conclusiones}{10}{section.6}%
