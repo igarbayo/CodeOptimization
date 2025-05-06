@@ -43,8 +43,8 @@ int main(int argc, char **argv) {
 
     // Fase de calentamiento de caché
     for (i = 0; i < N; i++) {
-        x[i] = i;
-        y[i] = i;
+        x[i] = (3.2 * i + 3);
+        y[i] = (-0.4 * i + 50);
     }
 
     // Medir overhead
@@ -62,12 +62,12 @@ int main(int argc, char **argv) {
 
     for(k=0; k<ITER; k++) {
         for(i=0; i<N; i++) {
-            if(i==N/2) {
+            if(i == N/2) {
                 x[i] = 0;
-            } else if(i==N-1) {
+            } else if(i == N-1) {
                 x[i] = N-1;
             } else {
-                x[i] = x[i]+y[i];
+                x[i] = x[i] + y[i];
             }
         }
     }

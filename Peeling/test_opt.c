@@ -46,8 +46,8 @@ int main(int argc, char **argv) {
 
     // Fase de calentamiento de caché
     for (i = 0; i < N; i++) {
-        x[i] = i;
-        y[i] = i;
+        x[i] = (3.2 * i + 3);
+        y[i] = (-0.4 * i + 50);
     }
 
     // Medir overhead

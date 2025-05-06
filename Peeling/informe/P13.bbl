@@ -1,0 +1,63 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{art}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=a1a3e1ab32c5d7afc3034678e389415f}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Litong},
+           giveni={L\bibinitperiod}}}%
+        {{hash=329b28d854182ab08a3b78743cc81552}{%
+           family={Kavi},
+           familyi={K\bibinitperiod},
+           given={Krishna\bibnamedelima M.},
+           giveni={K\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {spanish}%
+      }
+      \strng{namehash}{bdb7598e1bceea1381665381be5a6bba}
+      \strng{fullhash}{bdb7598e1bceea1381665381be5a6bba}
+      \strng{fullhashraw}{bdb7598e1bceea1381665381be5a6bba}
+      \strng{bibnamehash}{bdb7598e1bceea1381665381be5a6bba}
+      \strng{authorbibnamehash}{bdb7598e1bceea1381665381be5a6bba}
+      \strng{authornamehash}{bdb7598e1bceea1381665381be5a6bba}
+      \strng{authorfullhash}{bdb7598e1bceea1381665381be5a6bba}
+      \strng{authorfullhashraw}{bdb7598e1bceea1381665381be5a6bba}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Dept. Computer Science. University of North Texas}
+      \field{title}{A technique for variable dependence driven loop peeling}
+      \field{year}{2002}
+      \verb{urlraw}
+      \verb https://www.researchgate.net/publication/4001066_A_technique_for_variable_dependence_driven_loop_peeling
+      \endverb
+      \verb{url}
+      \verb https://www.researchgate.net/publication/4001066_A_technique_for_variable_dependence_driven_loop_peeling
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
