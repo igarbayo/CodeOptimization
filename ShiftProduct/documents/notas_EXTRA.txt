@@ -1,3 +1,0 @@
-estaría bien decir en el informe cómo hemos elegido el valor de ITER.
-
-en el informe hay que reportar el tiempo dividido por iter -> para eso sirve iter.
