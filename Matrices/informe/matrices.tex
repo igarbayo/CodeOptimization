@@ -105,6 +105,9 @@
 \usepackage[cache=false]{minted}
 \definecolor{bg}{rgb}{.95, .95, .95}
 
+\usepackage[backend=biber, style=ieee, sorting=nty]{biblatex}
+\bibliography{references}
+
 
 \begin{document}
 	
@@ -124,72 +127,104 @@
 
 	\section{Introducción}
 	
+	El objetivo de este experimento es analizar el impacto de las distintas optimizaciones del compilador GCC sobre un código ineficiente de multiplicación de matrices cuadradas en lenguaje \texttt{C}. El código realiza el producto de dos matrices de tamaño $n \times n$ utilizando tres bucles anidados sin ningún tipo de optimización algorítmica.
 	
+	El programa se compila con los niveles de optimización \texttt{-O0}, \texttt{-O1}, \texttt{-O2}, \texttt{-O3} y \texttt{-Os}, y se mide el tiempo de ejecución con precisión de nanosegundos. Además, se estudian las diferencias en el código ensamblador generado, el tamaño de los archivos de código objeto, los tiempos de ejecución y las aceleraciones obtenidas entre las versiones más eficientes.
+	
+	Este análisis permite observar cómo las optimizaciones del compilador afectan al rendimiento y a la eficiencia del código sin modificar el algoritmo subyacente.
 	
 
 	\section{Descripción de la técnica}
-
 	
-	
-	Para la práctica, se propone estudiar en primera instancia el rendimiento de la siguiente porción de código.
+	Para la práctica, se propone estudiar el rendimiento de la siguiente porción de código.
 	
 	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{c}
+for(j=0;j<Nmax;j++) { /* Producto matricial */
+	for(i=0;i<Nmax;i++) {
+		t=0;
+		for (k=0;k<Nmax;k++) {
+			producto(A[i][k],B[k][j],&r);
+			t+=r; 
+		}
+		C[i][j]=t; 
+	} 
+}
 	\end{minted}
 	
 	
 	\subsection{Configuración del experimento}
 	
-	El objetivo del experimento es analizar el comportamiento de la versión original frente a la versión con \textit{peeling} de 2 iteraciones. Para esto, se crea un \textit{array} de valores de \texttt{N} con un número de datos suficiente (39 valores diferentes) y evitando potencias enteras de 2. El \textit{array} se muestra en (\ref{eq:n}).
+	El objetivo del experimento es analizar el comportamiento de las diferentes optimizaciones del compilador, a saber: \texttt{O0}, \texttt{O1}, \texttt{O2}, \texttt{O3} y \texttt{Os}. Para esto, se prueba con un pequeño \textit{array} de valores de \texttt{N}. El \textit{array} se muestra en (\ref{eq:n}).
 	
 	\begin{equation}\label{eq:n}
 		\begin{aligned}
 			\texttt{N} = \left(
 			\begin{matrix}
-				3000,      & 4500,      & 7000,      & 9500,      & 12000,		\\
-				17000,     & 25000,     & 34000,     & 40000,     & 56000,		\\
-				78000,     & 95000,     & 110000,    & 160000,    & 250000,		\\
-				320000,    & 390000,    & 570000,    & 820000,    & 1000000,	\\
-				1190000,   & 1500000,   & 1750000,   & 1990000,   & 2550000,	\\ 
-				3190000,   & 4200000,   & 5100000,   & 5900000,   & 7800000,	\\
-				9500000,   & 11800000,  & 15900000,  & 23900000,  & 53000000,	\\
-				95000000,  & 199000000, & 383000000, & 959000000. &	\\
+				100, & 300, & 500, & 600, & 700.
 			\end{matrix}
 			\right).
 		\end{aligned}
 	\end{equation}
 
-	Además, resulta importante incluir un bucle externo de número fijo de iteraciones (\texttt{ITER}) cuando se estudia el rendimiento de un algoritmo en función del tamaño del problema, especialmente si este es variable, para garantizar condiciones comparables entre ejecuciones con distintos valores de \texttt{N}. Para valores pequeños de \texttt{N}, la ejecución del algoritmo es demasiado rápida. Esto puede provocar medidas ruidosas y poco precisas por debajo del umbral de resolución del reloj del sistema, aparte de un dominio del \textit{overhead} de la llamada al sistema o del propio cronómetro (si este no valiese 0).
-	
-	Sin embargo, para valores grandes de tamaño del problema, el algoritmo tarda más, pero con mucha menor variabilidad relativa. Esto genera datos incomparables y gráficas sesgadas. Se introduce así un bucle externo de \texttt{ITER} repeticiones, donde \texttt{ITER} se elige dinámicamente para que el producto $\texttt{ITER} \cdot \texttt{N}$ sea constante (o aproximadamente constante). Fijando que cada repetición del experimento deba tardar, al menos, una decena de segundos, generamos el vector de \texttt{ITER} según (\ref{eq:ITER}), que garantiza esta condición.
-	
-	\begin{equation} \label{eq:ITER}
-		\forall i \in \lbrace 1, \dots, 39 \rbrace, \:\: \texttt{ITER}_i = \left\lfloor \dfrac{7.000.000.000}{\texttt{N}_i} \right\rfloor.
-	\end{equation}
+	No se ha escalado en mayor medida el tamaño del problema, pues la definición estática en la pila de las matrices necesarias para la programación provocaba que se precisase más memoria de la disponible en la máquina. Además, definir las matrices como dinámicas empeoraba en gran medida la eficiencia de los accesos.
 
-	Para el vector (\ref{eq:n}), los valores corrrespondientes se reflejan en (\ref{eq:ejITER}).
-	
-	\begin{equation} \label{eq:ejITER}
-		\begin{aligned}
-			\texttt{ITER} = \left(
-			\begin{matrix}
-				2133333, & 1422222, & 914285, & 673684, & 533333, \\
-				376470, & 256000, & 188235, & 160000, & 114285, \\
-				82051, & 67368, & 58181, & 40000, & 25600, \\
-				20000, & 16410, & 11228, & 7804, & 6400, \\
-				5378, & 4266, & 3657, & 3216, & 2509, \\
-				2006, & 1523, & 1254, & 1084, & 820, \\
-				673, & 542, & 402, & 267, & 120, \\
-				67, & 32, & 16, & 6. &  \\
-			\end{matrix}
-			\right).
-		\end{aligned}
-	\end{equation}
+	Al ya efectuarse el experimento mediante un doble bucle sobre cada uno de los valores de \texttt{N} mostrados en (\ref{eq:n}), no es necesario definir un número \texttt{ITER} para evitar el ruido, como sí se hace en la Práctica 2 de la asignatura.
 
-	Para cada valor de \texttt{N}, es fundamental ejecutar el algoritmo un número suficiente de veces, denotado por \texttt{REPS}, con el fin de obtener medidas de rendimiento representativas y estables. La variabilidad inherente al sistema ---debido a factores como la planificación del sistema operativo, el estado de la caché, o procesos en segundo plano--- puede provocar fluctuaciones significativas en los tiempos de ejecución individuales. Al repetir las mediciones y calcular posteriormente estadísticas como la \textbf{media}, el \textbf{máximo} y el \textbf{mínimo}, se obtiene una caracterización más completa del comportamiento del algoritmo. Estas métricas permiten representar en las gráficas no solo la tendencia central, sino también la dispersión y los extremos del rendimiento, ofreciendo una visión más realista y robusta para comparar implementaciones o analizar cuellos de botella. Para este particular, \texttt{REPS} se fija a 15.
+	Para cada valor de \texttt{N}, es fundamental ejecutar el algoritmo un número suficiente de veces, denotado por \texttt{REPS}, con el fin de obtener medidas de rendimiento representativas y estables. La variabilidad inherente al sistema ---debido a factores como la planificación del sistema operativo, el estado de la caché, o procesos en segundo plano--- puede provocar fluctuaciones significativas en los tiempos de ejecución individuales. Al repetir las mediciones y calcular posteriormente estadísticas como la \textbf{media}, la \textbf{desviación típica}, el \textbf{máximo} y el \textbf{mínimo}, se obtiene una caracterización más completa del comportamiento del algoritmo. Estas métricas permiten representar en las gráficas no solo la tendencia central, sino también la dispersión y los extremos del rendimiento, ofreciendo una visión más realista y robusta para comparar implementaciones o analizar cuellos de botella. Para este particular, \texttt{REPS} se fija a 100, un número suficientemente grande, como se comentó en clase.
 		
 	
-	\section{Opciones de compilación}
+	\section{Niveles de optimización de GCC}
 
+	El compilador GCC proporciona distintos niveles de optimización que pueden activarse mediante las opciones \texttt{-O0}, \texttt{-O1}, \texttt{-O2}, \texttt{-O3} y \texttt{-Os}, como se muestra en \cite{gcc}. Cada uno de estos niveles activa diferentes transformaciones y análisis sobre el código fuente con el objetivo de mejorar su rendimiento o reducir su tamaño, a costa de aumentar el tiempo de compilación o dificultar la depuración.
+	
+	El nivel \texttt{-O0} es el predeterminado y está diseñado para acelerar la compilación y facilitar la depuración. No se realiza ninguna optimización sobre el código: se generan instrucciones prácticamente una a una a partir del código fuente. Esto permite una correlación directa entre el código fuente y el ejecutable, pero da lugar a un binario ineficiente y con tiempos de ejecución mayores.
+	
+	El nivel \texttt{-O1} introduce un conjunto básico de optimizaciones que buscan reducir tanto el tamaño como el tiempo de ejecución del código sin aumentar demasiado el tiempo de compilación. Entre las optimizaciones activadas en este nivel se incluyen:
+	
+	\begin{itemize}
+		\item Eliminación de código muerto, es decir, instrucciones que nunca se ejecutan o cuyos resultados no se utilizan.
+		\item Propagación de constantes, que sustituye expresiones por sus valores constantes cuando sea posible.
+		\item Eliminación de operaciones redundantes, como comparaciones duplicadas o asignaciones innecesarias.
+		\item Fusión de ajustes de pila consecutivos para mejorar la eficiencia en llamadas a funciones.
+		\item Omisión del puntero de marco en funciones simples, lo que reduce el uso de registros.
+	\end{itemize}
+
+	Este nivel es especialmente adecuado para programas grandes generados automáticamente, donde se desea un equilibrio entre rendimiento y consumo de memoria durante la compilación.
+	
+	El nivel \texttt{-O2} amplía las optimizaciones anteriores y activa casi todas las que no suponen un compromiso directo entre tamaño y velocidad. Se añaden optimizaciones más complejas, como:
+	
+	\begin{itemize}
+		\item Inlining parcial de funciones pequeñas o llamadas únicas, lo que evita la sobrecarga de llamadas.
+		\item Hoisting de cargas adyacentes, que agrupa lecturas similares para reducir accesos a memoria.
+		\item Reordenamiento de bloques de código y funciones para mejorar la localidad de instrucciones.
+		\item Vectorización de bucles, que transforma operaciones escalares en operaciones vectoriales cuando es posible.
+		\item Eliminación de punteros nulos redundantes y optimizaciones para cadenas de texto y cálculos de longitud.
+	\end{itemize}
+
+	\texttt{-O2} es probablemente el nivel más equilibrado en la mayoría de los casos reales, ya que mejora sensiblemente el rendimiento sin aumentar demasiado el tamaño del ejecutable.
+	
+	El nivel \texttt{-O3} activa todas las optimizaciones de \texttt{-O2} y añade otras aún más agresivas orientadas a maximizar la velocidad de ejecución, aunque esto puede aumentar considerablemente el tamaño del código generado. Entre las optimizaciones adicionales destacan:
+	
+	\begin{itemize}
+		\item Desenrollado y reordenamiento de bucles, lo que permite aprovechar mejor la jerarquía de memoria.
+		\item Separación y duplicación de caminos condicionales para mejorar la predictibilidad de las ramas.
+		\item Vectorización avanzada con un modelo de costes dinámico para adaptar las transformaciones al hardware.
+		\item Clonado de funciones para especializar comportamientos en contextos diferentes.
+	\end{itemize}
+
+	\texttt{-O3} puede producir importantes mejoras de rendimiento en código intensivo en cálculos, aunque no siempre es beneficioso para todos los programas.
+	
+	Finalmente, el nivel \texttt{-Os} está diseñado para minimizar el tamaño del ejecutable. Incluye todas las optimizaciones de \texttt{-O2}, excepto aquellas que tienden a aumentar el tamaño del código, como el alineamiento agresivo de funciones o bucles. Además:
+	
+	\begin{itemize}
+		\item Se fuerza la inserción de funciones en línea solo si esto reduce el tamaño total del código.
+		\item Se reorganiza el código para maximizar la reutilización de instrucciones y estructuras de control.
+		\item Se ajusta el uso de memoria intermedia para reducir la huella del programa.
+	\end{itemize}
+
+	\texttt{-Os} es ideal para sistemas embebidos o programas donde el tamaño del binario es crítico.
+	
+	Cada nivel representa una estrategia diferente en cuanto a las prioridades del programador: depuración (\texttt{-O0}), compilación rápida (\texttt{-O1}), rendimiento general (\texttt{-O2}), rendimiento máximo (\texttt{-O3}) o tamaño mínimo (\texttt{-Os}).
 	
 	\section{Programación y código en ensamblador}
 	
@@ -201,41 +236,93 @@
 
 	Con el fin de ejecutar las dos versiones en las mismas condiciones, el envoltorio de declaraciones y variables de medición previos a las llamadas correspondientes ha sido el que se muestra a continuación.
 	
+	Conviene mencionar que las mediciones se han efectuado utilizando la función \texttt{clock\_gettime()}, pues aporta una precisión de nanosegundos, necesaria para poder comparar las versiones compiladas con \texttt{O2}, \texttt{O3} o \texttt{Os}.
+	
 	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{c}
+float A[Nmax][Nmax], B[Nmax][Nmax], C[Nmax][Nmax], t, r;
+int i,j,k;
 
+// Abrir fichero de escritura
+if (argc < 2) { ... }
+nombre_archivo = argv[1];
+FILE* file = fopen(nombre_archivo, "a");
+if (file == NULL) { ... }
+
+// Calentamiento de la caché
+for(i=0;i<Nmax;i++) { /* Valores de las matrices */
+	for(j=0;j<Nmax;j++) {
+		A[i][j]=(i+j)/(j+1.1);
+		B[i][j]=(i-j)/(j+2.1);
+	}
+}
+
+// Medir el overhead
+clock_gettime(CLOCK_MONOTONIC, &overhead);
+clock_gettime(CLOCK_MONOTONIC, &inicio);
+// algoritmo
+clock_gettime(CLOCK_MONOTONIC, &final);
+
+// Cálculo de tiempos
+tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec
+- overhead.tv_nsec) / 1e9;
+tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
+
+// Imprimir en el archivo
+fprintf(file, "%d\t%.9f\n", Nmax, tiempo);
+// Cerrar el archivo
+fclose(file);
+return 0;
 	\end{minted}
 
 	\subsection{Bucles}
 	
-	Vamos a centrarnos en la traducción de los bucles de \texttt{algoritmo}. La versión original presenta la estructura siguiente.
+	Vamos a centrarnos en la traducción de los bucles de \texttt{algoritmo}. La versión con \texttt{O0} presenta la estructura siguiente.
 	
 	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
 
 	\end{minted}
 
-	Por el contrario, la versión con \textit{peeling}, sigue el esquema que aparece a continuación.
+	Por otra parte, con \texttt{O1} destaca lo que se expone a continuación.
 	
 	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
+		
+	\end{minted}
+	
+	Para \texttt{O2}, es relevante el siguiente bloque de código.
+	
+	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
+		
+	\end{minted}
 
+	La compilación con \texttt{O3} introduce los cambios que se comentan de seguido.
+	
+	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
+		
+	\end{minted}
+	
+	Finalmente, \texttt{Os} produce los cambios que se muestran a continuación.
+
+	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
+		
 	\end{minted}
 											
 	
 	\section{Resultados obtenidos}
 	
-	Los experimentos se han realizado teniendo en cuenta los parámetros \texttt{N}, \texttt{ITER} y \texttt{REPS} explicados en la sección 2. Las fases del experimento también se han introducido en la sección 4. En primer lugar, se realiza el calentamiento de la caché descrito previamente. A continuación, se obtiene el \textit{overhead}, medición que tiene como objetivo estimar el tiempo que tarda en ejecutarse la propia medición del tiempo. Esto se aproxima calculando el tiempo que se tarda en usar \texttt{gettimeofday()} dos veces seguidas. Con todo, el \textit{overhead} ha resultado ser nulo durante las pruebas.
+	Los experimentos se han realizado teniendo en cuenta los parámetros \texttt{N} y \texttt{REPS} explicados en la sección 2. Las fases del experimento también se han introducido en la sección 4. En primer lugar, se realiza el calentamiento de la caché. Las matrices se llenan de valores flotantes (no enteros) para que ya puedna estar disponibles en niveles altos de la caché. 
+	
+	A continuación, se obtiene el \textit{overhead}, medición que tiene como objetivo estimar el tiempo que tarda en ejecutarse la propia medición del tiempo. Esto se aproxima calculando el tiempo que se tarda en usar \texttt{clock\_gettime()} dos veces seguidas.
 	
 	\subsection{Tamaño de códigos objeto}
 	
 	\subsection{Tiempos de ejecución}
 	
-	
-	
 	\subsection{Aceleración}
 	
-	Una mejor manera de comparar las dos versiones del código es obtener la ganancia de una versión frente a la otra, es decir, la aceleración, que vendrá dada por:
+	Una mejor manera de comparar las dos versiones del código es obtener la ganancia de una versión frente a otra, es decir, la aceleración, que vendrá dada por:
 	
 	\begin{equation} \label{eq:speedup}
-		ac = \dfrac{t_{\text{original}}}{t_{\text{peeling}}}.
+		ac = \dfrac{t_{\text{una versión}}}{t_{\text{otra versión}}}.
 	\end{equation}
 	
 	Para cada tamaño de \texttt{N}, se consideran los tiempos de ejecución correspondientes a dos versiones distintas de un programa. Sea \( T_{\mathrm{OPT}}^{(\texttt{N})} \) y \( T_{\mathrm{SIN}}^{(\texttt{N})} \) los conjuntos de tiempos para cada versión. Se definen los cuantiles como \( Q_p(X) \), siendo \( Q_{0.25}(X) \) el cuantil inferior (primer cuartil) y \( Q_{0.75}(X) \) el cuantil superior (tercer cuartil) del conjunto \( X \). A partir de estos cuantiles, se estiman límites robustos para el \textit{speedup} como una franja entre dos cocientes: el inferior, que representa una ganancia conservadora, se calcula como:
@@ -253,7 +340,7 @@
 	\section{Conclusiones}
 
 
-	
+\printbibliography
 	
 	
 
