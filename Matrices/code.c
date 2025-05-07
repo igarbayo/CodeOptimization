@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <sys/time.h>
+#include <time.h>
 
-#define Nmax 500
+#define Nmax 700
 
-struct timeval inicio, final, overhead;
+struct timespec inicio, final, overhead;
 double tiempo, tiempo_overhead;
 
 char* nombre_archivo;
@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
     nombre_archivo = argv[1];
     FILE* file = fopen(nombre_archivo, "a");
     if (file == NULL) {
-        perro("No se pudo abrir el fichero");
+        perror("No se pudo abrir el fichero");
         return 1;
     }
 
@@ -37,8 +37,8 @@ int main(int argc, char** argv) {
     }
     
     // Medir el overhead
-    gettimeofday(&overhead, NULL);
-    gettimeofday(&inicio,NULL);
+    clock_gettime(CLOCK_MONOTONIC, &overhead);
+    clock_gettime(CLOCK_MONOTONIC, &inicio);
 
     for(j=0;j<Nmax;j++) { /* Producto matricial */
         for(i=0;i<Nmax;i++) {
@@ -51,14 +51,14 @@ int main(int argc, char** argv) {
         } 
     }
 
-    gettimeofday(&final,NULL);
+    clock_gettime(CLOCK_MONOTONIC, &final);
 
     // Cálculo de tiempos
-    tiempo_overhead = (inicio.tv_sec-overhead.tv_sec+(inicio.tv_usec-overhead.tv_usec)/1.e6);
-    tiempo = (final.tv_sec-inicio.tv_sec+(final.tv_usec-inicio.tv_usec)/1.e6) - tiempo_overhead;
+    tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
+    tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
 
     // Imprimir en el archivo
-    fprintf(file, "%d\t%.6f\n", Nmax, tiempo);
+    fprintf(file, "%d\t%.9f\n", Nmax, tiempo);
 
     // Cerrar el archivo
     fclose(file);

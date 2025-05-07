@@ -13,7 +13,7 @@ resultados["P1_Os"]="resultados/Os.txt"
 executables=("P1_O0" "P1_O1" "P1_O2" "P1_O3" "P1_Os")
 
 # Número de repeticiones por N
-REPS=20
+REPS=100
 
 # Recorremos cada ejecutable
 for exe in "${executables[@]}"; do
