@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.4.30)  8 MAY 2025 12:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.4.30)  8 MAY 2025 12:21
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1685,24 +1685,24 @@ nacio/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
 \pydata@fh@0=\write8
 \openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250508120508 25B24ABE5B8620F874D9AD
+runsystem(latexminted config  --timestamp 20250508122117 25B24ABE5B8620F874D9AD
 820E5D4859)...executed.
 
 
 (_25B24ABE5B8620F874D9AD820E5D4859.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250508120508 25B24ABE5B8620F87
+runsystem(latexminted cleanconfig  --timestamp 20250508122117 25B24ABE5B8620F87
 4D9AD820E5D4859)...executed.
 
 \openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
 
-runsystem(latexminted styledef  --timestamp 20250508120508 25B24ABE5B8620F874D9
+runsystem(latexminted styledef  --timestamp 20250508122117 25B24ABE5B8620F874D9
 AD820E5D4859)...executed.
 
 
 (_25B24ABE5B8620F874D9AD820E5D4859.style.minted)
 \openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250508120508 25B24ABE5B8620F874D
+runsystem(latexminted highlight  --timestamp 20250508122117 25B24ABE5B8620F874D
 9AD820E5D4859)...executed.
 
 
@@ -1737,7 +1737,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [3]
 \openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250508120508 25B24ABE5B8620F874D
+runsystem(latexminted highlight  --timestamp 20250508122117 25B24ABE5B8620F874D
 9AD820E5D4859)...executed.
 
  (_25B24ABE5B8620F874D9AD820E5D4859.highlight.minted
@@ -1752,7 +1752,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [4])
 \openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250508120508 25B24ABE5B8620F874D
+runsystem(latexminted highlight  --timestamp 20250508122117 25B24ABE5B8620F874D
 9AD820E5D4859)...executed.
 
  (_25B24ABE5B8620F874D9AD820E5D4859.highlight.minted
@@ -1767,7 +1767,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [5])
 \openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250508120508 25B24ABE5B8620F874D
+runsystem(latexminted highlight  --timestamp 20250508122117 25B24ABE5B8620F874D
 9AD820E5D4859)...executed.
 
  (_25B24ABE5B8620F874D9AD820E5D4859.highlight.minted)
@@ -1783,7 +1783,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <../graficas/tiempos.pdf, id=104, 505.89pt x 433.62pt>
 File: ../graficas/tiempos.pdf Graphic file (type pdf)
 <use ../graficas/tiempos.pdf>
-Package pdftex.def Info: ../graficas/tiempos.pdf  used on input line 393.
+Package pdftex.def Info: ../graficas/tiempos.pdf  used on input line 402.
 (pdftex.def)             Requested size: 362.37598pt x 310.61159pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1807,7 +1807,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [8 <../graficas/tiempos.pdf>]
-runsystem(latexminted cleantemp  --timestamp 20250508120508 25B24ABE5B8620F874D
+runsystem(latexminted cleantemp  --timestamp 20250508122117 25B24ABE5B8620F874D
 9AD820E5D4859)...executed.
 
  (matrices.aux
@@ -1845,7 +1845,7 @@ Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C
 :/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb>
 <C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.p
 fb>
-Output written on matrices.pdf (8 pages, 218241 bytes).
+Output written on matrices.pdf (8 pages, 218695 bytes).
 PDF statistics:
  178 PDF objects out of 1000 (max. 8388607)
  26 named destinations out of 1000 (max. 500000)

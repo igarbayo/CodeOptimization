@@ -372,22 +372,27 @@ jmp	.L12
 	\begin{table} [H] \centering
 		\begin{tabular} {| c | c |}
 			\hline
-			\textbf{Optimización} & \textbf{Tamaño (KiB)} \\
+			\textbf{Optimización} & \textbf{Tamaño (bytes)} \\
 			\hline
-			\texttt{O0} & \\
+			\texttt{O0} & 16416 \\
 			\hline
-			\texttt{O1} & \\
+			\texttt{O1} & 16376 \\
 			\hline
-			\texttt{O2} & \\
+			\texttt{O2} & 16376 \\
 			\hline
-			\texttt{O3} & \\
+			\texttt{O3} & 16376 \\
 			\hline
-			\texttt{Os} & \\
+			\texttt{Os} & 16376 \\
 			\hline
 		\end{tabular}
 		\caption{Tamaños de código objeto según tipo de optimización.}
 		\label{tam}
 	\end{table}
+
+	La opción \texttt{O0} produce el código objeto más grande. Esto es esperable, ya que no aplica optimizaciones, por lo que incluye todo el código generado tal como aparece en el fuente, sin eliminar redundancias ni código innecesario.
+	
+	Por otra parte, \texttt{O1}, \texttt{O2}, \texttt{O3} y \texttt{Os} producen exactamente el mismo tamaño de código objeto. Esto sugiere que a partir de \texttt{O1}, el compilador ya elimina el código muerto (por ejemplo, el cálculo de la matriz \texttt{C} si no se usa). En este caso particular, las optimizaciones adicionales de \texttt{O2}, \texttt{O3} u \texttt{Os} no afectan al tamaño del código generado, posiblemente porque el código que queda es muy compacto o porque las mejoras son solo de rendimiento y no estructurales.
+
 	
 	\subsection{Tiempos de ejecución}
 	
