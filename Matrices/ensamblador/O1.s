@@ -42,22 +42,22 @@ main:
 	.cfi_def_cfa_offset 16
 	.cfi_offset 3, -16
 # code.c:20:     if (argc < 2) {
-	cmpl	$1, %edi	#, tmp140
+	cmpl	$1, %edi	#, tmp141
 	jle	.L17	#,
 # code.c:24:     nombre_archivo = argv[1];
-	movq	8(%rsi), %rdi	# MEM[(char * *)argv_47(D) + 8B], _1
+	movq	8(%rsi), %rdi	# MEM[(char * *)argv_48(D) + 8B], _1
 	movq	%rdi, nombre_archivo(%rip)	# _1, nombre_archivo
 # code.c:25:     FILE* file = fopen(nombre_archivo, "a");
-	leaq	.LC1(%rip), %rsi	#, tmp111
+	leaq	.LC1(%rip), %rsi	#, tmp112
 	call	fopen@PLT	#
-	movq	%rax, %rbx	# tmp142, file
+	movq	%rax, %rbx	# tmp143, file
 # code.c:26:     if (file == NULL) {
 	testq	%rax, %rax	# file
 	je	.L18	#,
-	movl	$700, %edx	#, ivtmp_7
+	movl	$500, %edx	#, ivtmp_7
 .L5:
 # code.c:15: int main(int argc, char** argv) {
-	movl	$700, %eax	#, ivtmp_8
+	movl	$500, %eax	#, ivtmp_8
 .L6:
 # code.c:33:         for(j=0;j<Nmax;j++) {
 	subl	$1, %eax	#, ivtmp_8
@@ -66,50 +66,50 @@ main:
 	subl	$1, %edx	#, ivtmp_7
 	jne	.L5	#,
 # code.c:40:     clock_gettime(CLOCK_MONOTONIC, &overhead);
-	leaq	overhead(%rip), %rsi	#, tmp114
+	leaq	overhead(%rip), %rsi	#, tmp115
 	movl	$1, %edi	#,
 	call	clock_gettime@PLT	#
 # code.c:41:     clock_gettime(CLOCK_MONOTONIC, &inicio);
-	leaq	inicio(%rip), %rsi	#, tmp115
+	leaq	inicio(%rip), %rsi	#, tmp116
 	movl	$1, %edi	#,
 	call	clock_gettime@PLT	#
-	movl	$700, %ecx	#, ivtmp_69
+	movl	$500, %ecx	#, ivtmp_70
 	jmp	.L8	#
 .L17:
 # code.c:21:         perror("Debes pasar un nombre de fichero");
-	leaq	.LC0(%rip), %rdi	#, tmp110
+	leaq	.LC0(%rip), %rdi	#, tmp111
 	call	perror@PLT	#
 # code.c:22:         return 1;
 	movl	$1, %eax	#, <retval>
 	jmp	.L2	#
 .L18:
 # code.c:27:         perror("No se pudo abrir el fichero");
-	leaq	.LC2(%rip), %rdi	#, tmp113
+	leaq	.LC2(%rip), %rdi	#, tmp114
 	call	perror@PLT	#
 # code.c:28:         return 1;
 	movl	$1, %eax	#, <retval>
 	jmp	.L2	#
 .L19:
 # code.c:44:         for(i=0;i<Nmax;i++) {
-	subl	$1, %edx	#, ivtmp_59
+	subl	$1, %edx	#, ivtmp_60
 	je	.L10	#,
 .L12:
-	movl	$700, %eax	#, ivtmp_76
+	movl	$500, %eax	#, ivtmp_77
 .L9:
 # code.c:46:             for (k=0;k<Nmax;k++) {
-	subl	$1, %eax	#, ivtmp_76
+	subl	$1, %eax	#, ivtmp_77
 	jne	.L9	#,
 	jmp	.L19	#
 .L10:
 # code.c:43:     for(j=0;j<Nmax;j++) { /* Producto matricial */
-	subl	$1, %ecx	#, ivtmp_69
+	subl	$1, %ecx	#, ivtmp_70
 	je	.L11	#,
 .L8:
-	movl	$700, %edx	#, ivtmp_59
+	movl	$500, %edx	#, ivtmp_60
 	jmp	.L12	#
 .L11:
 # code.c:54:     clock_gettime(CLOCK_MONOTONIC, &final);
-	leaq	final(%rip), %rsi	#, tmp116
+	leaq	final(%rip), %rsi	#, tmp117
 	movl	$1, %edi	#,
 	call	clock_gettime@PLT	#
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
@@ -117,52 +117,54 @@ main:
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
 	movq	8+inicio(%rip), %rcx	# inicio.tv_nsec, _19
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	movq	%rcx, %rax	# _19, tmp120
-	subq	8+overhead(%rip), %rax	# overhead.tv_nsec, tmp120
+	movq	%rcx, %rax	# _19, tmp121
+	subq	8+overhead(%rip), %rax	# overhead.tv_nsec, tmp121
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	pxor	%xmm0, %xmm0	# tmp121
-	cvtsi2sdq	%rax, %xmm0	# tmp120, tmp121
-	movsd	.LC3(%rip), %xmm1	#, tmp123
-	divsd	%xmm1, %xmm0	# tmp123, tmp122
+	pxor	%xmm1, %xmm1	# tmp122
+	cvtsi2sdq	%rax, %xmm1	# tmp121, tmp122
+	movsd	.LC3(%rip), %xmm2	#, tmp124
+	divsd	%xmm2, %xmm1	# tmp124, tmp123
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	movq	%rdx, %rax	# _15, tmp125
-	subq	overhead(%rip), %rax	# overhead.tv_sec, tmp125
+	movq	%rdx, %rax	# _15, tmp126
+	subq	overhead(%rip), %rax	# overhead.tv_sec, tmp126
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	pxor	%xmm2, %xmm2	# tmp126
-	cvtsi2sdq	%rax, %xmm2	# tmp125, tmp126
-	addsd	%xmm2, %xmm0	# tmp126, tmp127
+	pxor	%xmm0, %xmm0	# tmp127
+	cvtsi2sdq	%rax, %xmm0	# tmp126, tmp127
+	addsd	%xmm0, %xmm1	# tmp127, _24
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	movsd	%xmm0, tiempo_overhead(%rip)	# tmp127, tiempo_overhead
+	movsd	%xmm1, tiempo_overhead(%rip)	# _24, tiempo_overhead
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
 	movq	8+final(%rip), %rax	# final.tv_nsec, tmp129
 	subq	%rcx, %rax	# _19, tmp129
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
 	pxor	%xmm0, %xmm0	# tmp131
 	cvtsi2sdq	%rax, %xmm0	# tmp129, tmp131
-	divsd	%xmm1, %xmm0	# tmp123, tmp132
+	divsd	%xmm2, %xmm0	# tmp124, tmp132
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
 	movq	final(%rip), %rax	# final.tv_sec, tmp135
 	subq	%rdx, %rax	# _15, tmp135
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
-	pxor	%xmm1, %xmm1	# tmp137
-	cvtsi2sdq	%rax, %xmm1	# tmp135, tmp137
-	addsd	%xmm1, %xmm0	# tmp137, _32
-# code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
-	movsd	%xmm0, tiempo(%rip)	# _32, tiempo
+	pxor	%xmm2, %xmm2	# tmp137
+	cvtsi2sdq	%rax, %xmm2	# tmp135, tmp137
+	addsd	%xmm2, %xmm0	# tmp137, tmp138
+# code.c:59:     tiempo = tiempo - tiempo_overhead;
+	subsd	%xmm1, %xmm0	# _24, _33
+# code.c:59:     tiempo = tiempo - tiempo_overhead;
+	movsd	%xmm0, tiempo(%rip)	# _33, tiempo
 # /usr/include/x86_64-linux-gnu/bits/stdio2.h:105:   return __fprintf_chk (__stream, __USE_FORTIFY_LEVEL - 1, __fmt,
-	movl	$700, %ecx	#,
-	leaq	.LC4(%rip), %rdx	#, tmp138
+	movl	$500, %ecx	#,
+	leaq	.LC4(%rip), %rdx	#, tmp139
 	movl	$1, %esi	#,
 	movq	%rbx, %rdi	# file,
 	movl	$1, %eax	#,
 	call	__fprintf_chk@PLT	#
-# code.c:64:     fclose(file);
+# code.c:65:     fclose(file);
 	movq	%rbx, %rdi	# file,
 	call	fclose@PLT	#
-# code.c:65:     return 0;
+# code.c:66:     return 0;
 	movl	$0, %eax	#, <retval>
 .L2:
-# code.c:66: }
+# code.c:67: }
 	popq	%rbx	#
 	.cfi_def_cfa_offset 8
 	ret	

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#define Nmax 700
+#define Nmax 500
 
 struct timespec inicio, final, overhead;
 double tiempo, tiempo_overhead;
@@ -56,6 +56,7 @@ int main(int argc, char** argv) {
     // Cálculo de tiempos
     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
+    tiempo = tiempo - tiempo_overhead;
 
     // Imprimir en el archivo
     fprintf(file, "%d\t%.9f\n", Nmax, tiempo);

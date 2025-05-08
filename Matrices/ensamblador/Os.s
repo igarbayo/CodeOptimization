@@ -37,29 +37,29 @@ main:
 	.cfi_startproc
 	endbr64	
 # code.c:20:     if (argc < 2) {
-	decl	%edi	# tmp135
+	decl	%edi	# tmp136
 # code.c:15: int main(int argc, char** argv) {
 	pushq	%rbp	#
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
 # code.c:21:         perror("Debes pasar un nombre de fichero");
-	leaq	.LC0(%rip), %rdi	#, tmp105
+	leaq	.LC0(%rip), %rdi	#, tmp106
 # code.c:20:     if (argc < 2) {
 	jle	.L7	#,
 # code.c:24:     nombre_archivo = argv[1];
-	movq	8(%rsi), %rdi	# MEM[(char * *)argv_25(D) + 8B], _1
+	movq	8(%rsi), %rdi	# MEM[(char * *)argv_26(D) + 8B], _1
 # code.c:25:     FILE* file = fopen(nombre_archivo, "a");
-	leaq	.LC1(%rip), %rsi	#, tmp106
+	leaq	.LC1(%rip), %rsi	#, tmp107
 # code.c:24:     nombre_archivo = argv[1];
 	movq	%rdi, nombre_archivo(%rip)	# _1, nombre_archivo
 # code.c:25:     FILE* file = fopen(nombre_archivo, "a");
 	call	fopen@PLT	#
-	movq	%rax, %rbp	# tmp137, tmp107
+	movq	%rax, %rbp	# tmp138, tmp108
 # code.c:26:     if (file == NULL) {
-	testq	%rax, %rax	# tmp107
+	testq	%rax, %rax	# tmp108
 	jne	.L5	#,
 # code.c:27:         perror("No se pudo abrir el fichero");
-	leaq	.LC2(%rip), %rdi	#, tmp108
+	leaq	.LC2(%rip), %rdi	#, tmp109
 .L7:
 	call	perror@PLT	#
 # code.c:28:         return 1;
@@ -67,73 +67,75 @@ main:
 	jmp	.L2	#
 .L5:
 # code.c:40:     clock_gettime(CLOCK_MONOTONIC, &overhead);
-	leaq	overhead(%rip), %rsi	#, tmp109
+	leaq	overhead(%rip), %rsi	#, tmp110
 	movl	$1, %edi	#,
 	call	clock_gettime@PLT	#
 # code.c:41:     clock_gettime(CLOCK_MONOTONIC, &inicio);
-	leaq	inicio(%rip), %rsi	#, tmp110
+	leaq	inicio(%rip), %rsi	#, tmp111
 	movl	$1, %edi	#,
 	call	clock_gettime@PLT	#
 # code.c:54:     clock_gettime(CLOCK_MONOTONIC, &final);
-	leaq	final(%rip), %rsi	#, tmp111
+	leaq	final(%rip), %rsi	#, tmp112
 	movl	$1, %edi	#,
 	call	clock_gettime@PLT	#
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
 	movq	8+inicio(%rip), %rcx	# inicio.tv_nsec, _6
 # /usr/include/x86_64-linux-gnu/bits/stdio2.h:105:   return __fprintf_chk (__stream, __USE_FORTIFY_LEVEL - 1, __fmt,
 	movl	$1, %esi	#,
-	movq	%rbp, %rdi	# tmp107,
+	movq	%rbp, %rdi	# tmp108,
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	movsd	.LC3(%rip), %xmm1	#, tmp118
+	movsd	.LC3(%rip), %xmm2	#, tmp119
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
 	movq	inicio(%rip), %rdx	# inicio.tv_sec, _2
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	movq	%rcx, %rax	# _6, tmp115
-	subq	8+overhead(%rip), %rax	# overhead.tv_nsec, tmp115
+	movq	%rcx, %rax	# _6, tmp116
+	subq	8+overhead(%rip), %rax	# overhead.tv_nsec, tmp116
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	cvtsi2sdq	%rax, %xmm0	# tmp115, tmp116
+	cvtsi2sdq	%rax, %xmm1	# tmp116, tmp117
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	movq	%rdx, %rax	# _2, tmp120
-	subq	overhead(%rip), %rax	# overhead.tv_sec, tmp120
+	movq	%rdx, %rax	# _2, tmp121
+	subq	overhead(%rip), %rax	# overhead.tv_sec, tmp121
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	cvtsi2sdq	%rax, %xmm2	# tmp120, tmp121
+	cvtsi2sdq	%rax, %xmm0	# tmp121, tmp122
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
 	movq	8+final(%rip), %rax	# final.tv_nsec, tmp124
 	subq	%rcx, %rax	# _6, tmp124
 # /usr/include/x86_64-linux-gnu/bits/stdio2.h:105:   return __fprintf_chk (__stream, __USE_FORTIFY_LEVEL - 1, __fmt,
-	movl	$700, %ecx	#,
+	movl	$500, %ecx	#,
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	divsd	%xmm1, %xmm0	# tmp118, tmp117
+	divsd	%xmm2, %xmm1	# tmp119, tmp118
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	addsd	%xmm2, %xmm0	# tmp121, tmp122
-# code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
-	movsd	%xmm0, tiempo_overhead(%rip)	# tmp122, tiempo_overhead
+	addsd	%xmm0, %xmm1	# tmp122, _11
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
 	cvtsi2sdq	%rax, %xmm0	# tmp124, tmp126
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
 	movq	final(%rip), %rax	# final.tv_sec, tmp130
 	subq	%rdx, %rax	# _2, tmp130
 # /usr/include/x86_64-linux-gnu/bits/stdio2.h:105:   return __fprintf_chk (__stream, __USE_FORTIFY_LEVEL - 1, __fmt,
-	leaq	.LC4(%rip), %rdx	#, tmp133
+	leaq	.LC4(%rip), %rdx	#, tmp134
+# code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
+	movsd	%xmm1, tiempo_overhead(%rip)	# _11, tiempo_overhead
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
-	divsd	%xmm1, %xmm0	# tmp118, tmp127
+	divsd	%xmm2, %xmm0	# tmp119, tmp127
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
-	cvtsi2sdq	%rax, %xmm1	# tmp130, tmp132
+	cvtsi2sdq	%rax, %xmm2	# tmp130, tmp132
 # /usr/include/x86_64-linux-gnu/bits/stdio2.h:105:   return __fprintf_chk (__stream, __USE_FORTIFY_LEVEL - 1, __fmt,
 	movb	$1, %al	#,
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
-	addsd	%xmm1, %xmm0	# tmp132, _19
-# code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
-	movsd	%xmm0, tiempo(%rip)	# _19, tiempo
+	addsd	%xmm2, %xmm0	# tmp132, tmp133
+# code.c:59:     tiempo = tiempo - tiempo_overhead;
+	subsd	%xmm1, %xmm0	# _11, _20
+# code.c:59:     tiempo = tiempo - tiempo_overhead;
+	movsd	%xmm0, tiempo(%rip)	# _20, tiempo
 # /usr/include/x86_64-linux-gnu/bits/stdio2.h:105:   return __fprintf_chk (__stream, __USE_FORTIFY_LEVEL - 1, __fmt,
 	call	__fprintf_chk@PLT	#
-# code.c:64:     fclose(file);
-	movq	%rbp, %rdi	# tmp107,
+# code.c:65:     fclose(file);
+	movq	%rbp, %rdi	# tmp108,
 	call	fclose@PLT	#
-# code.c:65:     return 0;
+# code.c:66:     return 0;
 	xorl	%eax, %eax	# <retval>
 .L2:
-# code.c:66: }
+# code.c:67: }
 	popq	%rbp	#
 	.cfi_def_cfa_offset 8
 	ret	

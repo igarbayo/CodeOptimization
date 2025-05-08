@@ -93,202 +93,202 @@ main:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp	#,
 	.cfi_def_cfa_register 6
-	leaq	-5877760(%rsp), %r11	#,
+	leaq	-2998272(%rsp), %r11	#,
 .LPSRL0:
 	subq	$4096, %rsp	#,
 	orq	$0, (%rsp)	#,
 	cmpq	%r11, %rsp	#,
 	jne	.LPSRL0
-	subq	$2304, %rsp	#,
-	movl	%edi, -5880052(%rbp)	# argc, argc
-	movq	%rsi, -5880064(%rbp)	# argv, argv
+	subq	$1792, %rsp	#,
+	movl	%edi, -3000052(%rbp)	# argc, argc
+	movq	%rsi, -3000064(%rbp)	# argv, argv
 # code.c:15: int main(int argc, char** argv) {
-	movq	%fs:40, %rax	# MEM[(<address-space-1> long unsigned int *)40B], tmp176
-	movq	%rax, -8(%rbp)	# tmp176, D.2524
-	xorl	%eax, %eax	# tmp176
+	movq	%fs:40, %rax	# MEM[(<address-space-1> long unsigned int *)40B], tmp179
+	movq	%rax, -8(%rbp)	# tmp179, D.2524
+	xorl	%eax, %eax	# tmp179
 # code.c:20:     if (argc < 2) {
-	cmpl	$1, -5880052(%rbp)	#, argc
+	cmpl	$1, -3000052(%rbp)	#, argc
 	jg	.L3	#,
 # code.c:21:         perror("Debes pasar un nombre de fichero");
-	leaq	.LC0(%rip), %rax	#, tmp122
-	movq	%rax, %rdi	# tmp122,
+	leaq	.LC0(%rip), %rax	#, tmp125
+	movq	%rax, %rdi	# tmp125,
 	call	perror@PLT	#
 # code.c:22:         return 1;
-	movl	$1, %eax	#, _45
+	movl	$1, %eax	#, _48
 	jmp	.L16	#
 .L3:
 # code.c:24:     nombre_archivo = argv[1];
-	movq	-5880064(%rbp), %rax	# argv, tmp123
-	movq	8(%rax), %rax	# MEM[(char * *)argv_54(D) + 8B], _1
+	movq	-3000064(%rbp), %rax	# argv, tmp126
+	movq	8(%rax), %rax	# MEM[(char * *)argv_57(D) + 8B], _1
 	movq	%rax, nombre_archivo(%rip)	# _1, nombre_archivo
 # code.c:25:     FILE* file = fopen(nombre_archivo, "a");
 	movq	nombre_archivo(%rip), %rax	# nombre_archivo, nombre_archivo.0_2
-	leaq	.LC1(%rip), %rdx	#, tmp124
-	movq	%rdx, %rsi	# tmp124,
+	leaq	.LC1(%rip), %rdx	#, tmp127
+	movq	%rdx, %rsi	# tmp127,
 	movq	%rax, %rdi	# nombre_archivo.0_2,
 	call	fopen@PLT	#
-	movq	%rax, -5880024(%rbp)	# tmp125, file
+	movq	%rax, -3000024(%rbp)	# tmp128, file
 # code.c:26:     if (file == NULL) {
-	cmpq	$0, -5880024(%rbp)	#, file
+	cmpq	$0, -3000024(%rbp)	#, file
 	jne	.L5	#,
 # code.c:27:         perror("No se pudo abrir el fichero");
-	leaq	.LC2(%rip), %rax	#, tmp126
-	movq	%rax, %rdi	# tmp126,
+	leaq	.LC2(%rip), %rax	#, tmp129
+	movq	%rax, %rdi	# tmp129,
 	call	perror@PLT	#
 # code.c:28:         return 1;
-	movl	$1, %eax	#, _45
+	movl	$1, %eax	#, _48
 	jmp	.L16	#
 .L5:
 # code.c:32:     for(i=0;i<Nmax;i++) { /* Valores de las matrices */
-	movl	$0, -5880036(%rbp)	#, i
+	movl	$0, -3000036(%rbp)	#, i
 # code.c:32:     for(i=0;i<Nmax;i++) { /* Valores de las matrices */
 	jmp	.L6	#
 .L9:
 # code.c:33:         for(j=0;j<Nmax;j++) {
-	movl	$0, -5880032(%rbp)	#, j
+	movl	$0, -3000032(%rbp)	#, j
 # code.c:33:         for(j=0;j<Nmax;j++) {
 	jmp	.L7	#
 .L8:
 # code.c:34:             A[i][j]=(i+j)/(j+1.1);
-	movl	-5880036(%rbp), %edx	# i, tmp127
-	movl	-5880032(%rbp), %eax	# j, tmp128
-	addl	%edx, %eax	# tmp127, _3
+	movl	-3000036(%rbp), %edx	# i, tmp130
+	movl	-3000032(%rbp), %eax	# j, tmp131
+	addl	%edx, %eax	# tmp130, _3
 # code.c:34:             A[i][j]=(i+j)/(j+1.1);
 	pxor	%xmm0, %xmm0	# _4
 	cvtsi2sdl	%eax, %xmm0	# _3, _4
 # code.c:34:             A[i][j]=(i+j)/(j+1.1);
 	pxor	%xmm2, %xmm2	# _5
-	cvtsi2sdl	-5880032(%rbp), %xmm2	# j, _5
-	movsd	.LC3(%rip), %xmm1	#, tmp129
+	cvtsi2sdl	-3000032(%rbp), %xmm2	# j, _5
+	movsd	.LC3(%rip), %xmm1	#, tmp132
 	addsd	%xmm2, %xmm1	# _5, _6
 # code.c:34:             A[i][j]=(i+j)/(j+1.1);
 	divsd	%xmm1, %xmm0	# _6, _7
 	cvtsd2ss	%xmm0, %xmm0	# _7, _8
 # code.c:34:             A[i][j]=(i+j)/(j+1.1);
-	movl	-5880032(%rbp), %eax	# j, tmp131
-	movslq	%eax, %rdx	# tmp131, tmp130
-	movl	-5880036(%rbp), %eax	# i, tmp133
+	movl	-3000032(%rbp), %eax	# j, tmp134
+	movslq	%eax, %rdx	# tmp134, tmp133
+	movl	-3000036(%rbp), %eax	# i, tmp136
 	cltq
-	imulq	$700, %rax, %rax	#, tmp132, tmp134
-	addq	%rdx, %rax	# tmp130, tmp135
-	movss	%xmm0, -5880016(%rbp,%rax,4)	# _8, A[i_40][j_42]
+	imulq	$500, %rax, %rax	#, tmp135, tmp137
+	addq	%rdx, %rax	# tmp133, tmp138
+	movss	%xmm0, -3000016(%rbp,%rax,4)	# _8, A[i_43][j_45]
 # code.c:35:             B[i][j]=(i-j)/(j+2.1);
-	movl	-5880036(%rbp), %eax	# i, tmp136
-	subl	-5880032(%rbp), %eax	# j, _9
+	movl	-3000036(%rbp), %eax	# i, tmp139
+	subl	-3000032(%rbp), %eax	# j, _9
 # code.c:35:             B[i][j]=(i-j)/(j+2.1);
 	pxor	%xmm0, %xmm0	# _10
 	cvtsi2sdl	%eax, %xmm0	# _9, _10
 # code.c:35:             B[i][j]=(i-j)/(j+2.1);
 	pxor	%xmm2, %xmm2	# _11
-	cvtsi2sdl	-5880032(%rbp), %xmm2	# j, _11
-	movsd	.LC4(%rip), %xmm1	#, tmp137
+	cvtsi2sdl	-3000032(%rbp), %xmm2	# j, _11
+	movsd	.LC4(%rip), %xmm1	#, tmp140
 	addsd	%xmm2, %xmm1	# _11, _12
 # code.c:35:             B[i][j]=(i-j)/(j+2.1);
 	divsd	%xmm1, %xmm0	# _12, _13
 	cvtsd2ss	%xmm0, %xmm0	# _13, _14
 # code.c:35:             B[i][j]=(i-j)/(j+2.1);
-	movl	-5880032(%rbp), %eax	# j, tmp139
-	movslq	%eax, %rdx	# tmp139, tmp138
-	movl	-5880036(%rbp), %eax	# i, tmp141
+	movl	-3000032(%rbp), %eax	# j, tmp142
+	movslq	%eax, %rdx	# tmp142, tmp141
+	movl	-3000036(%rbp), %eax	# i, tmp144
 	cltq
-	imulq	$700, %rax, %rax	#, tmp140, tmp142
-	addq	%rdx, %rax	# tmp138, tmp143
-	movss	%xmm0, -3920016(%rbp,%rax,4)	# _14, B[i_40][j_42]
+	imulq	$500, %rax, %rax	#, tmp143, tmp145
+	addq	%rdx, %rax	# tmp141, tmp146
+	movss	%xmm0, -2000016(%rbp,%rax,4)	# _14, B[i_43][j_45]
 # code.c:33:         for(j=0;j<Nmax;j++) {
-	addl	$1, -5880032(%rbp)	#, j
+	addl	$1, -3000032(%rbp)	#, j
 .L7:
 # code.c:33:         for(j=0;j<Nmax;j++) {
-	cmpl	$699, -5880032(%rbp)	#, j
+	cmpl	$499, -3000032(%rbp)	#, j
 	jle	.L8	#,
 # code.c:32:     for(i=0;i<Nmax;i++) { /* Valores de las matrices */
-	addl	$1, -5880036(%rbp)	#, i
+	addl	$1, -3000036(%rbp)	#, i
 .L6:
 # code.c:32:     for(i=0;i<Nmax;i++) { /* Valores de las matrices */
-	cmpl	$699, -5880036(%rbp)	#, i
+	cmpl	$499, -3000036(%rbp)	#, i
 	jle	.L9	#,
 # code.c:40:     clock_gettime(CLOCK_MONOTONIC, &overhead);
-	leaq	overhead(%rip), %rax	#, tmp144
-	movq	%rax, %rsi	# tmp144,
+	leaq	overhead(%rip), %rax	#, tmp147
+	movq	%rax, %rsi	# tmp147,
 	movl	$1, %edi	#,
 	call	clock_gettime@PLT	#
 # code.c:41:     clock_gettime(CLOCK_MONOTONIC, &inicio);
-	leaq	inicio(%rip), %rax	#, tmp145
-	movq	%rax, %rsi	# tmp145,
+	leaq	inicio(%rip), %rax	#, tmp148
+	movq	%rax, %rsi	# tmp148,
 	movl	$1, %edi	#,
 	call	clock_gettime@PLT	#
 # code.c:43:     for(j=0;j<Nmax;j++) { /* Producto matricial */
-	movl	$0, -5880032(%rbp)	#, j
+	movl	$0, -3000032(%rbp)	#, j
 # code.c:43:     for(j=0;j<Nmax;j++) { /* Producto matricial */
 	jmp	.L10	#
 .L15:
 # code.c:44:         for(i=0;i<Nmax;i++) {
-	movl	$0, -5880036(%rbp)	#, i
+	movl	$0, -3000036(%rbp)	#, i
 # code.c:44:         for(i=0;i<Nmax;i++) {
 	jmp	.L11	#
 .L14:
 # code.c:45:             t=0;
-	pxor	%xmm0, %xmm0	# tmp146
-	movss	%xmm0, -5880040(%rbp)	# tmp146, t
+	pxor	%xmm0, %xmm0	# tmp149
+	movss	%xmm0, -3000040(%rbp)	# tmp149, t
 # code.c:46:             for (k=0;k<Nmax;k++) {
-	movl	$0, -5880028(%rbp)	#, k
+	movl	$0, -3000028(%rbp)	#, k
 # code.c:46:             for (k=0;k<Nmax;k++) {
 	jmp	.L12	#
 .L13:
 # code.c:47:                 producto(A[i][k],B[k][j],&r);
-	movl	-5880032(%rbp), %eax	# j, tmp148
-	movslq	%eax, %rdx	# tmp148, tmp147
-	movl	-5880028(%rbp), %eax	# k, tmp150
+	movl	-3000032(%rbp), %eax	# j, tmp151
+	movslq	%eax, %rdx	# tmp151, tmp150
+	movl	-3000028(%rbp), %eax	# k, tmp153
 	cltq
-	imulq	$700, %rax, %rax	#, tmp149, tmp151
-	addq	%rdx, %rax	# tmp147, tmp152
-	movss	-3920016(%rbp,%rax,4), %xmm0	# B[k_44][j_43], _15
-	movl	-5880028(%rbp), %eax	# k, tmp154
-	movslq	%eax, %rdx	# tmp154, tmp153
-	movl	-5880036(%rbp), %eax	# i, tmp156
+	imulq	$500, %rax, %rax	#, tmp152, tmp154
+	addq	%rdx, %rax	# tmp150, tmp155
+	movss	-2000016(%rbp,%rax,4), %xmm0	# B[k_47][j_46], _15
+	movl	-3000028(%rbp), %eax	# k, tmp157
+	movslq	%eax, %rdx	# tmp157, tmp156
+	movl	-3000036(%rbp), %eax	# i, tmp159
 	cltq
-	imulq	$700, %rax, %rax	#, tmp155, tmp157
-	addq	%rdx, %rax	# tmp153, tmp158
-	movl	-5880016(%rbp,%rax,4), %eax	# A[i_41][k_44], _16
-	leaq	-5880044(%rbp), %rdx	#, tmp159
-	movq	%rdx, %rdi	# tmp159,
+	imulq	$500, %rax, %rax	#, tmp158, tmp160
+	addq	%rdx, %rax	# tmp156, tmp161
+	movl	-3000016(%rbp,%rax,4), %eax	# A[i_44][k_47], _16
+	leaq	-3000044(%rbp), %rdx	#, tmp162
+	movq	%rdx, %rdi	# tmp162,
 	movaps	%xmm0, %xmm1	# _15,
 	movd	%eax, %xmm0	# _16,
 	call	producto	#
 # code.c:48:                 t+=r; 
-	movss	-5880044(%rbp), %xmm0	# r, r.1_17
-	movss	-5880040(%rbp), %xmm1	# t, tmp161
-	addss	%xmm1, %xmm0	# tmp161, tmp160
-	movss	%xmm0, -5880040(%rbp)	# tmp160, t
+	movss	-3000044(%rbp), %xmm0	# r, r.1_17
+	movss	-3000040(%rbp), %xmm1	# t, tmp164
+	addss	%xmm1, %xmm0	# tmp164, tmp163
+	movss	%xmm0, -3000040(%rbp)	# tmp163, t
 # code.c:46:             for (k=0;k<Nmax;k++) {
-	addl	$1, -5880028(%rbp)	#, k
+	addl	$1, -3000028(%rbp)	#, k
 .L12:
 # code.c:46:             for (k=0;k<Nmax;k++) {
-	cmpl	$699, -5880028(%rbp)	#, k
+	cmpl	$499, -3000028(%rbp)	#, k
 	jle	.L13	#,
 # code.c:50:             C[i][j]=t; 
-	movl	-5880032(%rbp), %eax	# j, tmp163
-	movslq	%eax, %rdx	# tmp163, tmp162
-	movl	-5880036(%rbp), %eax	# i, tmp165
+	movl	-3000032(%rbp), %eax	# j, tmp166
+	movslq	%eax, %rdx	# tmp166, tmp165
+	movl	-3000036(%rbp), %eax	# i, tmp168
 	cltq
-	imulq	$700, %rax, %rax	#, tmp164, tmp166
-	addq	%rdx, %rax	# tmp162, tmp167
-	movss	-5880040(%rbp), %xmm0	# t, tmp168
-	movss	%xmm0, -1960016(%rbp,%rax,4)	# tmp168, C[i_41][j_43]
+	imulq	$500, %rax, %rax	#, tmp167, tmp169
+	addq	%rdx, %rax	# tmp165, tmp170
+	movss	-3000040(%rbp), %xmm0	# t, tmp171
+	movss	%xmm0, -1000016(%rbp,%rax,4)	# tmp171, C[i_44][j_46]
 # code.c:44:         for(i=0;i<Nmax;i++) {
-	addl	$1, -5880036(%rbp)	#, i
+	addl	$1, -3000036(%rbp)	#, i
 .L11:
 # code.c:44:         for(i=0;i<Nmax;i++) {
-	cmpl	$699, -5880036(%rbp)	#, i
+	cmpl	$499, -3000036(%rbp)	#, i
 	jle	.L14	#,
 # code.c:43:     for(j=0;j<Nmax;j++) { /* Producto matricial */
-	addl	$1, -5880032(%rbp)	#, j
+	addl	$1, -3000032(%rbp)	#, j
 .L10:
 # code.c:43:     for(j=0;j<Nmax;j++) { /* Producto matricial */
-	cmpl	$699, -5880032(%rbp)	#, j
+	cmpl	$499, -3000032(%rbp)	#, j
 	jle	.L15	#,
 # code.c:54:     clock_gettime(CLOCK_MONOTONIC, &final);
-	leaq	final(%rip), %rax	#, tmp169
-	movq	%rax, %rsi	# tmp169,
+	leaq	final(%rip), %rax	#, tmp172
+	movq	%rax, %rsi	# tmp172,
 	movl	$1, %edi	#,
 	call	clock_gettime@PLT	#
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
@@ -309,8 +309,8 @@ main:
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
 	pxor	%xmm0, %xmm0	# _25
 	cvtsi2sdq	%rax, %xmm0	# _24, _25
-	movsd	.LC6(%rip), %xmm2	#, tmp170
-	divsd	%xmm2, %xmm0	# tmp170, _26
+	movsd	.LC6(%rip), %xmm2	#, tmp173
+	divsd	%xmm2, %xmm0	# tmp173, _26
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
 	addsd	%xmm1, %xmm0	# _21, _27
 # code.c:57:     tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec - overhead.tv_nsec) / 1e9;
@@ -333,34 +333,40 @@ main:
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
 	pxor	%xmm0, %xmm0	# _35
 	cvtsi2sdq	%rax, %xmm0	# _34, _35
-	movsd	.LC6(%rip), %xmm2	#, tmp171
-	divsd	%xmm2, %xmm0	# tmp171, _36
+	movsd	.LC6(%rip), %xmm2	#, tmp174
+	divsd	%xmm2, %xmm0	# tmp174, _36
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
 	addsd	%xmm1, %xmm0	# _31, _37
 # code.c:58:     tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
 	movsd	%xmm0, tiempo(%rip)	# _37, tiempo
-# code.c:61:     fprintf(file, "%d\t%.9f\n", Nmax, tiempo);
-	movq	tiempo(%rip), %rdx	# tiempo, tiempo.2_38
-	movq	-5880024(%rbp), %rax	# file, tmp172
-	movq	%rdx, %xmm0	# tiempo.2_38,
-	movl	$700, %edx	#,
-	leaq	.LC7(%rip), %rcx	#, tmp173
-	movq	%rcx, %rsi	# tmp173,
-	movq	%rax, %rdi	# tmp172,
+# code.c:59:     tiempo = tiempo - tiempo_overhead;
+	movsd	tiempo(%rip), %xmm0	# tiempo, tiempo.2_38
+	movsd	tiempo_overhead(%rip), %xmm1	# tiempo_overhead, tiempo_overhead.3_39
+	subsd	%xmm1, %xmm0	# tiempo_overhead.3_39, _40
+# code.c:59:     tiempo = tiempo - tiempo_overhead;
+	movsd	%xmm0, tiempo(%rip)	# _40, tiempo
+# code.c:62:     fprintf(file, "%d\t%.9f\n", Nmax, tiempo);
+	movq	tiempo(%rip), %rdx	# tiempo, tiempo.4_41
+	movq	-3000024(%rbp), %rax	# file, tmp175
+	movq	%rdx, %xmm0	# tiempo.4_41,
+	movl	$500, %edx	#,
+	leaq	.LC7(%rip), %rcx	#, tmp176
+	movq	%rcx, %rsi	# tmp176,
+	movq	%rax, %rdi	# tmp175,
 	movl	$1, %eax	#,
 	call	fprintf@PLT	#
-# code.c:64:     fclose(file);
-	movq	-5880024(%rbp), %rax	# file, tmp174
-	movq	%rax, %rdi	# tmp174,
+# code.c:65:     fclose(file);
+	movq	-3000024(%rbp), %rax	# file, tmp177
+	movq	%rax, %rdi	# tmp177,
 	call	fclose@PLT	#
-# code.c:65:     return 0;
-	movl	$0, %eax	#, _45
+# code.c:66:     return 0;
+	movl	$0, %eax	#, _48
 .L16:
-# code.c:66: }
-	movq	-8(%rbp), %rdx	# D.2524, tmp177
-	subq	%fs:40, %rdx	# MEM[(<address-space-1> long unsigned int *)40B], tmp177
+# code.c:67: }
+	movq	-8(%rbp), %rdx	# D.2524, tmp180
+	subq	%fs:40, %rdx	# MEM[(<address-space-1> long unsigned int *)40B], tmp180
 	je	.L17	#,
-# code.c:66: }
+# code.c:67: }
 	call	__stack_chk_fail@PLT	#
 .L17:
 	leave	
