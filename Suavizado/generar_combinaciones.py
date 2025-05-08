@@ -3,8 +3,9 @@ import subprocess
 from itertools import permutations
 
 # Configuración
-N_values = [128, 256, 512]
-M_values = [128, 256, 512]
+N_values = [120, 250, 380, 510, 600]
+M_values = [128, 256, 380, 510, 600]
+REPS = 100  # Número de repeticiones
 loop_orders = [''.join(p) for p in permutations('ijmn')]  # 24 combinaciones
 compilation_options = {  # Opciones de compilación
     'O1': '-O1',
@@ -88,6 +89,7 @@ void guardar_imagen(float Iprime[N][M]) {{
 # Generar archivos C para cada combinación
 os.makedirs('resultados', exist_ok=True)
 os.makedirs('codigos', exist_ok=True)
+os.makedirs('ensamblador', exist_ok=True)
 indent = '    '
 
 for order in loop_orders:
@@ -135,6 +137,7 @@ for order in loop_orders:
             for opt_key, opt_flags in compilation_options.items():  # iterar opciones
                 # Nombres con sufijo de optimización
                 output_file = f"resultados/{order}_{opt_key}.txt"
+                ensamblador_file = f"ensamblador/{order}_{opt_key}.s"
                 exec_name = f"suavizado_{order}_{N}_{M}_{opt_key}"
                 
                 # Comando de compilación actualizado
@@ -148,10 +151,26 @@ for order in loop_orders:
                     *opt_flags.split()  # añadir flags de optimización
                 ]
                 
+                ensamblador_cmd = [
+                	'gcc',
+                	'-S',
+                	f'-DN={N}', 
+                    f'-DM={M}',
+                	f'codigos/{order}.c', 
+                    '-o', ensamblador_file,
+                    '-lm',
+                    *opt_flags.split()  # añadir flags de optimización
+                ]
+                
                 try:
                     subprocess.run(compile_cmd, check=True)
-                    # Ejecutar con archivo de resultados específico
-                    subprocess.run([f'./{exec_name}', output_file], check=True)
+                    subprocess.run(ensamblador_cmd, check=True)
+                    # Ejecutar REPS veces
+                    for _ in range(REPS):
+                        subprocess.run(
+                            [f'./{exec_name}', output_file],
+                            check=True
+                        )
                 except subprocess.CalledProcessError as e:
                     print(f"Error en {order} N={N} M={M} Opt={opt_key}: {e}")
                 finally:
