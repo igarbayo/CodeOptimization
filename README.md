@@ -23,7 +23,12 @@ Aquí se evalúa el uso de **peeling de lazos**, una técnica que consiste en se
 
 ### `Matrices/`
 
-Dentro de este ejerciccio se analizan las diferentes opciones de optimización de código disponibles en GCC, a saber: O0, O1, O2, O3 y Os, sobre un problema de multiplicación de matrices cuadradas estáticas.
+Dentro de este ejercicio se analizan varias de las diferentes opciones de optimización de código disponibles en GCC, en concreto: `-O0`, `-O1`, `-O2`, `-O3` y `-Os`, sobre un problema de multiplicación de matrices cuadradas estáticas.
+
+### `Suavizado/`
+
+Se lleva a cabo un análisis en varias direcciones del problema de suavizado por píxeles de una imagen en escala de grises mediante ventanas de como máximo tamaño 
+5x5. Se analiza el problema para las 24 posibilidades de ordenamiento de los lazos, las dimensiones N y M de la imagen y las opciones de compilacion `-O1` y `-O1 -funroll-loops`.
 
 ## Resultados
 
