@@ -266,6 +266,7 @@ clock_gettime(CLOCK_MONOTONIC, &final);
 tiempo_overhead = (inicio.tv_sec - overhead.tv_sec) + (inicio.tv_nsec
 - overhead.tv_nsec) / 1e9;
 tiempo = (final.tv_sec - inicio.tv_sec) + (final.tv_nsec - inicio.tv_nsec) / 1e9;
+tiempo = tiempo - tiempo_overhead;
 
 // Imprimir en el archivo
 fprintf(file, "%d\t%.9f\n", Nmax, tiempo);
@@ -279,32 +280,83 @@ return 0;
 	Vamos a centrarnos en la traducción de los bucles de \texttt{algoritmo}. La versión con \texttt{O0} presenta la estructura siguiente.
 	
 	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
+movl	$0, -3000032(%rbp)
+jmp	.L10
 
+.L15:
+movl	$0, -3000036(%rbp)
+jmp	.L11
+.L14:
+pxor	%xmm0, %xmm0
+movss	%xmm0, -3000040(%rbp)
+movl	$0, -3000028(%rbp)
+jmp	.L12
+.L13:
+movl	-3000032(%rbp), %eax
+movslq	%eax, %rdx
+movl	-3000028(%rbp), %eax
+cltq
+imulq	$500, %rax, %rax
+addq	%rdx, %rax
+movss	-2000016(%rbp,%rax,4), %xmm0
+movl	-3000028(%rbp), %eax
+movslq	%eax, %rdx
+movl	-3000036(%rbp), %eax
+cltq
+imulq	$500, %rax, %rax
+addq	%rdx, %rax
+movl	-3000016(%rbp,%rax,4), %eax
+leaq	-3000044(%rbp), %rdx
+movq	%rdx, %rdi
+movaps	%xmm0, %xmm1
+movd	%eax, %xmm0
+call	producto
+movss	-3000044(%rbp), %xmm0
+movss	-3000040(%rbp), %xmm1
+addss	%xmm1, %xmm0
+movss	%xmm0, -3000040(%rbp)
+addl	$1, -3000028(%rbp)
+.L12:
+cmpl	$499, -3000028(%rbp)
+jle	.L13
+movl	-3000032(%rbp), %eax
+movslq	%eax, %rdx
+movl	-3000036(%rbp), %eax
+cltq
+imulq	$500, %rax, %rax
+addq	%rdx, %rax
+movss	-3000040(%rbp), %xmm0
+movss	%xmm0, -1000016(%rbp,%rax,4)
+addl	$1, -3000036(%rbp)
+.L11:
+cmpl	$499, -3000036(%rbp)
+jle	.L14
+addl	$1, -3000032(%rbp)
+.L10:
+cmpl	$499, -3000032(%rbp)
+jle	.L15
+leaq	final(%rip), %rax
+movq	%rax, %rsi
+movl	$1, %edi
+call	clock_gettime@PLT
 	\end{minted}
+
+	Esta versión no realiza optimización, por lo que se ve una traducción directa y detallada de cada paso del código C. En el código ensamblador se el bucle sobre \texttt{j}, el bucle sobre \texttt{i}, la inicialización de variables, las sumas parciales y el almacenamiento final de las mismas.
 
 	Por otra parte, con \texttt{O1} destaca lo que se expone a continuación.
 	
 	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
-		
-	\end{minted}
-	
-	Para \texttt{O2}, es relevante el siguiente bloque de código.
-	
-	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
-		
+.L10:
+subl	$1, %ecx
+je	.L11
+.L8:
+movl	$500, %edx
+jmp	.L12
 	\end{minted}
 
-	La compilación con \texttt{O3} introduce los cambios que se comentan de seguido.
+	Este código ya omite completamente la estructura original explícita de tres bucles. Esto es indicativo de desenrollado parcial del bucle, fusión o simplificación de bucles y uso de registros para manejar iteraciones en vez de variables en memoria, como \texttt{-3000032(\%rbp)}. Posiblemente se está preparando un bucle que decrece (\texttt{subl \$1, \%ecx}), en vez de crecer. Es un inicio de optimización, pero aún mantiene la computación de la matriz C.
 	
-	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
-		
-	\end{minted}
-	
-	Finalmente, \texttt{Os} produce los cambios que se muestran a continuación.
-
-	\begin{minted}[linenos, fontsize=\small, bgcolor=bg]{nasm}
-		
-	\end{minted}
+	Para \texttt{O2}, \texttt{O3} y \texttt{Os}, el ensamblador no contiene nada de código asociado a los bucles pues, al no utilizarse la matriz \texttt{C} durante el programa, su cálculo se omite. Esto es resultado de optimización por análisis de uso (DCE, \textit{Dead Code Elimination}). Como \texttt{C[i][j]} nunca se lee ni se imprime, el compilador concluye que calcularla es inútil, y elimina todo el bloque de bucles.
 											
 	
 	\section{Resultados obtenidos}
@@ -315,26 +367,43 @@ return 0;
 	
 	\subsection{Tamaño de códigos objeto}
 	
+	En el Cuadro \ref{tam} aparecen los tamaños de código objeto generado.
+	
+	\begin{table} [H] \centering
+		\begin{tabular} {| c | c |}
+			\hline
+			\textbf{Optimización} & \textbf{Tamaño (KiB)} \\
+			\hline
+			\texttt{O0} & \\
+			\hline
+			\texttt{O1} & \\
+			\hline
+			\texttt{O2} & \\
+			\hline
+			\texttt{O3} & \\
+			\hline
+			\texttt{Os} & \\
+			\hline
+		\end{tabular}
+		\caption{Tamaños de código objeto según tipo de optimización.}
+		\label{tam}
+	\end{table}
+	
 	\subsection{Tiempos de ejecución}
 	
-	\subsection{Aceleración}
+	El análisis realizado en la sección 4.2 sobre la traducción en código ensamblador se ve claramente reflejada en los tiempos de ejecución, que aparecen en la Figura \ref{tiempos}.
 	
-	Una mejor manera de comparar las dos versiones del código es obtener la ganancia de una versión frente a otra, es decir, la aceleración, que vendrá dada por:
+	\begin{figure} [H] \centering
+		\includegraphics[width=.8\textwidth]{../graficas/tiempos.pdf}
+		\caption{Tiempos de ejecución en función de la optimización.}
+		\label{tiempos}
+	\end{figure}
+
+	En la Figura \ref{tiempos} se representa, para cada valor de \texttt{N} y cada optimización, un intervalo centrado en la media de los datos y con extremos la media $\pm$ la desviación típica de las observaciones. En puntos, habitualmente fuera de los intervalos, del mismo color, aparecen las observaciones mínima y máxima para cada combinación de las citadas. Esto es lo que se pidió en la presentación de la práctica.
 	
-	\begin{equation} \label{eq:speedup}
-		ac = \dfrac{t_{\text{una versión}}}{t_{\text{otra versión}}}.
-	\end{equation}
+	La gráfica ilustra claramente el impacto de las optimizaciones del compilador. Con \texttt{O0}, el código es fiel al original, completo pero lento. A partir de \texttt{O2}, el compilador elimina partes enteras del programa si no tienen efecto observable (como la asignación \texttt{C[i][j]}, que no se utiliza posteriormente). Esto implica que el tiempo de ejecución puede no reflejar el coste real del algoritmo si el compilador optimiza en exceso, como ocurre en este caso a partir de \texttt{O2}.
 	
-	Para cada tamaño de \texttt{N}, se consideran los tiempos de ejecución correspondientes a dos versiones distintas de un programa. Sea \( T_{\mathrm{OPT}}^{(\texttt{N})} \) y \( T_{\mathrm{SIN}}^{(\texttt{N})} \) los conjuntos de tiempos para cada versión. Se definen los cuantiles como \( Q_p(X) \), siendo \( Q_{0.25}(X) \) el cuantil inferior (primer cuartil) y \( Q_{0.75}(X) \) el cuantil superior (tercer cuartil) del conjunto \( X \). A partir de estos cuantiles, se estiman límites robustos para el \textit{speedup} como una franja entre dos cocientes: el inferior, que representa una ganancia conservadora, se calcula como:
-	\begin{equation}\label{q1}
-		\text{Speedup}_{\text{mín}} = \frac{Q_{0.25}\left(T_{\mathrm{SIN}}^{(N)}\right)}{Q_{0.75}\left(T_{\mathrm{OPT}}^{(N)}\right)},
-	\end{equation}
-	y el superior, que representa una ganancia potencial más optimista, como
-	\begin{equation} \label{q2}
-		\text{Speedup}_{\text{máx}} = \frac{Q_{0.75}\left(T_{\mathrm{SIN}}^{(N)}\right)}{Q_{0.25}\left(T_{\mathrm{OPT}}^{(N)}\right)}.
-	\end{equation}
-	
-	Esta franja proporciona una estimación del rendimiento relativa entre ambas versiones, mitigando la influencia de valores atípicos.
+	Para este experimento, no tiene sentido analizar la aceleración. Las mejoras entre \texttt{O0}, \texttt{O1} y las demás se ve de forma clara en la Figura \ref{tiempos} y en las demás no se ejecuta código, por lo que los tiempos resultan en ocasiones incluso negativos (al hacer la resta con el \textit{overhead}).
 	
 	
 	\section{Conclusiones}

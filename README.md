@@ -21,6 +21,10 @@ En esta carpeta se analiza el impacto del reemplazo de multiplicaciones y divisi
 
 Aquí se evalúa el uso de **peeling de lazos**, una técnica que consiste en separar iteraciones iniciales del bucle principal para mejorar la eficiencia, por ejemplo, en la alineación de datos o eliminación de dependencias.
 
+### `Matrices/`
+
+Dentro de este ejerciccio se analizan las diferentes opciones de optimización de código disponibles en GCC, a saber: O0, O1, O2, O3 y Os, sobre un problema de multiplicación de matrices cuadradas estáticas.
+
 ## Resultados
 
 Los resultados de las pruebas y el análisis de escalabilidad se encuentran en los respectivos subdirectorios `resultados/` de cada técnica y en 

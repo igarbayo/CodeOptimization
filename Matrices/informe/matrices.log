@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.4.30)  7 MAY 2025 20:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.4.30)  8 MAY 2025 12:05
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1685,24 +1685,24 @@ nacio/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
 \pydata@fh@0=\write8
 \openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
 
-runsystem(latexminted config  --timestamp 20250507205039 25B24ABE5B8620F874D9AD
+runsystem(latexminted config  --timestamp 20250508120508 25B24ABE5B8620F874D9AD
 820E5D4859)...executed.
 
 
 (_25B24ABE5B8620F874D9AD820E5D4859.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20250507205039 25B24ABE5B8620F87
+runsystem(latexminted cleanconfig  --timestamp 20250508120508 25B24ABE5B8620F87
 4D9AD820E5D4859)...executed.
 
 \openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
 
-runsystem(latexminted styledef  --timestamp 20250507205039 25B24ABE5B8620F874D9
+runsystem(latexminted styledef  --timestamp 20250508120508 25B24ABE5B8620F874D9
 AD820E5D4859)...executed.
 
 
 (_25B24ABE5B8620F874D9AD820E5D4859.style.minted)
 \openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250507205039 25B24ABE5B8620F874D
+runsystem(latexminted highlight  --timestamp 20250508120508 25B24ABE5B8620F874D
 9AD820E5D4859)...executed.
 
 
@@ -1737,7 +1737,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [3]
 \openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250507205039 25B24ABE5B8620F874D
+runsystem(latexminted highlight  --timestamp 20250508120508 25B24ABE5B8620F874D
 9AD820E5D4859)...executed.
 
  (_25B24ABE5B8620F874D9AD820E5D4859.highlight.minted
@@ -1752,38 +1752,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [4])
 \openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
 
-runsystem(latexminted highlight  --timestamp 20250507205039 25B24ABE5B8620F874D
+runsystem(latexminted highlight  --timestamp 20250508120508 25B24ABE5B8620F874D
 9AD820E5D4859)...executed.
 
- (_25B24ABE5B8620F874D9AD820E5D4859.highlight.minted)
-\openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
-
-runsystem(latexminted highlight  --timestamp 20250507205039 25B24ABE5B8620F874D
-9AD820E5D4859)...executed.
-
-
-(_25B24ABE5B8620F874D9AD820E5D4859.highlight.minted)
-\openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
-
-runsystem(latexminted highlight  --timestamp 20250507205039 25B24ABE5B8620F874D
-9AD820E5D4859)...executed.
-
-
-(_25B24ABE5B8620F874D9AD820E5D4859.highlight.minted)
-\openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
-
-runsystem(latexminted highlight  --timestamp 20250507205039 25B24ABE5B8620F874D
-9AD820E5D4859)...executed.
-
-
-(_25B24ABE5B8620F874D9AD820E5D4859.highlight.minted)
-\openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
-
-runsystem(latexminted highlight  --timestamp 20250507205039 25B24ABE5B8620F874D
-9AD820E5D4859)...executed.
-
-
-(_25B24ABE5B8620F874D9AD820E5D4859.highlight.minted)
+ (_25B24ABE5B8620F874D9AD820E5D4859.highlight.minted
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1792,7 +1764,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[5]
+[5])
+\openout8 = `_25B24ABE5B8620F874D9AD820E5D4859.data.minted'.
+
+runsystem(latexminted highlight  --timestamp 20250508120508 25B24ABE5B8620F874D
+9AD820E5D4859)...executed.
+
+ (_25B24ABE5B8620F874D9AD820E5D4859.highlight.minted)
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1802,7 +1780,34 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [6]
-runsystem(latexminted cleantemp  --timestamp 20250507205039 25B24ABE5B8620F874D
+<../graficas/tiempos.pdf, id=104, 505.89pt x 433.62pt>
+File: ../graficas/tiempos.pdf Graphic file (type pdf)
+<use ../graficas/tiempos.pdf>
+Package pdftex.def Info: ../graficas/tiempos.pdf  used on input line 393.
+(pdftex.def)             Requested size: 362.37598pt x 310.61159pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[7]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[8 <../graficas/tiempos.pdf>]
+runsystem(latexminted cleantemp  --timestamp 20250508120508 25B24ABE5B8620F874D
 9AD820E5D4859)...executed.
 
  (matrices.aux
@@ -1815,17 +1820,17 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
  ***********
 Package rerunfilecheck Info: File `matrices.out' has not changed.
-(rerunfilecheck)             Checksum: 8D04ADFA0C1037AFCC61A1354975441D;2031.
+(rerunfilecheck)             Checksum: 72234A290AD2232BD670A94EF2291DE5;1915.
 Package logreq Info: Writing requests to 'matrices.run.xml'.
 \openout1 = `matrices.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 44284 strings out of 469959
- 929537 string characters out of 5468866
- 1844071 words of memory out of 5000000
- 70349 multiletter control sequences out of 15000+600000
- 696457 words of font info for 137 fonts, out of 8000000 for 9000
+ 44348 strings out of 469959
+ 930826 string characters out of 5468866
+ 1850130 words of memory out of 5000000
+ 70423 multiletter control sequences out of 15000+600000
+ 696766 words of font info for 134 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,12n,117p,1105b,1926s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
@@ -1834,16 +1839,15 @@ m/cmex10.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/public
 ype1/public/amsfonts/cm/cmr10.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKT
 eX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Ignacio/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/public/cm-super/sfit1000.pfb><C:/Users/Ignacio/AppDat
-a/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt0800.pfb><C:/Users/Igna
-cio/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt1000.pfb><C:/
-Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt109
-5.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utm
-b8a.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/u
-tmr8a.pfb><C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times
-/utmri8a.pfb>
-Output written on matrices.pdf (6 pages, 210182 bytes).
+a/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt1000.pfb><C:/Users/Igna
+cio/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt1095.pfb><C:/
+Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C
+:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb>
+<C:/Users/Ignacio/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.p
+fb>
+Output written on matrices.pdf (8 pages, 218241 bytes).
 PDF statistics:
- 168 PDF objects out of 1000 (max. 8388607)
+ 178 PDF objects out of 1000 (max. 8388607)
  26 named destinations out of 1000 (max. 500000)
- 109 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 106 words of extra memory for PDF output out of 10000 (max. 10000000)
 
