@@ -1,0 +1,14 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{2}{section.1}%
+\contentsline {section}{\numberline {2}Descripción de la técnica}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Configuración del experimento}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Interpretación gráfica}{4}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Beneficios y desventajas esperados de las técnicas de optimización}{5}{section.3}%
+\contentsline {section}{\numberline {4}Programación y código en ensamblador}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Arquitectura de compilación y ejecución}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Ordenamiento de bucles}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Opciones de compilación}{8}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Resultados obtenidos}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Orden de anidamiento más eficiente}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Optimización sobre diferentes tamaños del problema}{10}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Conclusiones}{12}{section.6}%
