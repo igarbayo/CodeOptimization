@@ -1,0 +1,4 @@
+- tabla N, M, Mejor orden O1, Mejor orden O1_unroll
+- elegir orden más común y analizar tiempo en función de N y M (colores O1 y O1_unroll)
+
+hay 50 observaciones: ijmn (29), ijnm (19), jimn (1), jinm (1) -> el mejor es ijmn
