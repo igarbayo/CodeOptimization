@@ -1,14 +1,14 @@
-# Suavizado de una imagen en escala de grises mediante vecindades \( 5\times 5 \)
+# Suavizado de una imagen en escala de grises mediante vecindades $$ 5\times 5 $$
 
 ## Técnica utilizada
 
-Partimos de la operación de suavizado de una imagen de dimensiones \( N \times M \) en escala de grises a partir de vecindades de tamaño \( 5 \times 5 \), que viene dada por la fórmula siguiente:
+Partimos de la operación de suavizado de una imagen de dimensiones $$ N \times M $$ en escala de grises a partir de vecindades de tamaño $$ 5 \times 5 $$, que viene dada por la fórmula siguiente:
 
-\[
+$$
 I^\prime (i,j) = \dfrac{1}{25}\, \sum_{m=-2}^2 \sum_{n=-2}^2 I(i+m, j+n),
-\]
+$$
 
-donde \( I \) es la matriz que representa los valores de los píxeles de la imagen original e \( I^\prime \) la asociada a la imagen suavizada.
+donde $$ I $$ es la matriz que representa los valores de los píxeles de la imagen original e $$ I^\prime $$ la asociada a la imagen suavizada.
 
 ## Estructura de ficheros
 
